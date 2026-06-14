@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a2847">
+
+  <title>HydroVolt Mining – Bitcoin Mining Hosting in Paraguay | Antminer ASIC</title>
+  <meta name="description" content="Professionelles Bitcoin-Mining-Hosting in Alto Paraná, Paraguay. Air- & Hydro-cooled Antminer ASIC, günstiger Strom aus Wasserkraft, 24/7 Support, ROI-Kalkulator.">
+  <meta name="keywords" content="Bitcoin Mining, Antminer, ASIC, Mining Hosting, Paraguay, Hydro Cooling, Wasserkraft, ROI Kalkulator, Hydrovolt">
+  <meta name="author" content="HydroVolt Mining">
+  <link rel="canonical" href="https://www.hydrovolt-mining.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HydroVolt Mining – Bitcoin Mining Hosting in Paraguay">
+  <meta property="og:description" content="Air- & Hydro-cooled Antminer Hosting mit günstigem Strom aus Wasserkraft. Jetzt ROI berechnen.">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://www.hydrovolt-mining.com/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "HydroVolt Mining",
+    "description": "Bitcoin-Mining-Hosting mit Air- und Hydro-cooled Antminer ASIC, betrieben mit günstiger Wasserkraft in Paraguay.",
+    "url": "https://www.hydrovolt-mining.com/",
+    "email": "info@hydrovolt-mining.com",
+    "image": "https://www.hydrovolt-mining.com/assets/logo.svg",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Alto Paraná",
+      "addressCountry": "PY"
+    },
+    "areaServed": "Worldwide",
+    "openingHours": "Mo-Su 00:00-23:59"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <!-- ============ HEADER / NAV ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="#hero" aria-label="HydroVolt Mining – Startseite">
+        <img src="assets/logo.svg" alt="HydroVolt Mining Logo" width="44" height="44" class="brand-logo">
+        <span class="brand-name">HydroVolt<span class="brand-accent">Mining</span></span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#hero" data-i18n="nav.home">Startseite</a></li>
+          <li><a href="#packages" data-i18n="nav.packages">Hosting-Pakete</a></li>
+          <li><a href="#calculator" data-i18n="nav.calculator">ROI-Kalkulator</a></li>
+          <li><a href="#about" data-i18n="nav.about">Über uns</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="btc-ticker" id="btcTicker" title="Live Bitcoin-Preis">
+          <span class="btc-ticker-symbol" aria-hidden="true">&#8383;</span>
+          <span class="btc-ticker-price" id="btcTickerPrice" data-i18n="ticker.loading">lädt…</span>
+        </div>
+
+        <div class="lang-switch" role="group" aria-label="Sprache wählen / Choose language">
+          <button type="button" class="lang-btn is-active" data-lang="de" aria-pressed="true">DE</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="hero-eyebrow fade-in" data-i18n="hero.eyebrow">⚡ Wasserkraft aus Paraguay</p>
+        <h1 class="hero-title fade-in" data-i18n="hero.title">Bitcoin Mining Hosting mit grüner Energie</h1>
+        <p class="hero-subtitle fade-in" data-i18n="hero.subtitle">
+          Hosten Sie Ihre Antminer ASIC dort, wo Strom günstig und nachhaltig ist –
+          in Alto Paraná, Paraguay. Air- &amp; Hydro-cooled, 24/7 überwacht.
+        </p>
+        <div class="hero-cta fade-in">
+          <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Jetzt anfragen</a>
+          <a href="#calculator" class="btn btn-ghost" data-i18n="hero.cta2">ROI berechnen</a>
+        </div>
+        <ul class="hero-highlights fade-in">
+          <li><strong>ab&nbsp;0,045&nbsp;$</strong><span data-i18n="hero.hl1">pro kWh</span></li>
+          <li><strong>99,9&nbsp;%</strong><span data-i18n="hero.hl2">Uptime-Garantie</span></li>
+          <li><strong>100&nbsp;%</strong><span data-i18n="hero.hl3">Wasserkraft</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ HOSTING PACKAGES ============ -->
+    <section class="section" id="packages">
+      <div class="container">
+        <header class="section-head fade-in">
+          <h2 data-i18n="packages.title">Hosting-Pakete</h2>
+          <p data-i18n="packages.subtitle">Air-cooled für den Einstieg, Hydro-cooled für maximale Effizienz.</p>
+        </header>
+
+        <div class="price-banner fade-in" id="priceBanner">
+          <div class="price-banner-item">
+            <span class="price-banner-label" data-i18n="packages.btcusd">BTC / USD</span>
+            <span class="price-banner-value" id="bannerUsd">–</span>
+          </div>
+          <div class="price-banner-item">
+            <span class="price-banner-label" data-i18n="packages.btceur">BTC / EUR</span>
+            <span class="price-banner-value" id="bannerEur">–</span>
+          </div>
+          <div class="price-banner-item">
+            <span class="price-banner-label" data-i18n="packages.updated">Aktualisiert</span>
+            <span class="price-banner-value" id="bannerUpdated">–</span>
+          </div>
+        </div>
+
+        <div class="table-wrap fade-in">
+          <table class="compare-table">
+            <caption class="visually-hidden" data-i18n="packages.caption">Vergleich Air-cooled und Hydro-cooled Antminer Hosting</caption>
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="packages.spec">Spezifikation</th>
+                <th scope="col">
+                  <span class="plan-name" data-i18n="packages.air">Air-Cooled</span>
+                  <span class="plan-tag" data-i18n="packages.airtag">Antminer S21</span>
+                </th>
+                <th scope="col" class="featured-col">
+                  <span class="plan-badge" data-i18n="packages.popular">Beliebt</span>
+                  <span class="plan-name" data-i18n="packages.hydro">Hydro-Cooled</span>
+                  <span class="plan-tag" data-i18n="packages.hydrotag">Antminer S21 Hydro</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-i18n="packages.hashrate">Hash Rate</th>
+                <td>200 TH/s</td>
+                <td class="featured-col">335 TH/s</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="packages.power">Stromverbrauch</th>
+                <td>3.500 W</td>
+                <td class="featured-col">5.360 W</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="packages.efficiency">Effizienz</th>
+                <td>17,5 J/TH</td>
+                <td class="featured-col">16,0 J/TH</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="packages.priceth">Hosting-Preis / TH</th>
+                <td>0,12 $ / Tag</td>
+                <td class="featured-col">0,10 $ / Tag</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="packages.cooling">Kühlung</th>
+                <td data-i18n="packages.aircooling">Luftkühlung</td>
+                <td class="featured-col" data-i18n="packages.hydrocooling">Direkte Wasserkühlung</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="packages.roi">ROI-Zeitraum*</th>
+                <td>~14–18 <span data-i18n="unit.months">Monate</span></td>
+                <td class="featured-col">~11–15 <span data-i18n="unit.months">Monate</span></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><a href="#contact" class="btn btn-outline btn-sm" data-i18n="packages.choose">Anfragen</a></td>
+                <td class="featured-col"><a href="#contact" class="btn btn-primary btn-sm" data-i18n="packages.choose">Anfragen</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fineprint fade-in" data-i18n="packages.note">* ROI-Schätzung bei 0,05 $/kWh und aktuellem BTC-Kurs. Tatsächliche Werte abhängig von Netzwerk-Difficulty und Kurs. Nutze den Kalkulator unten.</p>
+      </div>
+    </section>
+
+    <!-- ============ ROI CALCULATOR ============ -->
+    <section class="section section-alt" id="calculator">
+      <div class="container">
+        <header class="section-head fade-in">
+          <h2 data-i18n="calc.title">ROI-Kalkulator</h2>
+          <p data-i18n="calc.subtitle">Live-Berechnung auf Basis des aktuellen Bitcoin-Kurses.</p>
+        </header>
+
+        <div class="calc-grid fade-in">
+          <!-- Inputs -->
+          <form class="calc-inputs" id="calcForm" novalidate>
+            <div class="field">
+              <label for="minerModel" data-i18n="calc.model">Miner-Modell</label>
+              <select id="minerModel" aria-describedby="modelHint">
+                <!-- options injected by JS -->
+              </select>
+              <small id="modelHint" class="field-hint" data-i18n="calc.modelhint">Hash-Rate &amp; Verbrauch werden automatisch übernommen.</small>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="minerCount" data-i18n="calc.count">Anzahl Miner</label>
+                <input type="number" id="minerCount" min="1" max="10000" step="1" value="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="hashRate" data-i18n="calc.hashrate">Hash-Rate (TH/s) pro Miner</label>
+                <input type="number" id="hashRate" min="1" step="1" value="335">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="powerDraw" data-i18n="calc.power">Verbrauch (W) pro Miner</label>
+                <input type="number" id="powerDraw" min="1" step="1" value="5360">
+              </div>
+              <div class="field">
+                <label for="elecCost" data-i18n="calc.elec">Stromkosten (USD/kWh)</label>
+                <input type="number" id="elecCost" min="0" step="0.001" value="0.05">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="poolFee" data-i18n="calc.poolfee">Pool-Gebühr (%)</label>
+                <input type="number" id="poolFee" min="0" max="100" step="0.1" value="1">
+              </div>
+              <div class="field">
+                <label for="hwCost" data-i18n="calc.hwcost">Hardware-Invest (USD) pro Miner</label>
+                <input type="number" id="hwCost" min="0" step="1" value="5500">
+              </div>
+            </div>
+
+            <fieldset class="field">
+              <legend data-i18n="calc.advanced">Netzwerk-Parameter (optional)</legend>
+              <div class="field-row">
+                <div class="field">
+                  <label for="netHash" data-i18n="calc.nethash">Netzwerk-Hashrate (EH/s)</label>
+                  <input type="number" id="netHash" min="1" step="1" value="750">
+                </div>
+                <div class="field">
+                  <label for="blockReward" data-i18n="calc.reward">Block-Reward (BTC)</label>
+                  <input type="number" id="blockReward" min="0" step="0.001" value="3.125">
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <!-- Results -->
+          <div class="calc-results" id="calcResults" aria-live="polite">
+            <div class="result-card result-hero">
+              <span class="result-label" data-i18n="calc.dailybtc">Täglicher BTC-Output</span>
+              <span class="result-value" id="resDailyBtc">–</span>
+              <span class="result-sub" id="resDailyUsd">–</span>
+            </div>
+
+            <div class="result-row">
+              <div class="result-card">
+                <span class="result-label" data-i18n="calc.monthlyusd">Monatlich (USD)</span>
+                <span class="result-value accent" id="resMonthlyUsd">–</span>
+              </div>
+              <div class="result-card">
+                <span class="result-label" data-i18n="calc.monthlyeur">Monatlich (EUR)</span>
+                <span class="result-value accent" id="resMonthlyEur">–</span>
+              </div>
+            </div>
+
+            <div class="result-row">
+              <div class="result-card">
+                <span class="result-label" data-i18n="calc.profit12">Gewinn nach 12 Monaten</span>
+                <span class="result-value" id="resProfit12">–</span>
+              </div>
+              <div class="result-card">
+                <span class="result-label" data-i18n="calc.profit24">Gewinn nach 24 Monaten</span>
+                <span class="result-value" id="resProfit24">–</span>
+              </div>
+            </div>
+
+            <div class="result-card result-breakeven">
+              <span class="result-label" data-i18n="calc.breakeven">Break-even</span>
+              <span class="result-value" id="resBreakeven">–</span>
+            </div>
+
+            <p class="result-disclaimer" data-i18n="calc.disclaimer">
+              Schätzung ohne Berücksichtigung künftiger Difficulty-Anpassungen. Keine Anlageberatung.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <header class="section-head fade-in">
+          <h2 data-i18n="features.title">Warum HydroVolt?</h2>
+          <p data-i18n="features.subtitle">Rundum-Service für Ihr Mining – von der Hardware bis zum Support.</p>
+        </header>
+
+        <div class="feature-grid">
+          <article class="feature-card fade-in">
+            <div class="feature-icon" aria-hidden="true">🛒</div>
+            <h3 data-i18n="features.f1.t">Hardware-Verkauf</h3>
+            <p data-i18n="features.f1.d">Neue &amp; geprüfte Antminer ASIC direkt von uns – inklusive Einrichtung im Rechenzentrum.</p>
+          </article>
+          <article class="feature-card fade-in">
+            <div class="feature-icon" aria-hidden="true">🔧</div>
+            <h3 data-i18n="features.f2.t">Repair-Service</h3>
+            <p data-i18n="features.f2.d">Eigene Reparaturwerkstatt vor Ort. Hashboard-Tausch und Firmware-Optimierung inklusive.</p>
+          </article>
+          <article class="feature-card fade-in">
+            <div class="feature-icon" aria-hidden="true">🛡️</div>
+            <h3 data-i18n="features.f3.t">Insurance</h3>
+            <p data-i18n="features.f3.d">Versicherungsschutz für Ihre Hardware gegen Feuer, Diebstahl und Elementarschäden.</p>
+          </article>
+          <article class="feature-card fade-in">
+            <div class="feature-icon" aria-hidden="true">📞</div>
+            <h3 data-i18n="features.f4.t">24/7 Support</h3>
+            <p data-i18n="features.f4.d">Monitoring rund um die Uhr und ein persönlicher Ansprechpartner auf Deutsch &amp; Englisch.</p>
+          </article>
+          <article class="feature-card fade-in">
+            <div class="feature-icon" aria-hidden="true">🌐</div>
+            <h3 data-i18n="features.f5.t">Bandbreiten-Garantie</h3>
+            <p data-i18n="features.f5.d">Redundante Glasfaseranbindung sorgt für stabile Pool-Verbindungen ohne Stale Shares.</p>
+          </article>
+          <article class="feature-card fade-in">
+            <div class="feature-icon" aria-hidden="true">💧</div>
+            <h3 data-i18n="features.f6.t">Wasserkraft-Vorteil</h3>
+            <p data-i18n="features.f6.d">Strom aus dem Itaipú-Wasserkraftwerk: günstig, CO₂-arm und nahezu unbegrenzt verfügbar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section-alt" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info fade-in">
+          <h2 data-i18n="contact.title">Kontakt aufnehmen</h2>
+          <p data-i18n="contact.subtitle">Sie haben Fragen oder möchten ein Angebot? Wir melden uns innerhalb von 24 Stunden.</p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-ico" aria-hidden="true">📍</span>
+              <span><strong data-i18n="contact.addr">Adresse</strong><br>Alto Paraná, Paraguay</span>
+            </li>
+            <li>
+              <span class="contact-ico" aria-hidden="true">✉️</span>
+              <span><strong data-i18n="contact.email">E-Mail</strong><br>
+                <a href="mailto:info@hydrovolt-mining.com">info@hydrovolt-mining.com</a></span>
+            </li>
+          </ul>
+          <div class="social-links" aria-label="Social Media">
+            <a href="#" class="social-link" aria-label="X / Twitter" rel="noopener">X</a>
+            <a href="#" class="social-link" aria-label="Telegram" rel="noopener">TG</a>
+            <a href="#" class="social-link" aria-label="LinkedIn" rel="noopener">in</a>
+          </div>
+        </div>
+
+        <form class="contact-form fade-in" id="contactForm" novalidate>
+          <div class="field">
+            <label for="cName" data-i18n="contact.name">Name</label>
+            <input type="text" id="cName" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="cEmail" data-i18n="contact.emaillabel">E-Mail</label>
+            <input type="email" id="cEmail" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="cPackage" data-i18n="contact.interest">Paket-Interesse</label>
+            <select id="cPackage" name="package">
+              <option value="air" data-i18n="contact.opt.air">Air-Cooled Hosting</option>
+              <option value="hydro" data-i18n="contact.opt.hydro">Hydro-Cooled Hosting</option>
+              <option value="hardware" data-i18n="contact.opt.hw">Hardware-Kauf</option>
+              <option value="other" data-i18n="contact.opt.other">Sonstiges</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cMessage" data-i18n="contact.message">Nachricht</label>
+            <textarea id="cMessage" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="contact.send">Nachricht senden</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="" width="36" height="36" aria-hidden="true">
+        <span class="brand-name">HydroVolt<span class="brand-accent">Mining</span></span>
+        <p class="footer-tag" data-i18n="footer.tag">Bitcoin Mining Hosting · Alto Paraná, Paraguay</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#" data-i18n="footer.imprint">Impressum</a>
+        <a href="#" data-i18n="footer.privacy">Datenschutz</a>
+        <a href="#" data-i18n="footer.terms">AGB</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year">2026</span> HydroVolt Mining. <span data-i18n="footer.rights">Alle Rechte vorbehalten.</span></p>
+      <p class="footer-credit" data-i18n="footer.data">Kursdaten: CoinGecko</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
