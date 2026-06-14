@@ -1,5 +1,5 @@
 /* ============================================================
-   HydroVolt Mining – script.js
+   ENPARA – Energy Paraguay · script.js
    Vanilla ES6+ · modulare Funktionen
    ============================================================ */
 'use strict';
@@ -10,7 +10,7 @@
 const COINGECKO_URL =
   'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur';
 const PRICE_REFRESH_MS = 60_000;   // alle 60 s aktualisieren
-const PRICE_CACHE_KEY = 'hv_btc_price';
+const PRICE_CACHE_KEY = 'enpara_btc_price';
 const BLOCKS_PER_DAY = 144;        // ~1 Block / 10 min
 const DAYS_PER_MONTH = 365 / 12;   // 30,4375
 
@@ -35,7 +35,7 @@ const MINER_MODELS = [
 const I18N = {
   de: {
     'nav.home': 'Startseite', 'nav.packages': 'Hosting-Pakete', 'nav.calculator': 'ROI-Kalkulator',
-    'nav.about': 'Über uns', 'nav.contact': 'Kontakt',
+    'nav.about': 'Über uns', 'nav.instagram': 'Instagram', 'nav.contact': 'Kontakt',
     'ticker.loading': 'lädt…',
     'hero.eyebrow': '⚡ Wasserkraft aus Paraguay',
     'hero.title': 'Bitcoin Mining Hosting mit grüner Energie',
@@ -65,7 +65,7 @@ const I18N = {
     'calc.monthlyeur': 'Monatlich netto (EUR)', 'calc.profit12': 'Gewinn nach 12 Monaten',
     'calc.profit24': 'Gewinn nach 24 Monaten', 'calc.breakeven': 'Break-even',
     'calc.disclaimer': 'Schätzung ohne Berücksichtigung künftiger Difficulty-Anpassungen. Keine Anlageberatung.',
-    'features.title': 'Warum HydroVolt?',
+    'features.title': 'Warum ENPARA?',
     'features.subtitle': 'Rundum-Service für Ihr Mining – von der Hardware bis zum Support.',
     'features.f1.t': 'Hardware-Verkauf', 'features.f1.d': 'Neue & geprüfte Antminer ASIC direkt von uns – inklusive Einrichtung im Rechenzentrum.',
     'features.f2.t': 'Repair-Service', 'features.f2.d': 'Eigene Reparaturwerkstatt vor Ort. Hashboard-Tausch und Firmware-Optimierung inklusive.',
@@ -73,19 +73,30 @@ const I18N = {
     'features.f4.t': '24/7 Support', 'features.f4.d': 'Monitoring rund um die Uhr und ein persönlicher Ansprechpartner auf Deutsch & Englisch.',
     'features.f5.t': 'Bandbreiten-Garantie', 'features.f5.d': 'Redundante Glasfaseranbindung sorgt für stabile Pool-Verbindungen ohne Stale Shares.',
     'features.f6.t': 'Wasserkraft-Vorteil', 'features.f6.d': 'Strom aus dem Itaipú-Wasserkraftwerk: günstig, CO₂-arm und nahezu unbegrenzt verfügbar.',
+    'insta.eyebrow': '📸 Instagram',
+    'insta.title': 'Folge uns auf Instagram',
+    'insta.subtitle': 'Einblicke in unsere Mining-Farm, Updates zur Wasserkraft und Neuigkeiten aus Paraguay.',
+    'insta.bio': 'Energy Paraguay · Bitcoin Mining Hosting',
+    'insta.follow': 'Auf Instagram folgen',
+    'insta.p1': 'Hydro-cooled Antminer im Einsatz',
+    'insta.p2': '100 % Strom aus dem Itaipú-Wasserkraftwerk',
+    'insta.p3': 'Behind the Scenes: Rechenzentrum Alto Paraná',
+    'insta.p4': 'Setup-Tag: neue Mining-Rigs',
+    'insta.p5': 'Team & Support vor Ort',
+    'insta.p6': 'BTC-Marktupdate der Woche',
     'contact.title': 'Kontakt aufnehmen',
     'contact.subtitle': 'Sie haben Fragen oder möchten ein Angebot? Wir melden uns innerhalb von 24 Stunden.',
-    'contact.addr': 'Adresse', 'contact.email': 'E-Mail', 'contact.name': 'Name',
+    'contact.addr': 'Adresse', 'contact.email': 'E-Mail', 'contact.instagram': 'Instagram', 'contact.name': 'Name',
     'contact.emaillabel': 'E-Mail', 'contact.interest': 'Paket-Interesse', 'contact.message': 'Nachricht',
     'contact.opt.air': 'Air-Cooled Hosting', 'contact.opt.hydro': 'Hydro-Cooled Hosting',
     'contact.opt.hw': 'Hardware-Kauf', 'contact.opt.other': 'Sonstiges', 'contact.send': 'Nachricht senden',
-    'footer.tag': 'Bitcoin Mining Hosting · Alto Paraná, Paraguay',
+    'footer.tag': 'Energy Paraguay · Bitcoin Mining Hosting · Alto Paraná',
     'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz', 'footer.terms': 'AGB',
     'footer.rights': 'Alle Rechte vorbehalten.', 'footer.data': 'Kursdaten: CoinGecko',
   },
   en: {
     'nav.home': 'Home', 'nav.packages': 'Hosting Plans', 'nav.calculator': 'ROI Calculator',
-    'nav.about': 'About', 'nav.contact': 'Contact',
+    'nav.about': 'About', 'nav.instagram': 'Instagram', 'nav.contact': 'Contact',
     'ticker.loading': 'loading…',
     'hero.eyebrow': '⚡ Hydropower from Paraguay',
     'hero.title': 'Bitcoin Mining Hosting Powered by Green Energy',
@@ -115,7 +126,7 @@ const I18N = {
     'calc.monthlyeur': 'Monthly net (EUR)', 'calc.profit12': 'Profit after 12 months',
     'calc.profit24': 'Profit after 24 months', 'calc.breakeven': 'Break-even',
     'calc.disclaimer': 'Estimate excluding future difficulty adjustments. Not investment advice.',
-    'features.title': 'Why HydroVolt?',
+    'features.title': 'Why ENPARA?',
     'features.subtitle': 'End-to-end service for your mining – from hardware to support.',
     'features.f1.t': 'Hardware Sales', 'features.f1.d': 'New & tested Antminer ASICs directly from us – including data-center setup.',
     'features.f2.t': 'Repair Service', 'features.f2.d': 'On-site repair workshop. Hashboard replacement and firmware tuning included.',
@@ -123,13 +134,24 @@ const I18N = {
     'features.f4.t': '24/7 Support', 'features.f4.d': 'Round-the-clock monitoring and a personal contact in English & German.',
     'features.f5.t': 'Bandwidth Guarantee', 'features.f5.d': 'Redundant fiber connectivity ensures stable pool connections without stale shares.',
     'features.f6.t': 'Hydropower Advantage', 'features.f6.d': 'Power from the Itaipú hydroelectric plant: cheap, low-carbon and virtually unlimited.',
+    'insta.eyebrow': '📸 Instagram',
+    'insta.title': 'Follow us on Instagram',
+    'insta.subtitle': 'Behind-the-scenes of our mining farm, hydropower updates and news from Paraguay.',
+    'insta.bio': 'Energy Paraguay · Bitcoin Mining Hosting',
+    'insta.follow': 'Follow on Instagram',
+    'insta.p1': 'Hydro-cooled Antminers in action',
+    'insta.p2': '100% power from the Itaipú hydro plant',
+    'insta.p3': 'Behind the scenes: Alto Paraná data center',
+    'insta.p4': 'Setup day: new mining rigs',
+    'insta.p5': 'Team & on-site support',
+    'insta.p6': 'BTC market update of the week',
     'contact.title': 'Get in touch',
     'contact.subtitle': 'Have questions or want a quote? We reply within 24 hours.',
-    'contact.addr': 'Address', 'contact.email': 'Email', 'contact.name': 'Name',
+    'contact.addr': 'Address', 'contact.email': 'Email', 'contact.instagram': 'Instagram', 'contact.name': 'Name',
     'contact.emaillabel': 'Email', 'contact.interest': 'Plan of interest', 'contact.message': 'Message',
     'contact.opt.air': 'Air-Cooled Hosting', 'contact.opt.hydro': 'Hydro-Cooled Hosting',
     'contact.opt.hw': 'Hardware purchase', 'contact.opt.other': 'Other', 'contact.send': 'Send message',
-    'footer.tag': 'Bitcoin Mining Hosting · Alto Paraná, Paraguay',
+    'footer.tag': 'Energy Paraguay · Bitcoin Mining Hosting · Alto Paraná',
     'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy', 'footer.terms': 'Terms',
     'footer.rights': 'All rights reserved.', 'footer.data': 'Price data: CoinGecko',
   },
@@ -198,7 +220,7 @@ function applyTranslations(lang) {
     btn.setAttribute('aria-pressed', String(active));
   });
 
-  try { localStorage.setItem('hv_lang', lang); } catch (_) {}
+  try { localStorage.setItem('enpara_lang', lang); } catch (_) {}
 
   // Dynamische Inhalte neu rendern (Zahlenformat, Modell-Select)
   renderMinerOptions();
@@ -209,7 +231,7 @@ function applyTranslations(lang) {
 function initLanguage() {
   let lang = 'de';
   try {
-    const saved = localStorage.getItem('hv_lang');
+    const saved = localStorage.getItem('enpara_lang');
     if (saved && I18N[saved]) lang = saved;
     else if (navigator.language && navigator.language.startsWith('en')) lang = 'en';
   } catch (_) {}
@@ -301,7 +323,7 @@ async function fetchPrice() {
     try { localStorage.setItem(PRICE_CACHE_KEY, JSON.stringify(state.price)); } catch (_) {}
   } catch (err) {
     // Fallback: gecachter Wert bleibt erhalten, sonst statischer Wert
-    console.warn('[HydroVolt] BTC-Preis konnte nicht geladen werden:', err.message);
+    console.warn('[ENPARA] BTC-Preis konnte nicht geladen werden:', err.message);
     if (!state.price || !state.price.usd) state.price = { ...FALLBACK_PRICE };
     state.price.fallback = true;
   } finally {
