@@ -6,6 +6,15 @@ HTML5 / CSS3 / JavaScript (ES6+) ohne Build-Tools oder Frameworks.
 
 ## Features
 
+- **Hero mit Wasserkraft-Visual**: animierte SVG-Szene (Staudamm, fließendes
+  Wasser, Turbinen-Glow, aufsteigende Luftblasen) als immer sichtbarer
+  Hintergrund – optional überlagert durch ein echtes Hintergrund-Video
+  (`assets/hydro-bg.mp4`). Fehlt das Video, bleibt die Animation sichtbar.
+  Pausiert automatisch außerhalb des Sichtbereichs und bei
+  `prefers-reduced-motion`.
+- **Animierte Weltkarte** (Bereich „Standort"): stilisierte Weltkarte mit
+  pulsierendem Standort-Marker auf Alto Paraná, Paraguay und fließenden
+  Verbindungs-Bögen in die Welt – reines Inline-SVG/CSS, kein externer Asset.
 - **Responsive** (Mobile-First): getestet für 375 px / 768 px / 1920 px
 - **Trust-Anchor „ENPARA in Zahlen"**: animierte Kennzahlen (Itaipú 14.000 MW,
   99,9 % Uptime-Ziel, 24/7, ab 0,045 $/kWh) – Count-up via IntersectionObserver
@@ -38,8 +47,25 @@ HTML5 / CSS3 / JavaScript (ES6+) ohne Build-Tools oder Frameworks.
 index.html      Seitenstruktur & Inhalte (inkl. Instagram-Bereich)
 styles.css      Design-System, Responsive Layout, Animationen
 script.js       i18n, CoinGecko-API, ROI-Kalkulator, Navigation, Formular
-assets/         Logo, Favicon, Hero-Hintergrund (SVG)
+assets/         Logo, Favicon, Hero-Hintergrund (SVG), animierte
+                Wasserkraft-Szene (hero-hydro.svg)
 ```
+
+## Echtes Hero-Video einbinden (optional)
+
+Der Hero zeigt standardmäßig die animierte SVG-Wasserkraft-Szene. Für ein
+echtes Video genügt es, eine Datei abzulegen – **kein Code-Eingriff nötig**:
+
+```
+assets/hydro-bg.mp4     (empfohlen: H.264, ~1920×1080, < 6 MB, ohne Ton)
+assets/hydro-bg.webm    (optional, zusätzliches Format)
+```
+
+Das Video wird automatisch über die Animation gelegt und abgespielt
+(`autoplay muted loop playsinline`). Fehlt die Datei, bleibt die animierte
+Szene sichtbar. Bei `prefers-reduced-motion` wird das Video pausiert und die
+statische Szene gezeigt; außerhalb des Sichtbereichs pausiert es zum
+Energiesparen.
 
 ## Lokal starten
 

@@ -44,7 +44,7 @@ const MINER_MODELS = [
    ------------------------------------------------------------ */
 const I18N = {
   de: {
-    'nav.home': 'Startseite', 'nav.about': 'Warum ENPARA', 'nav.packages': 'Pakete',
+    'nav.home': 'Startseite', 'nav.about': 'Warum ENPARA', 'nav.location': 'Standort', 'nav.packages': 'Pakete',
     'nav.calculator': 'Kalkulator', 'nav.faq': 'FAQ', 'nav.instagram': 'Instagram', 'nav.contact': 'Kontakt',
     'ticker.loading': 'lädt…',
     'hero.eyebrow': '⚡ Wasserkraft aus Paraguay',
@@ -84,6 +84,12 @@ const I18N = {
     'infra.fact1t': 'Standort', 'infra.fact1d': 'Alto Paraná, Paraguay',
     'infra.fact2t': 'Energiequelle', 'infra.fact2d': 'Itaipú-Wasserkraft · 100 % erneuerbar',
     'infra.fact3t': 'Kühlung', 'infra.fact3d': 'Air- & Direct-Hydro-Cooling',
+    // Weltkarte / Standort
+    'map.eyebrow': '🌎 Standort',
+    'map.title': 'Unser Standort auf der Weltkarte',
+    'map.subtitle': 'Alto Paraná, Paraguay – im Herzen Südamerikas, direkt an einer der größten Wasserkraft-Quellen der Welt.',
+    'map.pin': 'Alto Paraná, Paraguay',
+    'map.coords': '25°30′ S · 54°37′ W · Itaipú-Wasserkraftwerk',
     // Kalkulator
     'calc.title': 'ROI-Kalkulator', 'calc.subtitle': 'Live-Berechnung auf Basis des aktuellen Bitcoin-Kurses.',
     'calc.model': 'Miner-Modell', 'calc.modelhint': 'Hash-Rate & Verbrauch werden automatisch übernommen.',
@@ -170,7 +176,7 @@ const I18N = {
     'footer.rights': 'Alle Rechte vorbehalten.', 'footer.data': 'Kursdaten: CoinGecko · Netzwerkdaten: mempool.space',
   },
   en: {
-    'nav.home': 'Home', 'nav.about': 'Why ENPARA', 'nav.packages': 'Plans',
+    'nav.home': 'Home', 'nav.about': 'Why ENPARA', 'nav.location': 'Location', 'nav.packages': 'Plans',
     'nav.calculator': 'Calculator', 'nav.faq': 'FAQ', 'nav.instagram': 'Instagram', 'nav.contact': 'Contact',
     'ticker.loading': 'loading…',
     'hero.eyebrow': '⚡ Hydropower from Paraguay',
@@ -210,6 +216,12 @@ const I18N = {
     'infra.fact1t': 'Location', 'infra.fact1d': 'Alto Paraná, Paraguay',
     'infra.fact2t': 'Energy source', 'infra.fact2d': 'Itaipú hydropower · 100% renewable',
     'infra.fact3t': 'Cooling', 'infra.fact3d': 'Air- & direct-hydro cooling',
+    // World map / Location
+    'map.eyebrow': '🌎 Location',
+    'map.title': 'Our location on the world map',
+    'map.subtitle': 'Alto Paraná, Paraguay – in the heart of South America, right next to one of the largest hydropower sources in the world.',
+    'map.pin': 'Alto Paraná, Paraguay',
+    'map.coords': '25°30′ S · 54°37′ W · Itaipú hydro plant',
     // Calculator
     'calc.title': 'ROI Calculator', 'calc.subtitle': 'Live calculation based on the current Bitcoin price.',
     'calc.model': 'Miner model', 'calc.modelhint': 'Hash rate & power draw are filled in automatically.',
@@ -863,6 +875,44 @@ function initContactForm() {
 }
 
 /* ------------------------------------------------------------
+   13b. HERO-VISUALS (Video + animierte Wasserkraft-Szene)
+   ------------------------------------------------------------ */
+function initHeroMedia() {
+  const video = $('.hero-video');
+  const scene = $('.hero-scene');
+
+  if (prefersReducedMotion()) {
+    // Bewegung reduzieren: Video pausieren/ausblenden, statische Szene zeigen
+    if (video) {
+      video.removeAttribute('autoplay');
+      video.pause?.();
+      video.style.display = 'none';
+    }
+    // SMIL-Animationen der SVG-Szene anhalten
+    try { scene?.contentDocument?.documentElement?.pauseAnimations?.(); } catch (_) {}
+    return;
+  }
+
+  if (!video) return;
+
+  // Fehlt das Video (z. B. assets/hydro-bg.mp4 nicht vorhanden), bleibt
+  // die animierte SVG-Szene darunter sichtbar – Element ausblenden.
+  video.addEventListener('error', () => { video.style.display = 'none'; }, true);
+  video.addEventListener('stalled', () => { video.style.display = 'none'; });
+
+  // Energie sparen: Video nur abspielen, solange der Hero sichtbar ist
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) video.play?.().catch(() => {});
+        else video.pause?.();
+      });
+    }, { threshold: 0.15 });
+    io.observe(video);
+  }
+}
+
+/* ------------------------------------------------------------
    14. INIT
    ------------------------------------------------------------ */
 function init() {
@@ -870,6 +920,7 @@ function init() {
   initLanguage();
   initHeader();
   initMobileNav();
+  initHeroMedia();
   initReveal();
   initCounters();
   initCalculator();

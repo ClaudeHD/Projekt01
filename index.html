@@ -128,6 +128,7 @@
         <ul>
           <li><a href="#hero" data-i18n="nav.home">Startseite</a></li>
           <li><a href="#about" data-i18n="nav.about">Warum ENPARA</a></li>
+          <li><a href="#location" data-i18n="nav.location">Standort</a></li>
           <li><a href="#packages" data-i18n="nav.packages">Pakete</a></li>
           <li><a href="#calculator" data-i18n="nav.calculator">Kalkulator</a></li>
           <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
@@ -157,7 +158,17 @@
   <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-media" aria-hidden="true">
+        <!-- Animierte Wasserkraft-Szene (immer sichtbar, kein externer Asset nötig) -->
+        <img class="hero-scene" src="assets/hero-hydro.svg" alt="" loading="eager" decoding="async">
+        <!-- Optionales Hintergrund-Video: echtes Wasserkraftwerk-Video unter assets/hydro-bg.mp4 ablegen.
+             Liegt keine Datei vor, bleibt die animierte Szene darunter sichtbar. -->
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-hydro.svg">
+          <source src="assets/hydro-bg.mp4" type="video/mp4">
+          <source src="assets/hydro-bg.webm" type="video/webm">
+        </video>
+        <div class="hero-bg"></div>
+      </div>
       <div class="container hero-inner">
         <p class="hero-eyebrow fade-in" data-i18n="hero.eyebrow">⚡ Wasserkraft aus Paraguay</p>
         <h1 class="hero-title fade-in" data-i18n="hero.title">Bitcoin Mining Hosting mit grüner Energie</h1>
@@ -306,6 +317,62 @@
             <span class="infra-fact-ico" aria-hidden="true">❄️</span>
             <span><strong data-i18n="infra.fact3t">Kühlung</strong><br><span data-i18n="infra.fact3d">Air- &amp; Direct-Hydro-Cooling</span></span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LOCATION / WORLD MAP ============ -->
+    <section class="section section-alt" id="location" aria-labelledby="locationTitle">
+      <div class="container">
+        <header class="section-head fade-in">
+          <p class="hero-eyebrow" data-i18n="map.eyebrow">🌎 Standort</p>
+          <h2 id="locationTitle" data-i18n="map.title">Unser Standort auf der Weltkarte</h2>
+          <p data-i18n="map.subtitle">Alto Paraná, Paraguay – im Herzen Südamerikas, direkt an einer der größten Wasserkraft-Quellen der Welt.</p>
+        </header>
+
+        <div class="map-wrap fade-in">
+          <svg class="world-map" viewBox="0 0 1000 500" role="img" aria-labelledby="mapAria" preserveAspectRatio="xMidYMid meet">
+            <title id="mapAria">Weltkarte mit markiertem Standort in Alto Paraná, Paraguay</title>
+            <!-- Kontinente (stilisiert) -->
+            <g class="map-land">
+              <!-- Nordamerika -->
+              <path d="M120,90 Q150,70 210,80 Q270,88 300,120 Q320,150 290,175 Q260,195 250,225 Q240,255 210,250 Q185,245 180,215 Q150,210 140,180 Q110,170 110,135 Q108,105 120,90 Z"/>
+              <!-- Mittelamerika -->
+              <path d="M250,250 Q270,260 285,290 Q295,310 312,318 Q322,323 318,335 Q308,338 298,325 Q278,305 262,288 Q248,272 250,250 Z"/>
+              <!-- Südamerika -->
+              <path d="M318,318 Q352,308 372,335 Q388,360 380,400 Q372,440 348,455 Q330,463 322,440 Q316,415 305,395 Q296,370 305,345 Q310,328 318,318 Z"/>
+              <!-- Europa -->
+              <path d="M470,150 Q505,135 540,148 Q560,156 552,175 Q540,192 510,190 Q485,188 472,175 Q462,162 470,150 Z"/>
+              <!-- Afrika -->
+              <path d="M495,235 Q540,222 575,245 Q598,262 590,300 Q582,340 555,372 Q538,392 522,372 Q510,352 502,322 Q492,292 488,265 Q486,245 495,235 Z"/>
+              <!-- Asien -->
+              <path d="M560,135 Q650,110 760,130 Q840,146 855,185 Q862,215 820,228 Q770,238 720,225 Q680,238 640,228 Q600,220 580,198 Q560,180 558,158 Q556,142 560,135 Z"/>
+              <!-- Südostasien -->
+              <path d="M790,250 Q820,242 845,258 Q860,270 848,285 Q828,295 808,285 Q790,275 790,250 Z"/>
+              <!-- Australien -->
+              <path d="M810,370 Q850,358 888,378 Q908,390 898,415 Q882,435 850,432 Q822,428 812,405 Q804,385 810,370 Z"/>
+            </g>
+
+            <!-- Verbindungs-Bögen vom Standort zu globalen Hubs -->
+            <g class="map-arcs" fill="none" stroke="var(--green)" stroke-width="1.6">
+              <path d="M342,372 C300,250 220,180 200,140"/>
+              <path d="M342,372 C420,280 470,210 510,165"/>
+              <path d="M342,372 C520,340 700,260 815,195"/>
+            </g>
+
+            <!-- Standort-Marker: Alto Paraná, Paraguay -->
+            <g class="map-marker" transform="translate(342,372)">
+              <circle class="map-pulse" r="8"/>
+              <circle class="map-pulse map-pulse--2" r="8"/>
+              <circle class="map-dot" r="6"/>
+            </g>
+          </svg>
+
+          <figcaption class="map-caption">
+            <span class="map-flag" aria-hidden="true">📍</span>
+            <span><strong data-i18n="map.pin">Alto Paraná, Paraguay</strong>
+            <span class="map-coords" data-i18n="map.coords">25°30′ S · 54°37′ W · Itaipú-Wasserkraftwerk</span></span>
+          </figcaption>
         </div>
       </div>
     </section>
