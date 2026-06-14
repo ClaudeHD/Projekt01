@@ -7,18 +7,30 @@ HTML5 / CSS3 / JavaScript (ES6+) ohne Build-Tools oder Frameworks.
 ## Features
 
 - **Responsive** (Mobile-First): getestet für 375 px / 768 px / 1920 px
-- **Instagram-Integration**: eigener Instagram-Bereich mit Profilkarte und
-  Beitrags-Kacheln, Social-Icons in Kontakt & Footer, `sameAs` im Schema.org
+- **Trust-Anchor „ENPARA in Zahlen"**: animierte Kennzahlen (Itaipú 14.000 MW,
+  99,9 % Uptime-Ziel, 24/7, ab 0,045 $/kWh) – Count-up via IntersectionObserver
+- **Infrastruktur / „Vom Wasser zum Hash"**: Energiefluss-Diagramm
+  Wasserkraft → Stromnetz → Rechenzentrum → Miner (responsiv, animiert)
+- **Live-Netzwerkdaten** via mempool.space API: Netzwerk-Hashrate, Difficulty,
+  Block-Höhe und nächste Difficulty-Anpassung (Fortschrittsbalken) – mit
+  Timeout & Fallback; die Live-Hashrate befüllt automatisch den ROI-Kalkulator
 - **Live Bitcoin-Preis** via CoinGecko API (USD & EUR) mit Cache- und
   statischem Fallback bei API-Ausfall
 - **Interaktiver ROI-Kalkulator**: täglicher BTC-Output, monatliche Netto-
   Erträge (USD/EUR), Gewinn nach 12/24 Monaten, Break-even
-- **Zweisprachig** DE/EN (clientseitig, ohne Reload)
+- **FAQ-Bereich** mit nativem `<details>`-Accordion (immer nur eine Frage offen)
+  und `FAQPage`-Schema.org-Markup für Rich Results
+- **Testimonials** als klar markierte **Beispiel**-Karten (Platzhalter, vor
+  Live-Gang durch echte, freigegebene Kundenstimmen ersetzen – siehe unten)
+- **Transparenz-/Anti-Scam-Hinweis** im Kontaktbereich (offizielle Kanäle)
+- **Instagram-Integration**: eigener Instagram-Bereich mit Profilkarte und
+  Beitrags-Kacheln, Social-Icons in Kontakt & Footer, `sameAs` im Schema.org
+- **Zweisprachig** DE/EN (clientseitig, ohne Reload) – inkl. aller neuen Bereiche
 - **Hosting-Paketvergleich** Air- vs. Hydro-cooled
-- **SEO**: Meta-Tags, Open Graph, Schema.org `LocalBusiness`
+- **SEO**: Meta-Tags, Open Graph, Schema.org `LocalBusiness` + `FAQPage`
 - **Accessibility**: semantisches HTML, ARIA-Labels, Tastatur-Navigation,
-  `prefers-reduced-motion`
-- Dark-Theme · Sticky Header · Fade-In-Animationen (IntersectionObserver)
+  `prefers-reduced-motion` (deaktiviert Count-up, Live-Puls & Flow-Animation)
+- Dark-Theme · 3. Akzentfarbe Cyan (Wasserkraft) · Sticky Header · Fade-Ins
 
 ## Projektstruktur
 
@@ -95,7 +107,26 @@ sich durch echte Beiträge ersetzen. Drei gängige Wege:
 - Wöchentliches BTC-Markt- & Difficulty-Update
 - Team, Standort Alto Paraná, Kundenstimmen
 
+## Live-Daten & Kennzahlen
+
+- **Netzwerkdaten** (Hashrate, Difficulty, Block-Höhe, nächste Anpassung)
+  kommen clientseitig von der öffentlichen [mempool.space](https://mempool.space/docs/api/rest)-API.
+  Schlägt der Abruf fehl (z. B. offline), zeigt das Dashboard markierte
+  Richtwerte (`is-stale`) und einen Hinweis – wie beim BTC-Preis.
+- **Kennzahlen** im Band „ENPARA in Zahlen" sind bewusst belegbar gehalten:
+  Itaipú-Leistung (≈ 14.000 MW, öffentliche Angabe), Uptime-**Ziel**,
+  24/7-Monitoring und der bereits im Hero genannte Strompreis. Vor dem
+  Live-Gang mit den realen Betriebszahlen abgleichen.
+
+## Testimonials ersetzen
+
+Die Kundenstimmen im Abschnitt `#testimonials` sind als **Beispiel** markiert
+(Badge + Hinweistext + HTML-Kommentar) und dienen als Vorlage. Vor dem
+Live-Gang durch echte, freigegebene Zitate ersetzen (Texte in `script.js`
+unter den Schlüsseln `testi.q1…q3`, `testi.n*`, `testi.m*`) – oder den
+gesamten Abschnitt entfernen. **Keine erfundenen Aussagen als echt ausgeben.**
+
 ## Konfiguration
 
-Antminer-Modelle, Netzwerk-Parameter und Fallback-Kurse lassen sich oben in
-`script.js` (Abschnitt „KONSTANTEN & DATEN") anpassen.
+Antminer-Modelle, Netzwerk-Parameter, API-Endpunkte und Fallback-Werte lassen
+sich oben in `script.js` (Abschnitt „KONSTANTEN & DATEN") anpassen.
