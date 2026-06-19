@@ -352,16 +352,25 @@ h2.title {
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
 .step {
   padding: 28px 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
-  position: relative;
+  position: relative; transition: transform .25s, border-color .25s, box-shadow .25s;
 }
+.step:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: var(--shadow); }
+.step .ico {
+  position: relative; width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center;
+  margin-bottom: 18px; color: var(--green-2);
+  background: rgba(24,210,126,.10); border: 1px solid rgba(24,210,126,.22);
+}
+.step .ico svg { width: 27px; height: 27px; }
 .step .n {
-  font-family: var(--ff-display); font-weight: 700; font-size: 1rem; width: 40px; height: 40px;
-  display: grid; place-items: center; border-radius: 12px; margin-bottom: 16px;
-  background: var(--grad); color: #042016;
+  position: absolute; top: -9px; right: -9px;
+  font-family: var(--ff-display); font-weight: 700; font-size: .8rem; width: 24px; height: 24px;
+  display: grid; place-items: center; border-radius: 8px;
+  background: var(--grad); color: #042016; box-shadow: 0 2px 8px rgba(0,0,0,.35);
 }
+.step .label { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--green); font-family: var(--ff-display); font-weight: 600; margin-bottom: 6px; }
 .step h3 { font-size: 1.12rem; margin-bottom: 8px; }
 .step p { color: var(--text-dim); font-size: 0.92rem; }
-.step .arrow { position: absolute; top: 40px; right: -13px; color: var(--border-strong); z-index: 2; }
+.step .arrow { position: absolute; top: 46px; right: -13px; color: var(--border-strong); z-index: 2; }
 .step:last-child .arrow { display: none; }
 
 /* ---------- Packages / Pricing ---------- */
