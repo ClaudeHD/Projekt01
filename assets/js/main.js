@@ -9,31 +9,143 @@
   const $$ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
   const euro = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
   const fmtE = (n) => euro.format(Math.round(n));
+  const de = (n, dec = 0) => n.toLocaleString("de-DE", { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
   /* ---------------- CONFIG (edit me) ---------------- */
   const CONFIG = {
-    pricePerTH: 25,          // € per TH/s (entry rate; packages give volume discounts)
-    wattPerTH: 13.5,         // efficiency of hydro Antminer class (~13–16 J/TH)
-    tariffEurKwh: 0.12,      // all-in customer mining tariff (energy + hosting + maintenance)
-    poolFee: 0.02,           // pool / management fee
-    blockRewardBTC: 3.125,   // current block subsidy
-    blocksPerDay: 144,
-    defaultBtcEur: 80000,
-    scenarios: {
-      conservative: { factor: 0.90, networkEH: 780, label: "Vorsichtige Annahmen" },
-      base:         { factor: 1.00, networkEH: 700, label: "Basis-Annahmen" },
-      optimistic:   { factor: 1.30, networkEH: 600, label: "Optimistische Annahmen" },
+    /* --- Hardware & Preisbildung (effiziente Antminer Hydro) --- */
+    pricing: {
+      asicModel: "Antminer S21 XP Hydro",
+      asicTh: 473,            // TH/s je Einheit
+      asicWattPerTh: 12,      // ≈ J/TH = W je TH/s (sehr effizienter Hydro-Miner)
+      asicCostEur: 9500,      // Beschaffungskosten je Einheit (€) — Marktpreis ~$8,5k–12,6k
+      shippingPct: 0.05,      // Versand (% der Hardware)
+      customsPct: 0.06,       // Zoll
+      importTaxPct: 0.10,     // Einfuhrsteuer / IVA Paraguay
+      insurancePct: 0.02,     // Transportversicherung
+      markupPct: 0.25,        // Preisaufschlag des Unternehmens (Marge + Puffer)
+      volumeDiscounts: [      // Mengenvorteil nach Investitionssumme
+        { min: 0,     d: 0.00 },
+        { min: 9500,  d: 0.04 },
+        { min: 22500, d: 0.08 },
+      ],
+      minTicketEur: 5000,
     },
-    // Crypto payment options — REPLACE addresses with your real wallets before launch!
+    /* --- Mining-/Netzwerk-Annahmen --- */
+    network: { hashrateEH: 900, growthPerYear: 0.10 }, // aktuelle Netzwerk-Hashrate + jährliches Wachstum (Default-Regler)
+    tariffEurKwh: 0.12,      // All-in Mining-Tarif (Energie + Hosting + Wartung)
+    poolFee: 0.02,           // Pool-/Management-Gebühr
+    blockRewardBTC: 3.125,   // aktuelle Block-Subsidy
+    blocksPerDay: 144,
+    defaultBtcEur: 55000,    // Fallback-Kurs, falls Live-API nicht erreichbar
+    defaultForecastEur: 100000, // Vorbelegung Prognose-Feld (Basis-Szenario, vom Nutzer änderbar)
+    /* --- Währungs-Fallback (1 EUR = …), falls Live-/FX-API nicht erreichbar --- */
+    fx: { usdPerEur: 1.08, pygPerEur: 7900 },
+    /* --- Krypto-Zahlung — echte Wallets vor Launch eintragen! --- */
     crypto: {
-      BTC:  { network: "Bitcoin-Netzwerk", rate: 80000, decimals: 6, addr: "bc1qENPARA-PLATZHALTER-ECHTE-ADRESSE-EINSETZEN" },
-      ETH:  { network: "Ethereum · ERC-20", rate: 3000,  decimals: 4, addr: "0xENPARA0PLATZHALTER0ECHTE0ADRESSE0EINSETZEN" },
+      BTC:  { network: "Bitcoin-Netzwerk", rate: 55000, decimals: 6, addr: "bc1qENPARA-PLATZHALTER-ECHTE-ADRESSE-EINSETZEN" },
+      ETH:  { network: "Ethereum · ERC-20", rate: 2400,  decimals: 4, addr: "0xENPARA0PLATZHALTER0ECHTE0ADRESSE0EINSETZEN" },
       USDT: { network: "Tether · TRC-20",   rate: 0.92,  decimals: 2, addr: "TENPARA-PLATZHALTER-ECHTE-ADRESSE-EINSETZEN" },
       USDC: { network: "USD Coin · ERC-20", rate: 0.92,  decimals: 2, addr: "0xENPARA0PLATZHALTER0USDC0ADRESSE0EINSETZEN" },
     },
   };
 
   const fmtCrypto = (n, dec) => n.toLocaleString("de-DE", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+
+  /* =========================================================
+     Preismodell — eine Quelle der Wahrheit
+     Hardware → +Logistik (Versand/Zoll/Steuer/Versicherung) → +Marge
+     ========================================================= */
+  const PR = CONFIG.pricing;
+  const hwPerTh = () => PR.asicCostEur / PR.asicTh;
+  const logisticsPct = () => PR.shippingPct + PR.customsPct + PR.importTaxPct + PR.insurancePct;
+  const landedPerTh = () => hwPerTh() * (1 + logisticsPct());
+  const discountFor = (amt) => {
+    let d = 0;
+    PR.volumeDiscounts.forEach((t) => { if (amt >= t.min) d = t.d; });
+    return d;
+  };
+  const allInPerTh = (amt) => landedPerTh() * (1 + PR.markupPct) * (1 - discountFor(amt));
+  const thFor = (amt) => amt / allInPerTh(amt);
+
+  const costBreakdown = (amt) => {
+    const d = discountFor(amt);
+    const th = thFor(amt);
+    const hw = hwPerTh();
+    const f = (1 - d) * th; // Skalierungsfaktor inkl. Mengenvorteil
+    const items = [
+      { key: "hw",      label: "Hardware · " + PR.asicModel, eur: hw * f },
+      { key: "ship",    label: "Versand",                    eur: hw * PR.shippingPct * f },
+      { key: "customs", label: "Zoll",                       eur: hw * PR.customsPct * f },
+      { key: "tax",     label: "Einfuhrsteuer (IVA 10 %)",   eur: hw * PR.importTaxPct * f },
+      { key: "ins",     label: "Transportversicherung",      eur: hw * PR.insurancePct * f },
+      { key: "markup",  label: "Projekt- & Servicemarge",    eur: landedPerTh() * PR.markupPct * f },
+    ];
+    return { th, perTh: allInPerTh(amt), discount: d, items };
+  };
+
+  /* =========================================================
+     Live-Kurse (geteilt zwischen Rechner & Invest-Widget)
+     ========================================================= */
+  const LIVE = { eur: null, usd: null, pyg: null, ts: null };
+  const liveListeners = [];
+  const onLive = (fn) => liveListeners.push(fn);
+
+  async function fetchJSON(url, ms = 6500) {
+    const ctrl = ("AbortController" in window) ? new AbortController() : null;
+    const t = ctrl ? setTimeout(() => ctrl.abort(), ms) : null;
+    try {
+      const r = await fetch(url, { signal: ctrl ? ctrl.signal : undefined, headers: { accept: "application/json" } });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return await r.json();
+    } finally { if (t) clearTimeout(t); }
+  }
+
+  async function fetchLive() {
+    // 1) CoinGecko — liefert EUR/USD/PYG in einem Call
+    try {
+      const j = await fetchJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur,usd,pyg");
+      const b = j && j.bitcoin;
+      if (b && b.eur) {
+        LIVE.eur = b.eur;
+        LIVE.usd = b.usd || b.eur * CONFIG.fx.usdPerEur;
+        LIVE.pyg = b.pyg || LIVE.usd * (CONFIG.fx.pygPerEur / CONFIG.fx.usdPerEur);
+        LIVE.ts = Date.now();
+        return notifyLive();
+      }
+    } catch (e) { /* weiter zum Fallback */ }
+    // 2) Coinbase — EUR + USD (PYG aus FX-Fallback)
+    try {
+      const [e, u] = await Promise.all([
+        fetchJSON("https://api.coinbase.com/v2/prices/BTC-EUR/spot"),
+        fetchJSON("https://api.coinbase.com/v2/prices/BTC-USD/spot"),
+      ]);
+      const eur = parseFloat(e.data.amount), usd = parseFloat(u.data.amount);
+      if (eur) {
+        LIVE.eur = eur;
+        LIVE.usd = usd || eur * CONFIG.fx.usdPerEur;
+        LIVE.pyg = eur * CONFIG.fx.pygPerEur;
+        LIVE.ts = Date.now();
+        return notifyLive();
+      }
+    } catch (e) { /* aufgeben — Fallback-Default bleibt im Feld */ }
+    notifyLive(); // auch im Fehlerfall melden (für „Live n. v.")
+  }
+  function notifyLive() { liveListeners.forEach((fn) => { try { fn(); } catch (e) {} }); }
+
+  // Währungsverhältnisse (für Nebeninfo $/₲)
+  const fxRatios = () => {
+    if (LIVE.eur && LIVE.usd) {
+      return { usdPerEur: LIVE.usd / LIVE.eur, pygPerEur: (LIVE.pyg ? LIVE.pyg / LIVE.eur : CONFIG.fx.pygPerEur) };
+    }
+    return { usdPerEur: CONFIG.fx.usdPerEur, pygPerEur: CONFIG.fx.pygPerEur };
+  };
+  const usdFmt = (n) => "$ " + de(Math.round(n));
+  const pygFmt = (n) => {
+    if (n >= 1e9) return "₲ " + de(n / 1e9, 2) + " Mrd.";
+    if (n >= 1e6) return "₲ " + de(n / 1e6, 1) + " Mio.";
+    return "₲ " + de(Math.round(n));
+  };
 
   /* ---------------- Header shadow ---------------- */
   const header = $(".site-header");
@@ -102,75 +214,158 @@
     if (item.open) faqItems.forEach((o) => { if (o !== item) o.open = false; });
   }));
 
-  /* ---------------- ROI / mining calculator ---------------- */
+  /* ---------------- Pakete & Chips aus Preismodell befüllen ---------------- */
+  $$(".plan").forEach((plan) => {
+    const trigger = $("[data-amount]", plan);
+    if (!trigger) return;
+    const amt = parseInt(trigger.dataset.amount, 10);
+    const th = Math.round(thFor(amt));
+    trigger.dataset.th = th;
+    const hrEl = $("[data-pkg-hr]", plan);
+    if (hrEl) hrEl.textContent = de(th) + " TH/s · " + de(allInPerTh(amt), 2) + " € / TH/s";
+    const thEl = $("[data-pkg-th]", plan);
+    if (thEl) thEl.textContent = de(th) + " TH/s";
+  });
+  $$(".amount-chips .chip").forEach((chip) => {
+    const amt = parseInt(chip.dataset.amount, 10);
+    const th = Math.round(thFor(amt));
+    chip.dataset.th = th;
+    const b = $("b", chip);
+    if (b) b.textContent = de(th) + " TH/s";
+  });
+
+  /* ---------------- Mining-Rechner (neu) ---------------- */
   const calc = $("#calc");
   if (calc) {
-    const slider = $("#calc-amount", calc);
-    const amountOut = $("#calc-amount-out", calc);
-    const btcInput = $("#calc-btc", calc);
-    const termSel = $("#calc-term", calc);
-    const scnBtns = $$(".scenario button", calc);
-    const hint = $("#scn-hint", calc);
-    const out = {
-      annual: $("#out-annual", calc), roi: $("#out-roi", calc), pay: $("#out-payback", calc),
-      hash: $("#r-hash", calc), power: $("#r-power", calc), btc: $("#r-btc", calc),
-      gross: $("#r-gross", calc), energy: $("#r-energy", calc), net: $("#r-net", calc), total: $("#r-total", calc),
+    const el = {
+      amount: $("#calc-amount", calc), amountOut: $("#calc-amount-out", calc), thHint: $("#calc-th-out", calc),
+      term: $("#calc-term", calc), termOut: $("#calc-term-out", calc),
+      btc: $("#calc-btc", calc), btcLive: $("#btc-live", calc), fx: $("#btc-fx", calc),
+      net: $("#calc-net", calc), netOut: $("#calc-net-out", calc), netHint: $("#net-hint", calc),
+      total: $("#out-total"), termLabel: $("#out-term-label"), roi: $("#out-roi"), pay: $("#out-payback"),
+      hash: $("#r-hash"), power: $("#r-power"), btcM: $("#r-btc"), gross: $("#r-gross"), energy: $("#r-energy"), netM: $("#r-net"),
+      costAmount: $("#cost-amount"), costTh: $("#cost-th"), costPerTh: $("#cost-perth"),
+      costMeter: $("#cost-meter"), costLegend: $("#cost-legend"),
     };
-    let scn = "base";
+    const setNeg = (node, neg) => node && node.classList.toggle("neg", neg);
 
-    const setNeg = (el, neg) => el.classList.toggle("neg", neg);
+    const returnsOf = (amount, months, btcEur, growth) => {
+      const th = thFor(amount);
+      const powerKW = th * PR.asicWattPerTh / 1000;
+      const energyDay = powerKW * 24 * CONFIG.tariffEurKwh;
+      const net0TH = CONFIG.network.hashrateEH * 1e6;
+      let totalNet = 0, totalGross = 0, totalBtc = 0, cum = 0, payback = null;
+      for (let m = 0; m < months; m++) {
+        const networkTH = net0TH * Math.pow(1 + growth, m / 12);
+        const dailyBTC = CONFIG.blockRewardBTC * CONFIG.blocksPerDay * (th / networkTH);
+        const grossDay = dailyBTC * btcEur * (1 - CONFIG.poolFee);
+        const netDay = grossDay - energyDay;
+        totalGross += grossDay * 30.4; totalNet += netDay * 30.4; totalBtc += dailyBTC * 30.4;
+        cum += netDay * 30.4;
+        if (payback === null && cum >= amount) payback = m + 1;
+      }
+      return {
+        th, powerKW, energyMonth: energyDay * 30.4,
+        avgGross: totalGross / months, avgNet: totalNet / months, avgBtc: totalBtc / months,
+        totalNet, payback, roiPa: (totalNet / months * 12) / amount * 100,
+      };
+    };
+
+    const COST_LABELS = {
+      hw: "hw", ship: "ship", customs: "customs", tax: "tax", ins: "ins", markup: "markup",
+    };
+
+    const renderCost = (amount) => {
+      const cb = costBreakdown(amount);
+      if (el.costAmount) el.costAmount.textContent = fmtE(amount);
+      if (el.costTh) el.costTh.textContent = de(Math.round(cb.th));
+      if (el.costPerTh) el.costPerTh.textContent = de(cb.perTh, 2) + " €/TH/s"
+        + (cb.discount > 0 ? "  ·  −" + Math.round(cb.discount * 100) + " % Mengenvorteil" : "");
+      if (el.costMeter) cb.items.forEach((it) => {
+        const seg = $(".s-" + it.key, el.costMeter);
+        if (seg) seg.style.width = (it.eur / amount * 100).toFixed(2) + "%";
+      });
+      if (el.costLegend) el.costLegend.innerHTML = cb.items.map((it) =>
+        `<div class="cost-li"><span class="dot ${COST_LABELS[it.key]}"></span>` +
+        `<span class="lab">${it.label}</span><b>${fmtE(it.eur)}</b>` +
+        `<span class="pct">${Math.round(it.eur / amount * 100)} %</span></div>`).join("");
+    };
 
     const render = () => {
-      const amount = parseInt(slider.value, 10);
-      const btc = Math.max(1000, parseFloat(btcInput.value) || CONFIG.defaultBtcEur);
-      const term = parseInt(termSel.value, 10);
-      const s = CONFIG.scenarios[scn];
+      const amount = parseInt(el.amount.value, 10);
+      const months = parseInt(el.term.value, 10);
+      const btc = Math.max(1000, parseFloat(el.btc.value) || CONFIG.defaultBtcEur);
+      const growth = parseInt(el.net.value, 10) / 100;
+      const r = returnsOf(amount, months, btc, growth);
 
-      const th = amount / CONFIG.pricePerTH;
-      const effBtc = btc * s.factor;
-      const networkTH = s.networkEH * 1e6;            // 1 EH/s = 1e6 TH/s
-      const dailyBTC = CONFIG.blockRewardBTC * CONFIG.blocksPerDay * (th / networkTH);
-      const grossDay = dailyBTC * effBtc * (1 - CONFIG.poolFee);
-      const powerKW = th * CONFIG.wattPerTH / 1000;
-      const energyDay = powerKW * 24 * CONFIG.tariffEurKwh;
-      const netDay = grossDay - energyDay;
-      const monthlyNet = netDay * 30.4;
-      const annualNet = netDay * 365;
+      el.amountOut.textContent = de(amount);
+      if (el.thHint) el.thHint.textContent = "≈ " + de(Math.round(r.th)) + " TH/s";
+      el.termOut.textContent = months;
+      el.netOut.textContent = (growth > 0 ? "+" : "") + Math.round(growth * 100);
+      if (el.netHint) el.netHint.textContent = growth > 0 ? "Schwierigkeit steigt" : growth < 0 ? "Schwierigkeit sinkt" : "konstant";
 
-      amountOut.textContent = amount.toLocaleString("de-DE");
-      hint.textContent = s.label;
+      // FX-Nebeninfo zum Prognose-Kurs
+      const fx = fxRatios();
+      if (el.fx) el.fx.textContent = "≈ " + usdFmt(btc * fx.usdPerEur) + "  ·  " + pygFmt(btc * fx.pygPerEur);
 
-      out.hash.textContent = Math.round(th).toLocaleString("de-DE") + " TH/s";
-      out.power.textContent = powerKW.toFixed(1).replace(".", ",") + " kW";
-      out.btc.textContent = fmtCrypto(dailyBTC * 30.4, 4) + " BTC";
-      out.gross.textContent = fmtE(grossDay * 30.4);
-      out.energy.textContent = "−" + fmtE(energyDay * 30.4);
-      out.net.textContent = fmtE(monthlyNet); setNeg(out.net, monthlyNet < 0);
-      out.total.textContent = fmtE(monthlyNet * term); setNeg(out.total, monthlyNet < 0);
-      out.annual.textContent = fmtE(annualNet); setNeg(out.annual, annualNet < 0);
+      if (el.termLabel) el.termLabel.textContent = months + " Monate";
+      el.total.textContent = fmtE(r.totalNet); setNeg(el.total, r.totalNet < 0);
+      el.roi.textContent = (r.roiPa >= 0 ? "" : "−") + Math.abs(r.roiPa).toFixed(1).replace(".", ",") + " % p.a.";
+      el.roi.classList.toggle("neg-badge", r.roiPa < 0);
 
-      const roi = (annualNet / amount) * 100;
-      out.roi.textContent = (roi >= 0 ? "" : "−") + Math.abs(roi).toFixed(1).replace(".", ",") + " % p.a.";
+      if (r.avgNet > 0 && r.payback) el.pay.textContent = "Amortisation ≈ " + r.payback + " Mon.";
+      else if (r.avgNet > 0) el.pay.textContent = "Amortisation > " + months + " Mon.";
+      else el.pay.textContent = "Amortisation: in diesem Szenario nicht";
 
-      if (monthlyNet > 0) {
-        const months = Math.ceil(amount / monthlyNet);
-        out.pay.textContent = months > 120
-          ? "Amortisation > 10 Jahre"
-          : "Amortisation ≈ " + months + " Mon.";
-      } else {
-        out.pay.textContent = "Amortisation: in diesem Szenario nicht";
-      }
+      el.hash.textContent = de(Math.round(r.th)) + " TH/s";
+      el.power.textContent = de(r.powerKW, 1) + " kW";
+      el.btcM.textContent = fmtCrypto(r.avgBtc, 4) + " BTC";
+      el.gross.textContent = fmtE(r.avgGross);
+      el.energy.textContent = "−" + fmtE(r.energyMonth);
+      el.netM.textContent = fmtE(r.avgNet); setNeg(el.netM, r.avgNet < 0);
+
+      renderCost(amount);
     };
 
-    slider.addEventListener("input", render);
-    btcInput.addEventListener("input", render);
-    termSel.addEventListener("change", render);
-    scnBtns.forEach((b) => b.addEventListener("click", () => {
-      scnBtns.forEach((o) => o.classList.remove("active"));
-      b.classList.add("active");
-      scn = b.dataset.scenario;
+    // Live-Kurs als Referenz anzeigen (überschreibt das Prognose-Feld nicht)
+    const applyLive = () => {
+      if (LIVE.eur) {
+        el.btcLive.classList.add("on");
+        el.btcLive.innerHTML = '<span class="pulse"></span> Live · ' + euro.format(Math.round(LIVE.eur));
+        el.btcLive.title = "Aktualisiert: " + new Date(LIVE.ts).toLocaleTimeString("de-DE");
+      } else {
+        el.btcLive.classList.remove("on");
+        el.btcLive.textContent = "Live-Kurs n. v.";
+      }
+      render();
+    };
+    onLive(applyLive);
+
+    el.amount.addEventListener("input", render);
+    el.term.addEventListener("input", render);
+    el.net.addEventListener("input", render);
+    el.btc.addEventListener("input", () => {
+      $$(".btc-presets button", calc).forEach((x) => x.classList.remove("active"));
+      render();
+    });
+    $$(".btc-presets button", calc).forEach((b) => b.addEventListener("click", () => {
+      if (b.dataset.btc === "live") { if (LIVE.eur) el.btc.value = Math.round(LIVE.eur); }
+      else { el.btc.value = parseInt(b.dataset.btc, 10); }
+      $$(".btc-presets button", calc).forEach((x) => x.classList.toggle("active", x === b));
       render();
     }));
+
+    // Prognose-Standard (Basis-Szenario) vorbelegen
+    el.btc.value = CONFIG.defaultForecastEur;
+    $$(".btc-presets button", calc).forEach((x) => x.classList.toggle("active", parseInt(x.dataset.btc, 10) === CONFIG.defaultForecastEur));
+
+    // „Diesen Betrag investieren" → Invest-Bereich vorbefüllen
+    const investBtn = $("#calc-invest", calc);
+    if (investBtn) investBtn.addEventListener("click", () => {
+      const amt = parseInt(el.amount.value, 10);
+      if (window.__enparaSetInvest) window.__enparaSetInvest(amt);
+    });
+
     render();
   }
 
@@ -198,13 +393,7 @@
     if (cp.ref) cp.ref.textContent = ref;
     if (sepaRef) sepaRef.textContent = ref;
 
-    const thFor = (amt) => {
-      if (amt === 5000) return 200;
-      if (amt === 9500) return 400;
-      if (amt === 22500) return 1000;
-      return Math.max(1, Math.round(amt / CONFIG.pricePerTH));
-    };
-
+    const thForInvest = (amt) => Math.max(1, Math.round(thFor(amt)));
     const copyDefault = cp.copy ? cp.copy.innerHTML : "";
 
     const renderCrypto = () => {
@@ -219,12 +408,15 @@
     };
 
     const render = () => {
-      thOut.textContent = thFor(amount).toLocaleString("de-DE");
+      thOut.textContent = de(thForInvest(amount));
       fields.amount.value = amount;
       sepaAmount.textContent = fmtE(amount);
       chips.forEach((c) => c.classList.toggle("active", parseInt(c.dataset.amount, 10) === amount));
       renderCrypto();
     };
+
+    // Live-Kurs in Krypto-Betrag (BTC) übernehmen
+    onLive(() => { if (LIVE.eur) { CONFIG.crypto.BTC.rate = LIVE.eur; if (asset === "BTC") renderCrypto(); } });
 
     chips.forEach((c) => c.addEventListener("click", () => {
       amount = parseInt(c.dataset.amount, 10);
@@ -237,7 +429,7 @@
       render();
     });
     amountInput.addEventListener("blur", () => {
-      if (amount < 5000) { amount = 5000; amountInput.value = 5000; render(); }
+      if (amount < PR.minTicketEur) { amount = PR.minTicketEur; amountInput.value = PR.minTicketEur; render(); }
     });
 
     payTabs.forEach((t) => t.addEventListener("click", () => {
@@ -272,7 +464,11 @@
     cp.qr.addEventListener("error", () => { cp.qr.style.display = "none"; });
 
     // Allow pricing cards / external buttons to preset the amount
-    window.__enparaSetInvest = (amt) => { amount = amt; amountInput.value = amt; render(); };
+    window.__enparaSetInvest = (amt) => {
+      amount = amt; amountInput.value = amt; render();
+      const target = $("#invest");
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
 
     // Submit (front-end demo — wire to backend/CRM, see README)
     if (form) form.addEventListener("submit", (e) => {
@@ -289,8 +485,8 @@
       const msg = $("#success-msg");
       if (msg) {
         msg.textContent = method === "crypto"
-          ? `Bitte sende ${fmtCrypto(amount / CONFIG.crypto[asset].rate, CONFIG.crypto[asset].decimals)} ${asset} an die angezeigte Adresse (Referenz ${ref}). Sobald die Zahlung eingegangen ist, bestätigen wir deinen Anteil von ${thFor(amount).toLocaleString("de-DE")} TH/s.`
-          : `Bitte überweise ${fmtE(amount)} per SEPA mit Verwendungszweck „${ref}". Nach Zahlungseingang bestätigen wir deinen Anteil von ${thFor(amount).toLocaleString("de-DE")} TH/s.`;
+          ? `Bitte sende ${fmtCrypto(amount / CONFIG.crypto[asset].rate, CONFIG.crypto[asset].decimals)} ${asset} an die angezeigte Adresse (Referenz ${ref}). Sobald die Zahlung eingegangen ist, bestätigen wir deinen Anteil von ${de(thForInvest(amount))} TH/s.`
+          : `Bitte überweise ${fmtE(amount)} per SEPA mit Verwendungszweck „${ref}". Nach Zahlungseingang bestätigen wir deinen Anteil von ${de(thForInvest(amount))} TH/s.`;
       }
       if (ok) ok.classList.add("show");
     });
@@ -303,8 +499,6 @@
     e.preventDefault();
     const amt = parseInt(btn.dataset.amount, 10);
     if (amt && window.__enparaSetInvest) window.__enparaSetInvest(amt);
-    const target = $("#invest");
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     setTimeout(() => { const n = $("#f-name"); if (n) n.focus(); }, 600);
   }));
 
@@ -314,4 +508,7 @@
     img.addEventListener("error", fail);
     if (img.complete && img.naturalWidth === 0) fail();
   });
+
+  /* ---------------- Live-Kurse laden ---------------- */
+  fetchLive();
 })();

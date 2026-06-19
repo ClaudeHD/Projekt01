@@ -301,9 +301,9 @@
           <div class="pname">Starter</div>
           <div class="pdesc">Der Einstieg in grünes Hydro-Mining.</div>
           <div class="price"><span class="amt">5.000 €</span></div>
-          <div class="hr">200 TH/s · 25,00 € / TH/s</div>
+          <div class="hr" data-pkg-hr>200 TH/s · 25,00 € / TH/s</div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 200 TH/s Hashrate-Anteil</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-pkg-th>200 TH/s</span> Hashrate-Anteil</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Anteilige BTC-Auszahlungen</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Live-Dashboard-Zugang</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Krypto & SEPA</li>
@@ -316,10 +316,10 @@
           <div class="pname">Pro</div>
           <div class="pdesc">Mehr Hashrate, besserer Stückpreis.</div>
           <div class="price"><span class="amt">9.500 €</span></div>
-          <div class="hr">400 TH/s · 23,75 € / TH/s</div>
+          <div class="hr" data-pkg-hr>400 TH/s · 23,75 € / TH/s</div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 400 TH/s Hashrate-Anteil</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 5 % günstiger je TH/s</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-pkg-th>400 TH/s</span> Hashrate-Anteil</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 4 % günstiger je TH/s</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Quartals-Reporting</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Persönlicher Ansprechpartner</li>
           </ul>
@@ -330,10 +330,10 @@
           <div class="pname">Whale</div>
           <div class="pdesc">Maximale Beteiligung, bester Preis.</div>
           <div class="price"><span class="amt">22.500 €</span></div>
-          <div class="hr">1.000 TH/s · 22,50 € / TH/s</div>
+          <div class="hr" data-pkg-hr>1.000 TH/s · 22,50 € / TH/s</div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 1.000 TH/s Hashrate-Anteil</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Bester Preis je TH/s (−10 %)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-pkg-th>1.000 TH/s</span> Hashrate-Anteil</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Bester Preis je TH/s (−8 %)</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Optionale Vor-Ort-Besichtigung</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Direkter Draht zum Gründerteam</li>
           </ul>
@@ -357,51 +357,70 @@
           <div class="field">
             <label>Investitionsbetrag <b class="calc-amount"><span id="calc-amount-out">10.000</span> <span class="cur">€</span></b></label>
             <input type="range" id="calc-amount" min="5000" max="100000" step="500" value="10000" aria-label="Investitionsbetrag" />
+            <div class="field-foot"><span>5.000 €</span><span class="ff-mid" id="calc-th-out">≈ 0 TH/s</span><span>100.000 €</span></div>
           </div>
 
-          <div class="calc-2col">
-            <div class="field">
-              <label for="calc-btc">BTC-Kurs (€)</label>
-              <div class="num-field"><span class="cur">€</span><input type="number" id="calc-btc" min="10000" max="500000" step="1000" value="80000" /></div>
-            </div>
-            <div class="field">
-              <label for="calc-term">Laufzeit</label>
-              <select class="select" id="calc-term">
-                <option value="12">12 Monate</option>
-                <option value="24" selected>24 Monate</option>
-                <option value="36">36 Monate</option>
-                <option value="48">48 Monate</option>
-              </select>
+          <div class="field">
+            <label>Laufzeit <b class="calc-amount"><span id="calc-term-out">36</span>Monate</b></label>
+            <input type="range" id="calc-term" min="6" max="60" step="1" value="36" aria-label="Laufzeit in Monaten" />
+            <div class="field-foot"><span>6 Monate</span><span>60 Monate</span></div>
+          </div>
+
+          <div class="field">
+            <label for="calc-btc">BTC-Kurs · Prognose <span class="live-pill" id="btc-live"><span class="pulse"></span> lädt…</span></label>
+            <div class="num-field"><span class="cur">€</span><input type="number" id="calc-btc" min="1000" step="500" value="100000" inputmode="numeric" /></div>
+            <div class="fx-line" id="btc-fx">≈ $ — · ₲ —</div>
+            <div class="btc-presets" role="group" aria-label="Kurs-Schnellwahl">
+              <button type="button" data-btc="live">Live</button>
+              <button type="button" data-btc="100000" class="active">100k</button>
+              <button type="button" data-btc="150000">150k</button>
+              <button type="button" data-btc="200000">200k</button>
             </div>
           </div>
 
           <div class="field">
-            <label>Markt-Szenario <span class="hint" id="scn-hint">Basis-Annahmen</span></label>
-            <div class="scenario">
-              <button type="button" data-scenario="conservative">Konservativ</button>
-              <button type="button" data-scenario="base" class="active">Basis</button>
-              <button type="button" data-scenario="optimistic">Optimistisch</button>
-            </div>
+            <label>Netzwerk-Wachstum p.&nbsp;a. <b class="calc-amount"><span id="calc-net-out">+10</span>%</b></label>
+            <input type="range" id="calc-net" min="-10" max="60" step="5" value="10" aria-label="Jährliches Netzwerk-Wachstum" />
+            <div class="field-foot"><span>−10 %</span><span class="ff-mid" id="net-hint">Schwierigkeit steigt</span><span>+60 %</span></div>
           </div>
 
-          <p class="calc-note">* Modellrechnung mit hydro-effizienten Antminern (≈ 13,5 W/TH), Netzwerk-Annahmen je Szenario, 2 % Pool-/Mgmt-Gebühr und 0,12 €/kWh Mining-Tarif. Mining-Erträge schwanken erheblich mit BTC-Kurs und Netzwerk-Schwierigkeit. <b>Kein Renditeversprechen, keine Anlageberatung.</b></p>
+          <p class="calc-note">* Modellrechnung mit effizienten Hydro-Antminern (≈ 12 W/TH), Netzwerk-Hashrate ~900 EH/s zzgl. gewähltem Wachstum, 2 % Pool-/Mgmt-Gebühr und 0,12 €/kWh Mining-Tarif. Monatlich über die Laufzeit gerechnet. <b>Kein Renditeversprechen, keine Anlageberatung.</b></p>
         </div>
 
         <div class="calc-result">
-          <div class="sub">Geschätzter Netto-Ertrag p.&nbsp;a.</div>
-          <div class="big" id="out-annual">1.100 €</div>
-          <div class="roi-line"><span class="roi-badge" id="out-roi">11 % p.a.</span><span class="roi-pay" id="out-payback">Amortisation ≈ 24 Mon.</span></div>
+          <div class="sub">Geschätzter Netto-Ertrag über <span id="out-term-label">36 Monate</span></div>
+          <div class="big" id="out-total">0 €</div>
+          <div class="roi-line"><span class="roi-badge" id="out-roi">0 % p.a.</span><span class="roi-pay" id="out-payback">—</span></div>
           <div class="calc-rows">
-            <div class="r"><span>Hashrate-Anteil</span><b id="r-hash">400 TH/s</b></div>
-            <div class="r"><span>Leistungsaufnahme</span><b id="r-power">5,4 kW</b></div>
-            <div class="r"><span>Geschätzte BTC / Monat</span><b id="r-btc">0,0040 BTC</b></div>
-            <div class="r"><span>Brutto-Ertrag / Monat</span><b id="r-gross">320 €</b></div>
-            <div class="r"><span>Energie & Tarif / Monat</span><b id="r-energy">−210 €</b></div>
-            <div class="r"><span>Netto / Monat</span><b id="r-net">92 €</b></div>
-            <div class="r total"><span>Netto über Laufzeit</span><b id="r-total">2.208 €</b></div>
+            <div class="r"><span>Hashrate-Anteil</span><b id="r-hash">0 TH/s</b></div>
+            <div class="r"><span>Leistungsaufnahme</span><b id="r-power">0 kW</b></div>
+            <div class="r"><span>Ø BTC / Monat</span><b id="r-btc">0 BTC</b></div>
+            <div class="r"><span>Ø Brutto / Monat</span><b id="r-gross">0 €</b></div>
+            <div class="r"><span>Energie & Tarif / Monat</span><b id="r-energy">0 €</b></div>
+            <div class="r total"><span>Ø Netto / Monat</span><b id="r-net">0 €</b></div>
           </div>
-          <a class="btn btn-primary btn-block" href="#invest" style="margin-top:24px">Diesen Betrag investieren</a>
+          <button class="btn btn-primary btn-block" id="calc-invest" type="button" style="margin-top:24px">Diesen Betrag investieren</button>
         </div>
+      </div>
+
+      <!-- Kostenaufschlüsselung des Investitionsbetrags -->
+      <div class="cost-card reveal d2">
+        <div class="cost-head">
+          <div class="cost-headtext">
+            <div class="dc-title">Kostenaufschlüsselung deiner Beteiligung</div>
+            <p class="cost-sub">So setzt sich dein Betrag von <b id="cost-amount">10.000 €</b> zusammen – transparent von der Hardware bis zur Marge.</p>
+          </div>
+          <div class="cost-hero"><span><span id="cost-th">0</span> <span class="unit">TH/s</span></span><span class="cost-hero-sub" id="cost-perth">0 €/TH/s</span></div>
+        </div>
+        <div class="cost-meter" id="cost-meter" role="img" aria-label="Aufteilung des Investitionsbetrags nach Kostenposten">
+          <div class="cost-seg s-hw"></div>
+          <div class="cost-seg s-ship"></div>
+          <div class="cost-seg s-customs"></div>
+          <div class="cost-seg s-tax"></div>
+          <div class="cost-seg s-ins"></div>
+          <div class="cost-seg s-markup"></div>
+        </div>
+        <div class="cost-legend" id="cost-legend"></div>
       </div>
     </div>
   </section>
@@ -416,25 +435,33 @@
       </div>
       <div class="reveal d1">
         <div class="timeline">
-          <div class="tl-item done">
-            <div class="marker"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div><div class="q">Q1 2026</div><h3>Standort & Energievertrag</h3><p>Sicherung des Standorts und der Stromanbindung in Paraguay.</p></div>
+          <div class="tl-item active">
+            <div class="marker">1</div>
+            <div><div class="q">Q1–Q4 2026 · läuft</div><h3>Marketing & Werbung</h3><p>Aufbau von Reichweite, Community und Investoreninteresse über das gesamte Jahr.</p></div>
           </div>
           <div class="tl-item active">
             <div class="marker">2</div>
-            <div><div class="q">Q2–Q3 2026 · läuft</div><h3>Seed-Finanzierung (1 MW)</h3><p>Einsammeln des Investorenkapitals für die Hydro-Hardware und Infrastruktur der Phase 1.</p></div>
+            <div><div class="q">bis einschl. Q4 2026 · läuft</div><h3>Seed-Runde (1 MW)</h3><p>Einsammeln des Investorenkapitals für Hydro-Hardware und Infrastruktur der Phase 1.</p></div>
           </div>
           <div class="tl-item">
             <div class="marker">3</div>
-            <div><div class="q">Q4 2026</div><h3>Aufbau & Installation</h3><p>Beschaffung, Aufbau der Halle, Wasserkühlung und Inbetriebnahme der ersten Hydro-Antminer.</p></div>
+            <div><div class="q">Q4 2026</div><h3>Standortbezug</h3><p>Bezug der gesicherten Standorte in Paraguay und Vorbereitung der Mining-Halle.</p></div>
           </div>
           <div class="tl-item">
             <div class="marker">4</div>
-            <div><div class="q">Q1 2027</div><h3>Mining-Start & erste Auszahlungen</h3><p>Produktiver Betrieb, Live-Dashboard und erste anteilige BTC-Ausschüttungen.</p></div>
+            <div><div class="q">Q1 2027</div><h3>Energieverträge & Juristisches</h3><p>Finalisierung der Strom-/Energieverträge und der rechtlichen Beteiligungsstruktur.</p></div>
           </div>
           <div class="tl-item">
             <div class="marker">5</div>
-            <div><div class="q">ab 2027</div><h3>Skalierung auf 10+ MW</h3><p>Modularer Ausbau der Kapazität und Aufnahme weiterer Investorenrunden.</p></div>
+            <div><div class="q">Q1 2027</div><h3>Aufbau & Installation</h3><p>Beschaffung, Hallenaufbau, Wasserkühlung und Inbetriebnahme der Hydro-Antminer.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="marker">6</div>
+            <div><div class="q">Q1–Q2 2027</div><h3>Mining-Start & Auszahlungen</h3><p>Produktiver Betrieb, Live-Dashboard und erste anteilige BTC-Ausschüttungen.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="marker">7</div>
+            <div><div class="q">ab 2027 · Ausblick</div><h3>Skalierung auf 10+ MW</h3><p>Modularer Ausbau der Kapazität und Aufnahme weiterer Investorenrunden.</p></div>
           </div>
         </div>
       </div>
@@ -442,24 +469,69 @@
   </section>
 
   <!-- ============ BETRIEB / TRUST ============ -->
-  <section class="section-pad">
-    <div class="container split">
-      <div class="reveal">
-        <div class="media-frame">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145916_f6e3b61b-5262-4d02-bb36-edbb620d3992.png" alt="Technikerin überwacht den Betrieb der Mining-Server" data-fallback loading="lazy" />
-          <div class="fallback"></div>
-          <span class="tag">Betrieb · 24/7</span>
+  <section class="section-pad" id="betrieb">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow"><span class="dot"></span> Vertrauen & Betrieb</span>
+        <h2 class="title">Dein Kapital – <span class="grad-text">professionell verwaltet</span> und rund um die Uhr überwacht</h2>
+        <p class="lead">Transparenz und Sicherheit zuerst: Du behältst jederzeit den Überblick, während unser Team vor Ort den reibungslosen 24/7-Betrieb sicherstellt.</p>
+      </div>
+
+      <div class="ops-grid">
+        <div class="ops-visual reveal">
+          <div class="media-frame">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145916_f6e3b61b-5262-4d02-bb36-edbb620d3992.png" alt="Technikerin überwacht den Betrieb der Mining-Server" data-fallback loading="lazy" />
+            <div class="fallback"></div>
+            <span class="tag">Betrieb · 24/7</span>
+            <div class="ops-live"><span class="st-dot ok"></span> Live-Betrieb</div>
+            <div class="ops-scan"></div>
+          </div>
+          <div class="ops-chip oc1"><span class="st-dot ok"></span> Mining aktiv</div>
+          <div class="ops-chip oc2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2s6 5.5 6 11a6 6 0 0 1-12 0c0-5.5 6-11 6-11z" stroke-linejoin="round"/></svg>
+            Wasserkühlung <b>38&nbsp;°C</b>
+          </div>
+        </div>
+
+        <div class="ops-side reveal d1">
+          <div class="status-panel">
+            <div class="sp-head"><span class="st-dot ok pulse"></span> Systemstatus <b>Alle Systeme aktiv</b><span class="sp-shimmer"></span></div>
+            <div class="sp-rows">
+              <div class="sp-row"><span class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sp-name">Hashrate</span><span class="sp-val"><i>optimal</i><span class="st-dot ok"></span></span></div>
+              <div class="sp-row"><span class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2s6 5.5 6 11a6 6 0 0 1-12 0c0-5.5 6-11 6-11z" stroke-linejoin="round"/></svg></span><span class="sp-name">Wasserkühlung</span><span class="sp-val"><i>stabil</i><span class="st-dot ok"></span></span></div>
+              <div class="sp-row"><span class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z" stroke-linejoin="round"/></svg></span><span class="sp-name">Netz-Uptime</span><span class="sp-val"><i>99,9 %</i><span class="st-dot ok"></span></span></div>
+              <div class="sp-row"><span class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sp-name">Sicherheit</span><span class="sp-val"><i>gesichert</i><span class="st-dot ok"></span></span></div>
+            </div>
+          </div>
+          <div class="trust-stats">
+            <div class="ts"><div class="num"><span data-count="99.9" data-decimals="1">0</span><span class="suffix">&nbsp;%</span></div><span>Ziel-Uptime</span></div>
+            <div class="ts"><div class="num"><span data-count="24">0</span><span class="suffix">/7</span></div><span>Monitoring</span></div>
+            <div class="ts"><div class="num"><span data-count="100">0</span><span class="suffix">&nbsp;%</span></div><span>Versichert</span></div>
+          </div>
         </div>
       </div>
-      <div class="reveal d1">
-        <span class="eyebrow"><span class="dot"></span> Vertrauen & Betrieb</span>
-        <h2 class="title">Dein Kapital wird professionell verwaltet</h2>
-        <p class="lead">Transparenz und Sicherheit stehen bei uns an erster Stelle. Du behältst jederzeit den Überblick – wir kümmern uns um den reibungslosen Betrieb.</p>
-        <ul class="feature-list">
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Live-Monitoring & Dashboard</b>Seed-Fortschritt, Hashrate, Temperatur und Uptime jederzeit einsehbar.</span></li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Transparente Verträge</b>Klar geregelte Beteiligung, Konditionen und Auszahlungsmodalitäten.</span></li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Erfahrenes Team vor Ort</b>Lokale Operations-Crew plus Mining- und Energie-Expertise.</span></li>
-        </ul>
+
+      <div class="trust-cards">
+        <div class="trust-card reveal">
+          <div class="tc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Live-Monitoring & Dashboard</h3>
+          <p>Seed-Fortschritt, Hashrate, Temperatur und Uptime jederzeit transparent einsehbar.</p>
+        </div>
+        <div class="trust-card reveal d1">
+          <div class="tc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 13h6m-6 4h6M9 9h2M7 3h7l4 4v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Transparente Verträge</h3>
+          <p>Klar geregelte Beteiligung, Konditionen und Auszahlungsmodalitäten – ohne Kleingedrucktes.</p>
+        </div>
+        <div class="trust-card reveal d2">
+          <div class="tc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 20v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11" stroke-linecap="round"/></svg></div>
+          <h3>Erfahrenes Team vor Ort</h3>
+          <p>Lokale Operations-Crew plus geballte Mining- und Energie-Expertise direkt in Paraguay.</p>
+        </div>
+        <div class="trust-card reveal d3">
+          <div class="tc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Versicherte Hardware</h3>
+          <p>Gesicherter Standort mit Zutrittskontrolle und Versicherung deiner anteiligen Antminer.</p>
+        </div>
       </div>
     </div>
   </section>

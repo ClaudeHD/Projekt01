@@ -30,11 +30,13 @@ Deploybar auf **GitHub Pages, Netlify, Vercel, Cloudflare Pages** – Ordner hoc
 | Was | Datei | Variable / Stelle |
 |-----|-------|-------------------|
 | **Krypto-Wallets** (BTC/ETH/USDT/USDC) | `assets/js/main.js` | `CONFIG.crypto.*.addr` |
-| Wechselkurse, Effizienz, Tarif, Szenarien | `assets/js/main.js` | `CONFIG` (oben) |
+| **Hardware-Preis, Effizienz, Marge, Logistik** (Zoll/Steuer/Versand/Versicherung) | `assets/js/main.js` | `CONFIG.pricing` |
+| Netzwerk-Annahmen, Mining-Tarif, Pool-Gebühr | `assets/js/main.js` | `CONFIG.network`, `CONFIG.tariffEurKwh`, `CONFIG.poolFee` |
+| Prognose-Standard & FX-Fallback (USD/PYG) | `assets/js/main.js` | `CONFIG.defaultForecastEur`, `CONFIG.fx` |
 | **SEPA-Bankdaten** (IBAN/BIC) | `index.html` | Block `.sepa-box` |
 | **Dashboard-Zahlen** (Ziel, eingesammelt, Investoren …) | `assets/js/dashboard.js` | `DASH` (oben) |
 | Funding-Fortschritt im Invest-Block (68 %) | `index.html` | `.mini-progress` |
-| Pakete & Preise | `index.html` | Abschnitt `#pakete` |
+| Pakete: Beträge (€) | `index.html` `#pakete` | TH/s & €/TH werden **automatisch** aus `CONFIG.pricing` berechnet |
 
 > ⚠️ **Wichtig:** Wallet-Adressen, IBAN und alle Zahlen sind aktuell **Platzhalter**
 > und müssen vor dem Live-Gang ersetzt werden.
@@ -54,11 +56,26 @@ Daten eingeben → Meldung.
   - eigenen `fetch()`-Call im `submit`-Handler in `assets/js/main.js` (das `data`-Objekt
     mit Name, E-Mail, Betrag, Methode, Asset und Referenz ist bereits vorbereitet).
 
-## 📊 Rendite-Rechner
+## 📊 Rendite-Rechner & Preismodell
 
-Echte Mining-Logik: Hashrate → Netzwerk-Schwierigkeit → BTC-Kurs → minus
-All-in Mining-Tarif (**0,12 €/kWh**) und Pool-/Mgmt-Gebühr. Drei Szenarien
-(konservativ/basis/optimistisch), editierbarer BTC-Kurs und Laufzeit.
+**Preisbildung (Anteile):** Der €-Betrag wird über ein transparentes Modell in
+Hashrate (TH/s) umgerechnet — Basis ist ein effizienter Hydro-Antminer
+(S21 XP Hydro, ≈ 12 W/TH). Auf die Hardware kommen **Versand, Zoll,
+Einfuhrsteuer (IVA) und Transportversicherung** sowie **25 % Marge** (Gewinn +
+Puffer); größere Tickets erhalten einen Mengenvorteil. Alles in `CONFIG.pricing`.
+Der Rechner schlüsselt jeden Investitionsbetrag in genau diese Posten auf.
+
+**Mining-Rechner:** Monatsgenaue Modellrechnung über frei wählbare Laufzeit
+(6–60 Monate) mit:
+
+- **Echtzeit-BTC-Kurs** (CoinGecko, Fallback Coinbase) – als Referenz angezeigt,
+  inkl. kleiner Nebeninfo in **USD & Guaraní (PYG)**.
+- **Editierbares Prognose-Feld** für den BTC-Kurs (Standard `CONFIG.defaultForecastEur`)
+  plus Schnellwahl (Live / 100k / 150k / 200k).
+- **Netzwerk-Wachstum p. a.** als stufenloser Regler (ersetzt die alten 3 Szenarien)
+  – modelliert die steigende Mining-Schwierigkeit über die Laufzeit.
+- All-in Mining-Tarif (**0,12 €/kWh**) und Pool-/Mgmt-Gebühr.
+
 Annahmen in `CONFIG` (`main.js`) anpassbar. **Alle Werte illustrativ – kein
 Renditeversprechen.**
 
