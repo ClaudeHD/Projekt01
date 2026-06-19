@@ -15,13 +15,13 @@ Deploybar auf **GitHub Pages, Netlify, Vercel, Cloudflare Pages** – Ordner hoc
 
 ```
 .
-├── index.html              # Landingpage (Hero, Pakete, Rechner, Krypto-/SEPA-Invest, FAQ …)
+├── index.html              # Landingpage (Hero-Loop, Paraguay, Halle, Pakete, Rechner, Invest, FAQ …)
 ├── dashboard.html          # Seed-Runde Live-Dashboard
 ├── assets/
-│   ├── css/styles.css      # Design-System + alle Komponenten
-│   ├── js/main.js          # Rechner, Invest-Widget (Krypto+SEPA), FAQ, Reveal …
+│   ├── css/styles.css      # Design-System + alle Komponenten (v2-Block am Ende)
+│   ├── js/main.js          # Rechner, Live-Kurs, Invest-Widget, Hallen-Lightbox …
 │   ├── js/dashboard.js     # Dashboard-Rendering (Ring, KPIs, Chart, Feed)
-│   └── img/                # (für lokal gespeicherte Bilder – siehe unten)
+│   └── img/                # (für lokal gespeicherte Bilder – optional)
 └── README.md
 ```
 
@@ -30,61 +30,89 @@ Deploybar auf **GitHub Pages, Netlify, Vercel, Cloudflare Pages** – Ordner hoc
 | Was | Datei | Variable / Stelle |
 |-----|-------|-------------------|
 | **Krypto-Wallets** (BTC/ETH/USDT/USDC) | `assets/js/main.js` | `CONFIG.crypto.*.addr` |
-| Wechselkurse, Effizienz, Tarif, Szenarien | `assets/js/main.js` | `CONFIG` (oben) |
+| **Paket-Preiskalkulation** (Antminer-Kosten, Logistik, Aufschlag) | `assets/js/main.js` | `CONFIG.pricing` |
+| Mining-Annahmen (Effizienz, Netzwerk, Gebühr) | `assets/js/main.js` | `CONFIG.mining` |
+| Fallback-Kurse (BTC, USD, Guaraní) | `assets/js/main.js` | `CONFIG.fx` |
 | **SEPA-Bankdaten** (IBAN/BIC) | `index.html` | Block `.sepa-box` |
-| **Dashboard-Zahlen** (Ziel, eingesammelt, Investoren …) | `assets/js/dashboard.js` | `DASH` (oben) |
-| Funding-Fortschritt im Invest-Block (68 %) | `index.html` | `.mini-progress` |
+| **Dashboard-Zahlen** (Ziel, eingesammelt, Investoren, Frist …) | `assets/js/dashboard.js` | `DASH` (oben) |
+| Funding-Fortschritt (Hero + Invest, 68 %) | `index.html` | `#hero-fill` / `.mini-progress` |
 | Pakete & Preise | `index.html` | Abschnitt `#pakete` |
 
 > ⚠️ **Wichtig:** Wallet-Adressen, IBAN und alle Zahlen sind aktuell **Platzhalter**
 > und müssen vor dem Live-Gang ersetzt werden.
 
-## 💱 Krypto-Investment
+## 💱 Krypto-Investment & QR-Codes
 
-Im Bereich **„Investieren"** kann direkt per **BTC, ETH, USDT, USDC** oder **SEPA**
-beteiligt werden: Paket wählen → Zahlungsart → Adresse/QR + Verwendungszweck →
-Daten eingeben → Meldung.
+Im Bereich **„Investieren"** kann per **BTC, ETH, USDT, USDC** oder **SEPA**
+beteiligt werden: Paket → Zahlungsart → Adresse/QR + Verwendungszweck → Daten → Meldung.
 
-- Der **QR-Code** wird über `api.qrserver.com` erzeugt (externer Dienst, im Browser
-  des Besuchers). Fällt er aus, bleibt die kopierbare Adresse erhalten. Für volle
-  Unabhängigkeit eine kleine QR-Lib bündeln (z. B. `qrcode-generator`) – sag Bescheid,
-  ich baue es ein.
-- Das Formular ist aktuell **Frontend-Demo**. Anbinden an Backend/CRM:
-  - **Formspree/Getform/Netlify Forms** am `<form id="invest-form">`, **oder**
-  - eigenen `fetch()`-Call im `submit`-Handler in `assets/js/main.js` (das `data`-Objekt
-    mit Name, E-Mail, Betrag, Methode, Asset und Referenz ist bereits vorbereitet).
+**QR-Codes erscheinen automatisch**, sobald du in `CONFIG.crypto.*.addr` eine
+**echte** Wallet einträgst. Solange dort ein Platzhalter (`…PLATZHALTER…`) steht,
+zeigt die Box den Hinweis „QR erscheint, sobald echte Adresse hinterlegt". Für BTC
+wird ein `bitcoin:`-URI inkl. Betrag kodiert.
 
-## 📊 Rendite-Rechner
+- Der QR wird im Browser des Besuchers über `api.qrserver.com` gerendert; die
+  **kopierbare Adresse** ist die maßgebliche Quelle (bei Ausfall des Dienstes bleibt sie erhalten).
+- Das Formular ist **Frontend-Demo**. Anbinden an Backend/CRM via Formspree/Getform/
+  Netlify Forms am `#invest-form` oder eigenem `fetch()` im `submit`-Handler
+  (`assets/js/main.js`) – das `data`-Objekt ist vorbereitet.
 
-Echte Mining-Logik: Hashrate → Netzwerk-Schwierigkeit → BTC-Kurs → minus
-All-in Mining-Tarif (**0,12 €/kWh**) und Pool-/Mgmt-Gebühr. Drei Szenarien
-(konservativ/basis/optimistisch), editierbarer BTC-Kurs und Laufzeit.
-Annahmen in `CONFIG` (`main.js`) anpassbar. **Alle Werte illustrativ – kein
-Renditeversprechen.**
+## 📊 Rendite-Rechner (v2)
 
-## 🖼️ Bilder (KI-generiert)
+Monatsgenaue Mining-Logik mit **Live-Bitcoin-Kurs** (CoinGecko, im Browser):
 
-Vier Bilder werden derzeit von einer externen CDN geladen. Für den Produktivbetrieb
-herunterladen und lokal unter `assets/img/` ablegen, dann die `…cloudfront.net/…`-URLs
-in `index.html` ersetzen:
+- **Live-Kurs** in € groß, **USD + Guaraní (₲)** klein als Nebeninfo.
+- **BTC-Prognose**: eigenes, editierbares Feld zum Durchspielen (Kurs läuft linear
+  vom Live-Kurs zur Prognose).
+- **Laufzeit** monatlich verstellbar (6–60 Monate).
+- **Netzwerk-Wachstum p. a.** und **Mining-Tarif** (0,10–0,15 €/kWh) als Regler
+  – ersetzt die alten 3 Szenarien durch ein kontinuierliches, „spielbares" Modell.
+- **Kosten-Aufschlüsselung** des Investitionsbetrags (Hardware / Logistik / Marge).
 
-- `hero.png` `…/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png`
-- `dam.png` `…/hf_20260618_145426_2d565d68-21d3-4057-a419-9b1dac9169bb.png`
-- `farm.png` `…/hf_20260618_145610_455cea7b-3e87-4081-a151-86991df25064.png`
-- `ops.png` `…/hf_20260618_145916_f6e3b61b-5262-4d02-bb36-edbb620d3992.png`
+Bei fehlendem Netz greifen die `CONFIG.fx`-Fallbacks („Offline-Schätzwert").
+**Alle Werte illustrativ – kein Renditeversprechen.**
 
-(Basis-URL: `https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/`)
+## 💰 Paketpreise – so werden sie berechnet
+
+`Preis je TH/s = (effizienter Antminer + Versand · Zoll · Steuer · Transportversicherung) × 1,25`
+
+In `CONFIG.pricing`:
+- `asicCostPerTH` Hardware-Kosten je TH/s (hydro-effizient)
+- `logisticsPct` Aufschlag für Versand/Zoll/Steuer/Versicherung
+- `markup` Unternehmens-Aufschlag (Marge & Puffer, Standard 25 %)
+- `tiers` Verkaufspreis je TH/s nach Volumen (Starter 20 € · Pro 19 € · Whale 18 €)
+
+Ergibt die Pakete **250 / 500 / 1.250 TH/s** zu **5.000 / 9.500 / 22.500 €**.
+Die Marge ist bewusst so kalkuliert, dass der Betrieb solide finanziert ist.
+
+## 🏭 Kapazität & Seed-Runde
+
+Phase 1 = **1 MW**. **80 % (0,8 MW)** sind in der Seed-Runde für Investoren
+verfügbar, 20 % hält das Unternehmen als Eigenanteil. Dargestellt im Hero,
+im Invest-Block (Kapazitäts-Raster) und im Dashboard.
+
+## 🖼️ Bilder & Mining-Halle
+
+Die Bilder werden von einer externen CDN geladen (deine in Higgsfield erzeugten
+Aufnahmen). Im Bereich **„Mining-Halle"** öffnet ein Klick die **Lightbox-Großansicht**
+(Pfeile / Esc / Klick). Für den Produktivbetrieb optional herunterladen und unter
+`assets/img/` lokal ablegen, dann die `…cloudfront.net/…`-URLs ersetzen.
 Fällt ein Bild aus, zeigt die Seite automatisch einen Farbverlauf-Platzhalter.
+
+> Hinweis zur Bild-/Video-Erzeugung: Der bewegte Hero-Hintergrund ist ein
+> **CSS-Szenen-Loop** (Crossfade + langsamer Kamera-Zoom über deine echten Bilder) –
+> bewusst **ohne** credit-pflichtige Video-Generierung. Neue Bilder am besten in der
+> Higgsfield-**Web-App** (dort „Nano Banana 2" unlimited) erzeugen und die URL hier eintragen.
 
 ## ✅ Checkliste vor dem Launch
 
-- [ ] **Echte Wallet-Adressen** eintragen (`CONFIG.crypto`)
+- [ ] **Echte Wallet-Adressen** eintragen (`CONFIG.crypto`) → QR erscheint automatisch
 - [ ] **Echte Bankdaten** (IBAN/BIC) eintragen (`.sepa-box`)
-- [ ] **Dashboard-Zahlen** mit realen Werten füllen (`DASH`)
+- [ ] **Pricing/Annahmen** prüfen (`CONFIG.pricing` / `CONFIG.mining`)
+- [ ] **Dashboard-Zahlen** & Frist mit realen Werten füllen (`DASH`)
 - [ ] Funding-Fortschritt (68 %) & Investorenzahl aktualisieren
-- [ ] Bilder lokal speichern
+- [ ] Bilder lokal speichern (optional)
 - [ ] Formular an Backend/Service anbinden
-- [ ] Team mit echten Profilen füllen
 - [ ] **Impressum & Datenschutz** verlinken (Pflicht in DE)
 - [ ] Disclaimer & rechtliche Struktur prüfen lassen (s. u.)
 

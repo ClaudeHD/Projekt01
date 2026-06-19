@@ -10,27 +10,28 @@
 
   /* ---------------- DASH data (edit me) ---------------- */
   const DASH = {
-    target: 1500000,
-    raised: 1020000,
+    target: 1200000,
+    raised: 816000,
     investors: 143,
-    daysLeft: 45,
+    deadline: "2026-12-31",   // Seed-Runde schließt Ende Q4 2026
     minTicket: 5000,
-    capacityMW: 1,
-    totalTH: 74000,
+    phase1MW: 1,              // Phase-1 Gesamtkapazität
+    seedShareMW: 0.8,        // 80 % der 1 MW sind für die Seed-Runde
+    seedTH: 60000,           // ~0,8 MW bei ~13,5 W/TH
     useOfFunds: [
-      { label: "Hydro-Hardware (ASICs)", pct: 64 },
-      { label: "Halle & Infrastruktur", pct: 17 },
-      { label: "Energie-Anbindung", pct: 10 },
+      { label: "Hydro-Hardware (ASICs)", pct: 68 },
+      { label: "Halle & Infrastruktur", pct: 14 },
+      { label: "Energie-Anbindung", pct: 9 },
       { label: "Betrieb & Reserve", pct: 9 },
     ],
     tiers: [
-      { label: "Starter · 200 TH/s", count: 96, of: 120 },
-      { label: "Pro · 400 TH/s", count: 40, of: 60 },
-      { label: "Whale · 1.000 TH/s", count: 7, of: 15 },
+      { label: "Starter · 250 TH/s", count: 70, of: 110 },
+      { label: "Pro · 500 TH/s", count: 30, of: 50 },
+      { label: "Whale · 1.250 TH/s", count: 8, of: 16 },
     ],
     timeline: {
       labels: ["Feb", "Mär", "Apr", "Mai", "Jun"],
-      values: [140000, 360000, 620000, 840000, 1020000],
+      values: [90000, 240000, 420000, 620000, 816000],
     },
     feed: [
       { method: "BTC", amount: 9500, when: "vor 2 Std" },
@@ -44,6 +45,7 @@
   };
 
   const pct = Math.min(1, DASH.raised / DASH.target);
+  const daysLeft = Math.max(0, Math.ceil((new Date(DASH.deadline) - new Date()) / 86400000));
 
   /* ---------------- year ---------------- */
   const yr = $("#year"); if (yr) yr.textContent = new Date().getFullYear();
@@ -79,13 +81,13 @@
   $("#d-target").textContent = euro0.format(DASH.target);
   animateNum($("#d-investors"), DASH.investors, (v) => num(v));
   animateNum($("#d-avg"), DASH.raised / DASH.investors, (v) => num(v));
-  animateNum($("#d-days"), DASH.daysLeft, (v) => num(v));
+  animateNum($("#d-days"), daysLeft, (v) => num(v));
   animateNum($("#d-min"), DASH.minTicket, (v) => num(v));
-  const daysPill = $("#d-days-pill"); if (daysPill) daysPill.textContent = DASH.daysLeft + " Tagen";
+  const daysPill = $("#d-days-pill"); if (daysPill) daysPill.textContent = daysLeft + " Tagen";
 
-  /* ---------------- capacity ---------------- */
-  animateNum($("#d-mw"), DASH.capacityMW * pct, (v) => v.toFixed(2).replace(".", ","));
-  animateNum($("#d-th"), DASH.totalTH * pct, (v) => num(v));
+  /* ---------------- capacity (Seed-Anteil = 80 % von 1 MW) ---------------- */
+  animateNum($("#d-mw"), DASH.seedShareMW * pct, (v) => v.toFixed(2).replace(".", ","));
+  animateNum($("#d-th"), DASH.seedTH * pct, (v) => num(v));
   const capbar = $("#d-capbar");
   if (capbar) requestAnimationFrame(() => requestAnimationFrame(() => { capbar.style.width = (pct * 100).toFixed(1) + "%"; }));
 

@@ -39,6 +39,7 @@
 
       <nav class="nav-links" aria-label="Hauptnavigation">
         <a href="#paraguay">Warum Paraguay</a>
+        <a href="#anlage">Mining-Halle</a>
         <a href="#pakete">Pakete</a>
         <a href="#rechner">Rechner</a>
         <a href="dashboard.html">Seed-Dashboard</a>
@@ -55,7 +56,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#paraguay">Warum Paraguay</a>
-    <a href="#vorteile">Vorteile</a>
+    <a href="#anlage">Mining-Halle</a>
     <a href="#ablauf">Ablauf</a>
     <a href="#pakete">Pakete</a>
     <a href="#rechner">Rechner</a>
@@ -68,7 +69,15 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <div class="hero-bg has-img" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png');"></div>
+    <!-- Bewegte Kulisse: cinematischer Endless-Loop (Crossfade + langsamer Kamera-Zoom) -->
+    <div class="hero-scene" aria-hidden="true" data-scene>
+      <div class="hs-layer l1" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png');"></div>
+      <div class="hs-layer l2" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145426_2d565d68-21d3-4057-a419-9b1dac9169bb.png');"></div>
+      <div class="hs-layer l3" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145610_455cea7b-3e87-4081-a151-86991df25064.png');"></div>
+      <div class="hs-particles"></div>
+      <div class="hs-scrim"></div>
+    </div>
+
     <div class="container hero-grid">
       <div class="hero-copy">
         <span class="eyebrow reveal"><span class="dot"></span> Grünes Bitcoin-Mining · Paraguay</span>
@@ -79,12 +88,12 @@
             Jetzt investieren
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a class="btn btn-ghost btn-lg" href="dashboard.html">Seed-Dashboard ansehen</a>
+          <a class="btn btn-ghost btn-lg" href="#anlage">Mining-Halle ansehen</a>
         </div>
         <div class="hero-meta reveal d3">
           <div class="m"><b>~100 %</b><span>erneuerbare Energie</span></div>
           <div class="m"><b>1 MW</b><span>Kapazität Phase 1</span></div>
-          <div class="m"><b>24/7</b><span>Betrieb & Monitoring</span></div>
+          <div class="m"><b>0,10–0,15 €</b><span>All-in Tarif / kWh</span></div>
         </div>
         <div class="hero-trust reveal d4">
           <div class="avatars"><i></i><i></i><i></i><i></i></div>
@@ -92,23 +101,28 @@
         </div>
       </div>
 
+      <!-- Hero-Visual: Seed-Runde Live-Karte -->
       <div class="hero-visual reveal d2">
-        <a class="hero-card" href="dashboard.html" aria-label="Seed-Dashboard öffnen">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png" alt="Luftaufnahme der ENPARA Mining-Farm in Paraguay mit Wasserkraftwerk" data-fallback loading="eager" />
-          <div class="fallback"></div>
-          <div class="overlay"></div>
-          <div class="hero-badge">
-            <div class="live"><span class="pulse"></span> Seed-Runde offen</div>
-            <div class="pct">68 % gefüllt →</div>
+        <div class="seed-card">
+          <div class="seed-card-img" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260619_010031_f14797d7-84d6-470f-9aaf-009770b13315.png');">
+            <div class="live-tag"><span class="pulse"></span> Seed-Runde offen</div>
           </div>
-        </a>
-        <div class="float-chip c1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
-          Energie <b>100 % grün</b>
-        </div>
-        <div class="float-chip c2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z" stroke-linejoin="round"/></svg>
-          Mining-Tarif <b>0,12 €/kWh</b>
+          <div class="seed-card-body">
+            <div class="seed-top">
+              <span>Seed-Fortschritt</span><b id="hero-pct">68 %</b>
+            </div>
+            <div class="seed-bar"><i id="hero-fill" style="width:68%"></i></div>
+            <div class="seed-meta">
+              <span><b id="hero-raised">816.000 €</b> eingesammelt</span>
+              <span>Ziel <b>1.200.000 €</b></span>
+            </div>
+            <div class="seed-mini">
+              <div><b>0,8&nbsp;MW</b><span>Seed-Allokation (80 % von 1 MW)</span></div>
+              <div><b>250+</b><span>TH/s ab 5.000 €</span></div>
+            </div>
+            <a class="btn btn-primary btn-block" href="#invest">Anteil sichern</a>
+            <a class="seed-dash-link" href="dashboard.html">Live-Dashboard öffnen →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -119,7 +133,7 @@
     <div class="container strip-inner">
       <b>Itaipú-Wasserkraft</b><span class="sep"></span>
       <b>~100 % erneuerbar</b><span class="sep"></span>
-      <b>All-in Mining-Tarif 0,12 €/kWh</b><span class="sep"></span>
+      <b>All-in Mining-Tarif 0,10–0,15 €/kWh</b><span class="sep"></span>
       <b>Krypto & SEPA</b><span class="sep"></span>
       <b>Professioneller 24/7-Betrieb</b>
     </div>
@@ -134,12 +148,12 @@
           <div class="label">Erneuerbare Energie aus Wasserkraft</div>
         </div>
         <div class="stat reveal d1">
-          <div class="num"><span data-count="0.12" data-decimals="2">0</span><span class="suffix"> €</span></div>
+          <div class="num"><span class="static-num">0,10–0,15</span><span class="suffix"> €</span></div>
           <div class="label">All-in Mining-Tarif je kWh (Energie, Hosting & Wartung)</div>
         </div>
         <div class="stat reveal d2">
           <div class="num"><span data-count="1">0</span><span class="suffix"> MW</span></div>
-          <div class="label">Kapazität in Phase 1</div>
+          <div class="label">Kapazität Phase 1 · 80 % für die Seed-Runde</div>
         </div>
         <div class="stat reveal d3">
           <div class="num"><span data-count="24">0</span><span class="suffix">/7</span></div>
@@ -151,36 +165,92 @@
 
   <!-- ============ WHY PARAGUAY ============ -->
   <section class="section-pad" id="paraguay">
-    <div class="container split">
-      <div class="reveal">
-        <div class="media-frame">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145426_2d565d68-21d3-4057-a419-9b1dac9169bb.png" alt="Großes Wasserkraftwerk in Paraguay mit türkisem Wasser" data-fallback loading="lazy" />
-          <div class="fallback"></div>
-          <span class="tag">Itaipú · Wasserkraft</span>
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow"><span class="dot"></span> Der Standort-Vorteil</span>
+        <h2 class="title">Warum Paraguay der beste Ort für <span class="grad-text">grünes Mining</span> ist</h2>
+        <p class="lead">Paraguay erzeugt über die Mega-Wasserkraftwerke Itaipú und Yacyretá weit mehr Strom, als das Land selbst verbraucht – nahezu vollständig erneuerbar. Dieser Überschuss macht sauberen Strom außergewöhnlich günstig und stabil verfügbar.</p>
+      </div>
+
+      <!-- Paraguay in Zahlen -->
+      <div class="pg-stats reveal">
+        <div class="pg-stat">
+          <div class="pgv"><span data-count="14">0</span> GW</div>
+          <div class="pgk">Leistung Itaipú-Wasserkraftwerk – eines der größten der Welt</div>
+        </div>
+        <div class="pg-stat">
+          <div class="pgv"><span data-count="100">0</span> %</div>
+          <div class="pgk">der Stromerzeugung aus erneuerbarer Wasserkraft</div>
+        </div>
+        <div class="pg-stat">
+          <div class="pgv">&gt;<span data-count="40">0</span> %</div>
+          <div class="pgk">des erzeugten Stroms werden exportiert – riesiger Überschuss</div>
+        </div>
+        <div class="pg-stat">
+          <div class="pgv"><span data-count="0" data-decimals="0">0</span><span class="pg-co2"> CO₂</span></div>
+          <div class="pgk">fossiler CO₂-Ausstoß im Betrieb – starkes ESG-Profil</div>
         </div>
       </div>
-      <div class="reveal d1">
-        <span class="eyebrow"><span class="dot"></span> Der Standort-Vorteil</span>
-        <h2 class="title">Warum Paraguay der beste Ort für grünes Mining ist</h2>
-        <p class="lead">Paraguay erzeugt durch die Mega-Wasserkraftwerke Itaipú und Yacyretá weit mehr Strom, als das Land selbst verbraucht – nahezu vollständig erneuerbar. Dieser Überschuss macht sauberen Strom außergewöhnlich günstig und stabil verfügbar.</p>
-        <ul class="feature-list">
-          <li>
-            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span><b>Riesiger Energieüberschuss</b>Paraguay exportiert einen Großteil seines Stroms – ideale Basis für stabilen, günstigen Industrietarif.</span>
-          </li>
-          <li>
-            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span><b>Nahezu 100 % erneuerbar</b>Bitcoin-Mining ohne fossiles CO₂ – ein starkes ESG-Argument für moderne Investoren.</span>
-          </li>
-          <li>
-            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span><b>Planbare Kosten</b>Stabile Energiekosten erlauben einen fairen, transparenten All-in Mining-Tarif von 0,12 €/kWh für Investoren.</span>
-          </li>
-          <li>
-            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span><b>Wachsender, krypto-freundlicher Rahmen</b>Zunehmende Regulierung und Investitionssicherheit für digitale Infrastruktur.</span>
-          </li>
-        </ul>
+
+      <div class="split pg-split">
+        <div class="reveal">
+          <!-- Stylisierte Standort-Karte -->
+          <div class="pg-map-card">
+            <span class="tag">Standort · Paraguay</span>
+            <svg class="pg-map" viewBox="0 0 320 300" role="img" aria-label="Karte von Paraguay mit Standorten der Wasserkraftwerke">
+              <defs>
+                <linearGradient id="pgFill" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="rgba(24,210,126,.22)"/><stop offset="1" stop-color="rgba(0,224,184,.08)"/>
+                </linearGradient>
+              </defs>
+              <path d="M120 28 L188 40 L210 78 L250 96 L262 140 L240 178 L256 214 L214 258 L150 274 L120 244 L86 252 L70 210 L96 176 L78 140 L92 96 L78 60 Z"
+                    fill="url(#pgFill)" stroke="rgba(24,210,126,.55)" stroke-width="2.5" stroke-linejoin="round"/>
+              <!-- Itaipú -->
+              <g class="pg-pin">
+                <circle cx="232" cy="92" r="7" fill="#18d27e"/>
+                <circle cx="232" cy="92" r="13" fill="none" stroke="#18d27e" stroke-width="2" opacity=".5"/>
+                <text x="218" y="78" class="pg-lbl">Itaipú · 14 GW</text>
+              </g>
+              <!-- Yacyretá -->
+              <g class="pg-pin">
+                <circle cx="206" cy="252" r="6" fill="#00e0b8"/>
+                <circle cx="206" cy="252" r="11" fill="none" stroke="#00e0b8" stroke-width="2" opacity=".5"/>
+                <text x="150" y="270" class="pg-lbl">Yacyretá · 3,2 GW</text>
+              </g>
+              <!-- ENPARA Standort -->
+              <g class="pg-pin pg-pin-main">
+                <circle cx="210" cy="120" r="8" fill="#f7931a"/>
+                <circle cx="210" cy="120" r="15" fill="none" stroke="#f7931a" stroke-width="2"/>
+                <text x="118" y="118" class="pg-lbl pg-lbl-main">ENPARA Mining-Farm</text>
+              </g>
+            </svg>
+            <p class="pg-map-note">Direkter Zugang zu günstigem, erneuerbarem Industriestrom aus dem Wasserkraft-Überschuss.</p>
+          </div>
+        </div>
+        <div class="reveal d1">
+          <ul class="feature-list">
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span><b>Riesiger Energieüberschuss</b>Paraguay exportiert einen Großteil seines Stroms – ideale Basis für stabilen, günstigen Industrietarif und planbare Kosten.</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span><b>Nahezu 100 % erneuerbar</b>Bitcoin-Mining ohne fossiles CO₂ – ein starkes ESG-Argument für moderne Investoren.</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span><b>Günstiger Wasserkraft-Strom</b>Der Überschuss erlaubt einen fairen, transparenten All-in Mining-Tarif von 0,10–0,15 €/kWh – mit gesundem Puffer für den Betrieb.</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span><b>Krypto-freundlicher Rahmen</b>Zunehmende Regulierung und Investitionssicherheit für digitale Infrastruktur.</span>
+            </li>
+          </ul>
+          <div class="pg-img-row">
+            <div class="pg-img" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_232102_4bf87da1-b718-46ca-bf8f-ee1840c0757e.png');"><span>Itaipú · Spillways</span></div>
+            <div class="pg-img" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145426_2d565d68-21d3-4057-a419-9b1dac9169bb.png');"><span>Wasserkraft</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -202,7 +272,7 @@
         <div class="card reveal d1">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z" stroke-linejoin="round"/></svg></div>
           <h3>Fairer Mining-Tarif</h3>
-          <p>Transparente 0,12 €/kWh – Energie, Hosting und Wartung inklusive. Keine versteckten Kosten, planbare Konditionen.</p>
+          <p>Transparente 0,10–0,15 €/kWh – Energie, Hosting und Wartung inklusive. Keine versteckten Kosten, planbare Konditionen.</p>
         </div>
         <div class="card reveal d2">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -228,25 +298,50 @@
     </div>
   </section>
 
-  <!-- ============ ANLAGE / HARDWARE ============ -->
-  <section class="section-pad">
-    <div class="container split">
-      <div class="reveal">
+  <!-- ============ ANLAGE / MINING-HALLE ============ -->
+  <section class="section-pad" id="anlage">
+    <div class="container">
+      <div class="section-head center reveal">
         <span class="eyebrow"><span class="dot"></span> Die Anlage</span>
-        <h2 class="title">Effiziente Hydro-Antminer, kompromisslos professionell betrieben</h2>
-        <p class="lead">Wir setzen auf hocheffiziente, wassergekühlte ASIC-Miner der Antminer-Hydro-Generation (≈ 13–16 J/TH). Wasserkühlung bedeutet höhere Hashrate-Dichte, mehr Effizienz je Watt und eine längere Lebensdauer der Hardware.</p>
-        <ul class="feature-list">
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Hydro-gekühlte ASICs</b>Antminer-Hydro-Klasse mit bestem Verhältnis von Hashrate zu Stromverbrauch.</span></li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Wasserkühlung statt Lüfter</b>Stabilere Temperaturen, weniger Verschleiß, höhere Uptime und leiserer Betrieb.</span></li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Sicherheit & Versicherung</b>Gesicherter Standort, Zutrittskontrolle und Versicherung der Hardware.</span></li>
-        </ul>
+        <h2 class="title">Sieh dir die <span class="grad-text">Mining-Halle</span> an</h2>
+        <p class="lead">Hocheffiziente, wassergekühlte ASIC-Miner der Antminer-Hydro-Generation (≈ 13–16 J/TH) – professionell installiert und betrieben. Klicke auf ein Bild für die Großansicht. Ernsthafte Investoren laden wir zur Vor-Ort-Besichtigung ein.</p>
       </div>
-      <div class="reveal d1">
-        <div class="media-frame">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145610_455cea7b-3e87-4081-a151-86991df25064.png" alt="Innenansicht der Mining-Halle mit Reihen leuchtender ASIC-Miner" data-fallback loading="lazy" />
+
+      <div class="hall reveal">
+        <button type="button" class="hall-main" data-lightbox
+          data-img="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145610_455cea7b-3e87-4081-a151-86991df25064.png"
+          data-cap="Mining-Halle · Cold-Aisle mit hydro-gekühlten Antminer-Reihen">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145610_455cea7b-3e87-4081-a151-86991df25064.png" alt="Innenansicht der ENPARA Mining-Halle mit Reihen hydro-gekühlter ASIC-Miner" data-fallback loading="lazy" />
           <div class="fallback"></div>
-          <span class="tag">Mining-Halle</span>
+          <span class="hall-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6" stroke-linecap="round"/></svg> Großansicht</span>
+          <span class="tag">360°-Eindruck · Halle</span>
+        </button>
+        <div class="hall-side">
+          <button type="button" class="hall-thumb" data-lightbox
+            data-img="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_232106_650e617a-967b-4fa6-94cb-18509f5e00d7.png"
+            data-cap="Hydro-Cooling · Manifolds und Kühlkreislauf der Antminer">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_232106_650e617a-967b-4fa6-94cb-18509f5e00d7.png" alt="Hydro-gekühlte Bitcoin-Mining-Server mit Kühlleitungen" data-fallback loading="lazy" />
+            <div class="fallback"></div>
+            <span class="hall-cap">Wasserkühlung</span>
+          </button>
+          <button type="button" class="hall-thumb" data-lightbox
+            data-img="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_220608_7b72320e-55bc-45df-aa90-848196380ea5.png"
+            data-cap="ENPARA Mining-Floor · Hot-/Cold-Aisle-Containment">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_220608_7b72320e-55bc-45df-aa90-848196380ea5.png" alt="ENPARA Mining-Floor mit organisierten Server-Racks" data-fallback loading="lazy" />
+            <div class="fallback"></div>
+            <span class="hall-cap">Mining-Floor</span>
+          </button>
         </div>
+      </div>
+
+      <div class="hall-features reveal d1">
+        <div class="hf"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Hydro-gekühlte ASICs</b> Bestes Verhältnis von Hashrate zu Stromverbrauch, höhere Dichte.</span></div>
+        <div class="hf"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Wasserkühlung statt Lüfter</b> Stabile Temperaturen, weniger Verschleiß, höhere Uptime.</span></div>
+        <div class="hf"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Sicherheit & Versicherung</b> Gesicherter Standort, Zutrittskontrolle, versicherte Hardware.</span></div>
+        <a class="btn btn-ghost hall-visit" href="#invest">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Vor-Ort-Besichtigung anfragen
+        </a>
       </div>
     </div>
   </section>
@@ -259,30 +354,38 @@
         <h2 class="title">In 4 Schritten zu deiner eigenen Hashrate</h2>
         <p class="lead">Transparent, unkompliziert und vollständig betreut – von der Investition bis zur Auszahlung in Bitcoin.</p>
       </div>
-      <div class="steps">
-        <div class="step reveal">
-          <div class="n">1</div>
-          <h3>Paket wählen</h3>
-          <p>Wähle deinen Hashrate-Anteil – ab 200 TH/s (5.000 €) – und zahle per Krypto oder SEPA.</p>
-          <svg class="arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="steps-v2">
+        <div class="step-v2 reveal">
+          <div class="step-rail"><span class="step-num">1</span></div>
+          <div class="step-card">
+            <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h2l2.5 12.5a2 2 0 0 0 2 1.5h7a2 2 0 0 0 2-1.5L21 8H6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg></div>
+            <h3>Paket wählen</h3>
+            <p>Wähle deinen Hashrate-Anteil – ab 250 TH/s (5.000 €) – passend zu deinem Budget.</p>
+          </div>
         </div>
-        <div class="step reveal d1">
-          <div class="n">2</div>
-          <h3>Wir bauen & betreiben</h3>
-          <p>Wir beschaffen die Hydro-Antminer, installieren sie in Paraguay und übernehmen den Betrieb.</p>
-          <svg class="arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="step-v2 reveal d1">
+          <div class="step-rail"><span class="step-num">2</span></div>
+          <div class="step-card">
+            <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="13" rx="2.5"/><path d="M2 10h20M6 15h4" stroke-linecap="round"/></svg></div>
+            <h3>Bezahlen</h3>
+            <p>Per Bitcoin, ETH, USDT/USDC oder SEPA – inkl. QR-Code und Verwendungszweck. In wenigen Minuten erledigt.</p>
+          </div>
         </div>
-        <div class="step reveal d2">
-          <div class="n">3</div>
-          <h3>Mining startet</h3>
-          <p>Deine Anteile minen rund um die Uhr Bitcoin – mit günstiger, grüner Wasserkraft.</p>
-          <svg class="arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="step-v2 reveal d2">
+          <div class="step-rail"><span class="step-num">3</span></div>
+          <div class="step-card">
+            <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1.5"/><rect x="3" y="11" width="18" height="5" rx="1.5"/><path d="M7 6.5h.01M7 13.5h.01" stroke-linecap="round"/><path d="M8 20h8" stroke-linecap="round"/></svg></div>
+            <h3>Wir bauen & betreiben</h3>
+            <p>Wir beschaffen die Hydro-Antminer, installieren sie in Paraguay und übernehmen den 24/7-Betrieb.</p>
+          </div>
         </div>
-        <div class="step reveal d3">
-          <div class="n">4</div>
-          <h3>Erträge erhalten</h3>
-          <p>Deine anteiligen Mining-Erträge werden regelmäßig in BTC ausgezahlt – transparent im Dashboard.</p>
-          <svg class="arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="step-v2 reveal d3">
+          <div class="step-rail"><span class="step-num">4</span></div>
+          <div class="step-card">
+            <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 8h4a2 2 0 0 1 0 4h-4m0 0h4.5a2 2 0 0 1 0 4H9.5m0-8V6m0 12v-2m2-12v2m0 12v-2" stroke-linecap="round"/></svg></div>
+            <h3>BTC-Erträge erhalten</h3>
+            <p>Deine Anteile minen rund um die Uhr Bitcoin. Erträge werden regelmäßig in BTC ausgezahlt – transparent im Dashboard.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -294,21 +397,21 @@
       <div class="section-head center reveal">
         <span class="eyebrow"><span class="dot"></span> Hashrate-Pakete</span>
         <h2 class="title">Wähle deinen Anteil</h2>
-        <p class="lead">Mehr Hashrate = besserer Preis je TH/s. Alle Pakete laufen auf effizienten Hydro-Antminern. Mining-Tarif 0,12 €/kWh inklusive. Angaben illustrativ, finale Konditionen laut Vertrag.</p>
+        <p class="lead">Preise kalkuliert auf Basis effizienter Hydro-Antminer inkl. Versand, Zoll, Steuer & Transportversicherung plus 25 % Unternehmens-Aufschlag (Marge & Puffer). Mehr Hashrate = besserer Preis je TH/s. Mining-Tarif 0,10–0,15 €/kWh. Angaben illustrativ, finale Konditionen laut Vertrag.</p>
       </div>
       <div class="pricing">
         <div class="plan reveal">
           <div class="pname">Starter</div>
           <div class="pdesc">Der Einstieg in grünes Hydro-Mining.</div>
           <div class="price"><span class="amt">5.000 €</span></div>
-          <div class="hr">200 TH/s · 25,00 € / TH/s</div>
+          <div class="hr">250 TH/s · 20,00 € / TH/s</div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 200 TH/s Hashrate-Anteil</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 250 TH/s Hashrate-Anteil</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Anteilige BTC-Auszahlungen</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Live-Dashboard-Zugang</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Krypto & SEPA</li>
           </ul>
-          <a class="btn btn-ghost btn-block" href="#invest" data-plan="starter" data-amount="5000" data-th="200">Auswählen</a>
+          <a class="btn btn-ghost btn-block" href="#invest" data-plan="starter" data-amount="5000" data-th="250">Auswählen</a>
         </div>
 
         <div class="plan featured reveal d1">
@@ -316,30 +419,31 @@
           <div class="pname">Pro</div>
           <div class="pdesc">Mehr Hashrate, besserer Stückpreis.</div>
           <div class="price"><span class="amt">9.500 €</span></div>
-          <div class="hr">400 TH/s · 23,75 € / TH/s</div>
+          <div class="hr">500 TH/s · 19,00 € / TH/s</div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 400 TH/s Hashrate-Anteil</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 500 TH/s Hashrate-Anteil</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 5 % günstiger je TH/s</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Quartals-Reporting</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Persönlicher Ansprechpartner</li>
           </ul>
-          <a class="btn btn-primary btn-block" href="#invest" data-plan="pro" data-amount="9500" data-th="400">Auswählen</a>
+          <a class="btn btn-primary btn-block" href="#invest" data-plan="pro" data-amount="9500" data-th="500">Auswählen</a>
         </div>
 
         <div class="plan reveal d2">
           <div class="pname">Whale</div>
           <div class="pdesc">Maximale Beteiligung, bester Preis.</div>
           <div class="price"><span class="amt">22.500 €</span></div>
-          <div class="hr">1.000 TH/s · 22,50 € / TH/s</div>
+          <div class="hr">1.250 TH/s · 18,00 € / TH/s</div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 1.000 TH/s Hashrate-Anteil</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> 1.250 TH/s Hashrate-Anteil</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Bester Preis je TH/s (−10 %)</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Optionale Vor-Ort-Besichtigung</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Vor-Ort-Besichtigung inklusive</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Direkter Draht zum Gründerteam</li>
           </ul>
-          <a class="btn btn-ghost btn-block" href="#invest" data-plan="whale" data-amount="22500" data-th="1000">Auswählen</a>
+          <a class="btn btn-ghost btn-block" href="#invest" data-plan="whale" data-amount="22500" data-th="1250">Auswählen</a>
         </div>
       </div>
+      <p class="price-foot reveal">Preis je TH/s = (effizienter Antminer + Versand, Zoll, Steuer, Transportversicherung) × 1,25. Volumen-Rabatt bei größeren Paketen. Details im Rechner.</p>
     </div>
   </section>
 
@@ -349,7 +453,7 @@
       <div class="section-head center reveal">
         <span class="eyebrow"><span class="dot"></span> Rendite-Rechner</span>
         <h2 class="title">Mining-Ökonomie transparent durchgerechnet</h2>
-        <p class="lead">Basierend auf realer Mining-Logik: Hashrate, Netzwerk-Schwierigkeit, BTC-Kurs und dem All-in Mining-Tarif von 0,12 €/kWh. <strong>Alle Werte sind illustrativ</strong> – keine Garantie, keine Anlageberatung.</p>
+        <p class="lead">Echte Mining-Logik mit <strong>Live-Bitcoin-Kurs</strong>: Hashrate, Netzwerk-Schwierigkeit, BTC-Kurs und All-in Mining-Tarif. Spiele mit Prognose-Kurs, Laufzeit und Annahmen. <strong>Alle Werte illustrativ</strong> – keine Garantie, keine Anlageberatung.</p>
       </div>
 
       <div class="calc reveal d1" id="calc">
@@ -357,48 +461,73 @@
           <div class="field">
             <label>Investitionsbetrag <b class="calc-amount"><span id="calc-amount-out">10.000</span> <span class="cur">€</span></b></label>
             <input type="range" id="calc-amount" min="5000" max="100000" step="500" value="10000" aria-label="Investitionsbetrag" />
+            <div class="ctrl-sub">
+              <span id="calc-amount-fx" class="fx-side">≈ $— · ₲ —</span>
+              <span class="th-pill">≈ <b id="calc-th-sub">—</b> TH/s</span>
+            </div>
+          </div>
+
+          <!-- Kosten-Aufschlüsselung -->
+          <div class="cost-break">
+            <div class="cb-title">Wofür dein Kapital eingesetzt wird</div>
+            <div class="cb-bar">
+              <i class="cb-seg hw" id="cb-hw-bar"></i><i class="cb-seg log" id="cb-log-bar"></i><i class="cb-seg mar" id="cb-mar-bar"></i>
+            </div>
+            <div class="cb-legend">
+              <span><i class="dot hw"></i> Hardware (Antminer) <b id="cb-hw-v">—</b></span>
+              <span><i class="dot log"></i> Versand · Zoll · Steuer · Versicherung <b id="cb-log-v">—</b></span>
+              <span><i class="dot mar"></i> Unternehmens-Marge & Puffer <b id="cb-mar-v">—</b></span>
+            </div>
+          </div>
+
+          <!-- Live BTC -->
+          <div class="price-box">
+            <div class="pb-head">
+              <span>Bitcoin-Kurs</span>
+              <span class="live-pill" id="px-live"><span class="pulse"></span> Live</span>
+            </div>
+            <div class="pb-main"><span id="px-eur">—</span> <span class="cur">€</span></div>
+            <div class="pb-side"><span id="px-usd">$ —</span><span class="sep-dot"></span><span id="px-pyg">₲ —</span><span class="px-note" id="px-note"></span></div>
           </div>
 
           <div class="calc-2col">
             <div class="field">
-              <label for="calc-btc">BTC-Kurs (€)</label>
-              <div class="num-field"><span class="cur">€</span><input type="number" id="calc-btc" min="10000" max="500000" step="1000" value="80000" /></div>
+              <label for="calc-btc">BTC-Prognose <span class="hint">eigener Kurs zum Rechnen</span></label>
+              <div class="num-field"><span class="cur">€</span><input type="number" id="calc-btc" min="1000" max="2000000" step="1000" value="90000" /></div>
             </div>
             <div class="field">
-              <label for="calc-term">Laufzeit</label>
-              <select class="select" id="calc-term">
-                <option value="12">12 Monate</option>
-                <option value="24" selected>24 Monate</option>
-                <option value="36">36 Monate</option>
-                <option value="48">48 Monate</option>
-              </select>
+              <label for="calc-term">Laufzeit <b class="lab-val"><span id="calc-term-out">24</span> Mon.</b></label>
+              <input type="range" id="calc-term" min="6" max="60" step="1" value="24" />
             </div>
           </div>
 
-          <div class="field">
-            <label>Markt-Szenario <span class="hint" id="scn-hint">Basis-Annahmen</span></label>
-            <div class="scenario">
-              <button type="button" data-scenario="conservative">Konservativ</button>
-              <button type="button" data-scenario="base" class="active">Basis</button>
-              <button type="button" data-scenario="optimistic">Optimistisch</button>
+          <div class="calc-2col">
+            <div class="field">
+              <label for="calc-growth">Netzwerk-Wachstum p.&nbsp;a. <b class="lab-val"><span id="calc-growth-out">25</span> %</b></label>
+              <input type="range" id="calc-growth" min="0" max="60" step="1" value="25" />
+            </div>
+            <div class="field">
+              <label for="calc-tariff">Mining-Tarif <b class="lab-val"><span id="calc-tariff-out">0,12</span> €/kWh</b></label>
+              <input type="range" id="calc-tariff" min="0.10" max="0.15" step="0.005" value="0.12" />
             </div>
           </div>
 
-          <p class="calc-note">* Modellrechnung mit hydro-effizienten Antminern (≈ 13,5 W/TH), Netzwerk-Annahmen je Szenario, 2 % Pool-/Mgmt-Gebühr und 0,12 €/kWh Mining-Tarif. Mining-Erträge schwanken erheblich mit BTC-Kurs und Netzwerk-Schwierigkeit. <b>Kein Renditeversprechen, keine Anlageberatung.</b></p>
+          <p class="calc-note">* Monats-genaue Modellrechnung mit hydro-effizienten Antminern (≈ 13,5 W/TH), aktueller Netzwerk-Schwierigkeit + jährlichem Wachstum, 2 % Pool-/Mgmt-Gebühr und deinem Mining-Tarif. Der BTC-Kurs läuft linear vom Live-Kurs zur Prognose. Mining-Erträge schwanken erheblich. <b>Kein Renditeversprechen, keine Anlageberatung.</b></p>
         </div>
 
         <div class="calc-result">
-          <div class="sub">Geschätzter Netto-Ertrag p.&nbsp;a.</div>
-          <div class="big" id="out-annual">1.100 €</div>
-          <div class="roi-line"><span class="roi-badge" id="out-roi">11 % p.a.</span><span class="roi-pay" id="out-payback">Amortisation ≈ 24 Mon.</span></div>
+          <div class="sub">Geschätzter Netto-Ertrag über Laufzeit</div>
+          <div class="big" id="out-total">—</div>
+          <div class="big-fx" id="out-total-fx">≈ $— · ₲ —</div>
+          <div class="roi-line"><span class="roi-badge" id="out-roi">— % p.a.</span><span class="roi-pay" id="out-payback">—</span></div>
           <div class="calc-rows">
-            <div class="r"><span>Hashrate-Anteil</span><b id="r-hash">400 TH/s</b></div>
-            <div class="r"><span>Leistungsaufnahme</span><b id="r-power">5,4 kW</b></div>
-            <div class="r"><span>Geschätzte BTC / Monat</span><b id="r-btc">0,0040 BTC</b></div>
-            <div class="r"><span>Brutto-Ertrag / Monat</span><b id="r-gross">320 €</b></div>
-            <div class="r"><span>Energie & Tarif / Monat</span><b id="r-energy">−210 €</b></div>
-            <div class="r"><span>Netto / Monat</span><b id="r-net">92 €</b></div>
-            <div class="r total"><span>Netto über Laufzeit</span><b id="r-total">2.208 €</b></div>
+            <div class="r"><span>Hashrate-Anteil</span><b id="r-hash">—</b></div>
+            <div class="r"><span>Leistungsaufnahme</span><b id="r-power">—</b></div>
+            <div class="r"><span>Ø BTC / Monat</span><b id="r-btc">—</b></div>
+            <div class="r"><span>Ø Brutto-Ertrag / Monat</span><b id="r-gross">—</b></div>
+            <div class="r"><span>Energie & Tarif / Monat</span><b id="r-energy">—</b></div>
+            <div class="r"><span>Ø Netto / Monat</span><b id="r-net">—</b></div>
+            <div class="r total"><span>Netto über Laufzeit</span><b id="r-total">—</b></div>
           </div>
           <a class="btn btn-primary btn-block" href="#invest" style="margin-top:24px">Diesen Betrag investieren</a>
         </div>
@@ -412,29 +541,37 @@
       <div class="reveal">
         <span class="eyebrow"><span class="dot"></span> Fahrplan</span>
         <h2 class="title">Unser Weg – und wohin dein Kapital fließt</h2>
-        <p class="lead">Ein klarer, gestufter Plan vom Standortaufbau bis zur Skalierung. Mit jedem Meilenstein wächst die Kapazität – und die Beteiligung der Investoren.</p>
+        <p class="lead">Ein klarer, gestufter Plan: Marketing und Seed-Runde laufen durch 2026, Standortbezug zum Jahresende, Aufbau und Mining-Start Anfang 2027. Mit jedem Meilenstein wächst die Kapazität – und die Beteiligung der Investoren.</p>
+        <div class="rm-legend">
+          <span><i class="rm-dot active"></i> läuft</span>
+          <span><i class="rm-dot"></i> geplant</span>
+        </div>
       </div>
       <div class="reveal d1">
         <div class="timeline">
-          <div class="tl-item done">
-            <div class="marker"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div><div class="q">Q1 2026</div><h3>Standort & Energievertrag</h3><p>Sicherung des Standorts und der Stromanbindung in Paraguay.</p></div>
+          <div class="tl-item active">
+            <div class="marker"><span class="pulse"></span></div>
+            <div><div class="q">Q1–Q4 2026 · läuft</div><h3>Marketing & Investorengewinnung</h3><p>Werbekampagne, Community-Aufbau und Reichweite – parallel zur Seed-Runde.</p></div>
           </div>
           <div class="tl-item active">
-            <div class="marker">2</div>
-            <div><div class="q">Q2–Q3 2026 · läuft</div><h3>Seed-Finanzierung (1 MW)</h3><p>Einsammeln des Investorenkapitals für die Hydro-Hardware und Infrastruktur der Phase 1.</p></div>
+            <div class="marker"><span class="pulse"></span></div>
+            <div><div class="q">bis einschließlich Q4 2026 · läuft</div><h3>Seed-Runde (0,8 MW Allokation)</h3><p>Einsammeln des Investorenkapitals für die Hydro-Hardware und Infrastruktur – 80 % der 1-MW-Kapazität.</p></div>
           </div>
           <div class="tl-item">
             <div class="marker">3</div>
-            <div><div class="q">Q4 2026</div><h3>Aufbau & Installation</h3><p>Beschaffung, Aufbau der Halle, Wasserkühlung und Inbetriebnahme der ersten Hydro-Antminer.</p></div>
+            <div><div class="q">Q4 2026</div><h3>Standorte beziehen</h3><p>Sicherung und Bezug der Standorte in Paraguay inkl. Netzanschluss.</p></div>
           </div>
           <div class="tl-item">
             <div class="marker">4</div>
-            <div><div class="q">Q1 2027</div><h3>Mining-Start & erste Auszahlungen</h3><p>Produktiver Betrieb, Live-Dashboard und erste anteilige BTC-Ausschüttungen.</p></div>
+            <div><div class="q">Q1 2027</div><h3>Energieverträge & Juristisches</h3><p>Finalisierung der Energieverträge und der rechtlichen Struktur.</p></div>
           </div>
           <div class="tl-item">
             <div class="marker">5</div>
-            <div><div class="q">ab 2027</div><h3>Skalierung auf 10+ MW</h3><p>Modularer Ausbau der Kapazität und Aufnahme weiterer Investorenrunden.</p></div>
+            <div><div class="q">Q1 2027</div><h3>Aufbau & Installation</h3><p>Hallenaufbau, Wasserkühlung und Inbetriebnahme der Hydro-Antminer.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="marker">6</div>
+            <div><div class="q">Q1 / Q2 2027</div><h3>Mining-Start & erste Auszahlungen</h3><p>Produktiver Betrieb, Live-Dashboard und erste anteilige BTC-Ausschüttungen.</p></div>
           </div>
         </div>
       </div>
@@ -442,24 +579,47 @@
   </section>
 
   <!-- ============ BETRIEB / TRUST ============ -->
-  <section class="section-pad">
-    <div class="container split">
-      <div class="reveal">
-        <div class="media-frame">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145916_f6e3b61b-5262-4d02-bb36-edbb620d3992.png" alt="Technikerin überwacht den Betrieb der Mining-Server" data-fallback loading="lazy" />
-          <div class="fallback"></div>
-          <span class="tag">Betrieb · 24/7</span>
-        </div>
-      </div>
-      <div class="reveal d1">
+  <section class="section-pad" id="vertrauen">
+    <div class="container">
+      <div class="section-head center reveal">
         <span class="eyebrow"><span class="dot"></span> Vertrauen & Betrieb</span>
-        <h2 class="title">Dein Kapital wird professionell verwaltet</h2>
-        <p class="lead">Transparenz und Sicherheit stehen bei uns an erster Stelle. Du behältst jederzeit den Überblick – wir kümmern uns um den reibungslosen Betrieb.</p>
-        <ul class="feature-list">
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Live-Monitoring & Dashboard</b>Seed-Fortschritt, Hashrate, Temperatur und Uptime jederzeit einsehbar.</span></li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Transparente Verträge</b>Klar geregelte Beteiligung, Konditionen und Auszahlungsmodalitäten.</span></li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Erfahrenes Team vor Ort</b>Lokale Operations-Crew plus Mining- und Energie-Expertise.</span></li>
-        </ul>
+        <h2 class="title">Dein Kapital wird <span class="grad-text">professionell</span> verwaltet</h2>
+        <p class="lead">Transparenz und Sicherheit stehen an erster Stelle. Du behältst jederzeit den Überblick – wir kümmern uns um den reibungslosen Betrieb.</p>
+      </div>
+
+      <div class="trust-grid">
+        <div class="trust-visual reveal">
+          <div class="media-frame">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145916_f6e3b61b-5262-4d02-bb36-edbb620d3992.png" alt="Technikerin überwacht den 24/7-Betrieb der Mining-Server" data-fallback loading="lazy" />
+            <div class="fallback"></div>
+            <span class="tag">Betrieb · 24/7</span>
+          </div>
+          <!-- Live-Ops Mini-Panel -->
+          <div class="ops-panel">
+            <div class="ops-item"><span class="ops-dot"></span><span class="ops-k">Status</span><b class="ops-ok">Online</b></div>
+            <div class="ops-item"><span class="ops-k">Uptime</span><b><span data-count="99.8" data-decimals="1">0</span> %</b></div>
+            <div class="ops-item"><span class="ops-k">Monitoring</span><b>24 / 7</b></div>
+          </div>
+        </div>
+
+        <div class="trust-points reveal d1">
+          <div class="tp">
+            <div class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><h3>Live-Monitoring & Dashboard</h3><p>Seed-Fortschritt, Hashrate, Temperatur und Uptime jederzeit einsehbar.</p></div>
+          </div>
+          <div class="tp">
+            <div class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z" stroke-linejoin="round"/></svg></div>
+            <div><h3>Transparente Verträge</h3><p>Klar geregelte Beteiligung, Konditionen und Auszahlungsmodalitäten.</p></div>
+          </div>
+          <div class="tp">
+            <div class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3.2 3.2 0 0 1 0 6.4M21 20c0-2.5-1.4-4.7-3.5-5.6" stroke-linecap="round"/></svg></div>
+            <div><h3>Erfahrenes Team vor Ort</h3><p>Lokale Operations-Crew plus Mining- und Energie-Expertise.</p></div>
+          </div>
+          <div class="tp">
+            <div class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg></div>
+            <div><h3>Sicherheit & Versicherung</h3><p>Gesicherter Standort mit Zutrittskontrolle und versicherter Hardware.</p></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -474,7 +634,15 @@
       <div class="faq reveal d1">
         <details class="faq-item">
           <summary>Wie funktioniert die Beteiligung?<span class="pm"></span></summary>
-          <div class="body">Du erwirbst in der Seed-Runde einen Hashrate-Anteil an der ENPARA-Mining-Farm. ENPARA beschafft und betreibt die Hydro-Antminer in Paraguay. Die erzielten Mining-Erträge werden anteilig – nach Abzug des Mining-Tarifs (0,12 €/kWh) und der Gebühren – in Bitcoin an dich ausgezahlt. Die konkrete rechtliche Struktur wird dir vor einer Investition transparent dargelegt.</div>
+          <div class="body">Du erwirbst in der Seed-Runde einen Hashrate-Anteil an der ENPARA-Mining-Farm. ENPARA beschafft und betreibt die Hydro-Antminer in Paraguay. Die erzielten Mining-Erträge werden anteilig – nach Abzug des Mining-Tarifs (0,10–0,15 €/kWh) und der Gebühren – in Bitcoin an dich ausgezahlt. Die konkrete rechtliche Struktur wird dir vor einer Investition transparent dargelegt.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Wie werden die Paketpreise berechnet?<span class="pm"></span></summary>
+          <div class="body">Der Preis je TH/s basiert auf den Kosten effizienter, hydro-gekühlter Antminer zuzüglich Versand, Zoll, Einfuhrsteuer und Transportversicherung. Darauf rechnen wir einen Unternehmens-Aufschlag von 25 % (Marge & Puffer), damit der Betrieb solide finanziert ist. Größere Pakete erhalten einen Volumen-Rabatt je TH/s. Die genaue Aufschlüsselung siehst du im Rechner.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Kann ich die Mining-Halle ansehen?<span class="pm"></span></summary>
+          <div class="body">Ja. Im Bereich „Mining-Halle" findest du aktuelle Aufnahmen der Anlage in Großansicht. Ernsthafte Investoren – insbesondere im Whale-Paket – laden wir zu einer Vor-Ort-Besichtigung in Paraguay ein. Auf Wunsch stellen wir zusätzlich einen Video-Rundgang bereit.</div>
         </details>
         <details class="faq-item">
           <summary>Kann ich mit Krypto investieren?<span class="pm"></span></summary>
@@ -482,15 +650,11 @@
         </details>
         <details class="faq-item">
           <summary>Welche Renditen sind realistisch?<span class="pm"></span></summary>
-          <div class="body">Seriös lässt sich keine feste Rendite versprechen. Mining-Erträge hängen vom Bitcoin-Kurs, der Netzwerk-Schwierigkeit und den Kosten ab. Der Rechner auf dieser Seite modelliert verschiedene Szenarien – ausschließlich zur Veranschaulichung. Bitte triff deine Entscheidung auf Basis der offiziellen Unterlagen und ggf. mit fachlicher Beratung.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Was bedeutet der Mining-Tarif von 0,12 €/kWh?<span class="pm"></span></summary>
-          <div class="body">Das ist der All-in-Preis je Kilowattstunde, der für deinen Hashrate-Anteil anfällt – inklusive Energie, Hosting, Kühlung und Wartung. Er ist transparent und planbar und wird bei der Ertragsberechnung berücksichtigt.</div>
+          <div class="body">Seriös lässt sich keine feste Rendite versprechen. Mining-Erträge hängen vom Bitcoin-Kurs, der Netzwerk-Schwierigkeit und den Kosten ab. Der Rechner auf dieser Seite modelliert die Ökonomie monatsgenau mit Live-Kurs – ausschließlich zur Veranschaulichung. Bitte triff deine Entscheidung auf Basis der offiziellen Unterlagen und ggf. mit fachlicher Beratung.</div>
         </details>
         <details class="faq-item">
           <summary>Wie groß ist die Farm?<span class="pm"></span></summary>
-          <div class="body">Phase 1 umfasst 1 MW Leistung mit hydro-gekühlten Antminern. Der modulare Aufbau erlaubt eine spätere Skalierung auf 10+ MW über weitere Finanzierungsrunden.</div>
+          <div class="body">Phase 1 umfasst 1 MW Leistung mit hydro-gekühlten Antminern. 80 % dieser Kapazität (0,8 MW) sind in der Seed-Runde für Investoren verfügbar. Der modulare Aufbau erlaubt eine spätere Skalierung auf 10+ MW über weitere Finanzierungsrunden.</div>
         </details>
         <details class="faq-item">
           <summary>Wie wird mein Investment abgesichert?<span class="pm"></span></summary>
@@ -506,7 +670,7 @@
       <div class="section-head center reveal">
         <span class="eyebrow"><span class="dot"></span> Seed-Runde · jetzt offen</span>
         <h2 class="title">Investiere in ENPARA – per Krypto oder Überweisung</h2>
-        <p class="lead">Sichere dir deinen Hashrate-Anteil. Mindestbeteiligung 5.000 €. Direkt hier, in wenigen Schritten.</p>
+        <p class="lead">Sichere dir deinen Hashrate-Anteil. Mindestbeteiligung 5.000 € (250 TH/s). Direkt hier, in wenigen Schritten.</p>
       </div>
 
       <div class="invest-wrap reveal d1">
@@ -514,10 +678,18 @@
           <div class="mini-progress">
             <div class="mp-top"><span>Seed-Fortschritt</span><b id="mp-pct">68 %</b></div>
             <div class="mp-bar"><i id="mp-fill" style="width:68%"></i></div>
-            <div class="mp-meta"><span><b id="mp-raised">1.020.000 €</b> eingesammelt</span><span>Ziel <b>1.500.000 €</b></span></div>
+            <div class="mp-meta"><span><b id="mp-raised">816.000 €</b> eingesammelt</span><span>Ziel <b>1.200.000 €</b></span></div>
           </div>
+
+          <!-- Kapazitäts-Visual: 80% von 1 MW -->
+          <div class="cap-viz">
+            <div class="cap-head"><span>Seed-Allokation</span><b>0,8&nbsp;MW</b></div>
+            <div class="cap-cells" id="cap-cells" aria-hidden="true"></div>
+            <div class="cap-note"><span><i class="cap-key seed"></i> 80 % für Investoren</span><span><i class="cap-key own"></i> 20 % Eigenanteil</span></div>
+          </div>
+
           <ul class="aside-points">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Ab 5.000 € (200 TH/s)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Ab 5.000 € (250 TH/s)</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> BTC · ETH · USDT · USDC · SEPA</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Anteilige BTC-Auszahlungen</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Voller Dashboard-Zugang</li>
@@ -533,14 +705,14 @@
           <div class="inv-step">
             <span class="inv-label"><i>1</i> Paket wählen</span>
             <div class="amount-chips">
-              <button type="button" class="chip active" data-amount="5000" data-th="200"><b>200 TH/s</b><span>5.000 €</span></button>
-              <button type="button" class="chip" data-amount="9500" data-th="400"><b>400 TH/s</b><span>9.500 €</span></button>
-              <button type="button" class="chip" data-amount="22500" data-th="1000"><b>1.000 TH/s</b><span>22.500 €</span></button>
+              <button type="button" class="chip active" data-amount="5000" data-th="250"><b>250 TH/s</b><span>5.000 €</span></button>
+              <button type="button" class="chip" data-amount="9500" data-th="500"><b>500 TH/s</b><span>9.500 €</span></button>
+              <button type="button" class="chip" data-amount="22500" data-th="1250"><b>1.250 TH/s</b><span>22.500 €</span></button>
             </div>
             <div class="custom-amount">
               <label for="inv-amount">Eigener Betrag</label>
               <div class="num-field"><span class="cur">€</span><input type="number" id="inv-amount" min="5000" step="500" value="5000" /></div>
-              <span class="inv-hash">≈ <b id="inv-th">200</b> TH/s</span>
+              <span class="inv-hash">≈ <b id="inv-th">250</b> TH/s</span>
             </div>
           </div>
 
@@ -567,9 +739,9 @@
                 <button type="button" class="asset" data-asset="USDC"><b>$</b> USDC</button>
               </div>
               <div class="crypto-pay">
-                <div class="cp-amount">Zu senden: <b id="cp-amount">0,062500 BTC</b> <span class="cp-net" id="cp-net">· Bitcoin-Netzwerk</span></div>
+                <div class="cp-amount">Zu senden: <b id="cp-amount">0,055556 BTC</b> <span class="cp-net" id="cp-net">· Bitcoin-Netzwerk</span></div>
                 <div class="addr-box">
-                  <div class="qr-wrap"><img class="qr" id="cp-qr" alt="QR-Code der Einzahlungsadresse" /><div class="qr-fallback">QR</div></div>
+                  <div class="qr-wrap"><img class="qr" id="cp-qr" alt="QR-Code der Einzahlungsadresse" /><div class="qr-fallback" id="cp-qr-fallback">QR erscheint,<br>sobald echte<br>Adresse hinterlegt</div></div>
                   <div class="addr-side">
                     <span class="addr-label">Einzahlungsadresse</span>
                     <code class="addr" id="cp-addr">bc1q…</code>
@@ -580,7 +752,7 @@
                     <span class="ref">Verwendungszweck: <b id="cp-ref">ENP-000000</b></span>
                   </div>
                 </div>
-                <p class="warn">⚠ Platzhalter-Adresse – vor dem Live-Gang durch eure echte Wallet ersetzen (siehe README).</p>
+                <p class="warn" id="cp-warn">⚠ Platzhalter-Adresse – sobald du im Code (<code>assets/js/main.js</code>, <code>CONFIG.crypto</code>) die echte Wallet einträgst, erscheint hier automatisch der passende QR-Code.</p>
               </div>
             </div>
 
@@ -642,6 +814,7 @@
         <div class="foot-col">
           <h4>Seite</h4>
           <a href="#paraguay">Warum Paraguay</a>
+          <a href="#anlage">Mining-Halle</a>
           <a href="#pakete">Pakete</a>
           <a href="#rechner">Rechner</a>
           <a href="dashboard.html">Seed-Dashboard</a>
@@ -673,6 +846,17 @@
       </div>
     </div>
   </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" id="lb-close" aria-label="Schließen">✕</button>
+    <button class="lb-nav lb-prev" id="lb-prev" aria-label="Vorheriges Bild">‹</button>
+    <figure class="lb-fig">
+      <img id="lb-img" src="" alt="Mining-Halle Großansicht" />
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lb-next" aria-label="Nächstes Bild">›</button>
+  </div>
 
   <script src="assets/js/main.js" defer></script>
 </body>
