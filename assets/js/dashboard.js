@@ -15,8 +15,9 @@
     investors: 143,
     daysLeft: 45,
     minTicket: 5000,
-    capacityMW: 1,
-    totalTH: 74000,
+    capacityMW: 1,        // Gesamt-Leistung Phase 1
+    seedShare: 0.8,       // 80 % der Kapazität sind über die Seed-Runde finanzierbar
+    totalTH: 74000,       // Hashrate bei voll ausgebauten 1 MW
     useOfFunds: [
       { label: "Hydro-Hardware (ASICs)", pct: 64 },
       { label: "Halle & Infrastruktur", pct: 17 },
@@ -83,11 +84,28 @@
   animateNum($("#d-min"), DASH.minTicket, (v) => num(v));
   const daysPill = $("#d-days-pill"); if (daysPill) daysPill.textContent = DASH.daysLeft + " Tagen";
 
-  /* ---------------- capacity ---------------- */
-  animateNum($("#d-mw"), DASH.capacityMW * pct, (v) => v.toFixed(2).replace(".", ","));
-  animateNum($("#d-th"), DASH.totalTH * pct, (v) => num(v));
-  const capbar = $("#d-capbar");
-  if (capbar) requestAnimationFrame(() => requestAnimationFrame(() => { capbar.style.width = (pct * 100).toFixed(1) + "%"; }));
+  /* ---------------- capacity allocation ---------------- */
+  const seedMW = DASH.capacityMW * DASH.seedShare;          // für die Seed-Runde verfügbar
+  const reserveMW = DASH.capacityMW * (1 - DASH.seedShare); // strategische Reserve
+  const financedMW = seedMW * pct;                          // bereits finanziert
+  const openMW = Math.max(0, seedMW - financedMW);          // Seed noch offen
+  const seedTH = DASH.totalTH * DASH.seedShare;             // Hashrate-Ziel der Seed-Runde
+  const mw = (v) => v.toFixed(2).replace(".", ",") + " MW";
+
+  animateNum($("#d-seed-mw"), seedMW, (v) => v.toFixed(2).replace(".", ","));
+  animateNum($("#d-th"), seedTH * pct, (v) => num(v));
+
+  const capFin = $("#d-cap-fin"); if (capFin) capFin.textContent = mw(financedMW);
+  const capOpen = $("#d-cap-open"); if (capOpen) capOpen.textContent = mw(openMW);
+  const capRes = $("#d-cap-res"); if (capRes) capRes.textContent = mw(reserveMW);
+  const thGoal = $("#d-th-goal"); if (thGoal) thGoal.textContent = num(seedTH);
+
+  const segFin = $("#d-seg-fin"), segOpen = $("#d-seg-open"), segRes = $("#d-seg-res");
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (segFin) segFin.style.width = (financedMW / DASH.capacityMW * 100).toFixed(1) + "%";
+    if (segOpen) segOpen.style.width = (openMW / DASH.capacityMW * 100).toFixed(1) + "%";
+    if (segRes) segRes.style.width = (reserveMW / DASH.capacityMW * 100).toFixed(1) + "%";
+  }));
 
   /* ---------------- bar lists ---------------- */
   const barItem = (label, value, pctWidth, warm) =>

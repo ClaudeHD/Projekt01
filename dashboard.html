@@ -96,12 +96,33 @@
         </div>
       </div>
 
-      <!-- Capacity -->
-      <div class="dash-card span-4 reveal">
-        <div class="dc-title">Finanzierte Kapazität</div>
-        <div class="kpi"><div class="v"><span id="d-mw">0</span> <span style="color:var(--green-2)">MW</span></div><div class="k">von 1 MW (Phase 1)</div></div>
-        <div class="bar-track" style="margin:18px 0 10px"><div class="bar-fill" id="d-capbar"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:.84rem;color:var(--muted)"><span><b id="d-th" style="color:var(--text)">0</b> TH/s</span><span>Ziel 74.000 TH/s</span></div>
+      <!-- Capacity allocation -->
+      <div class="dash-card span-4 reveal cap-card">
+        <div class="dc-title">Kapazitäts-Allokation</div>
+        <div class="cap-head">
+          <div class="cap-hero">
+            <span class="cap-num"><span id="d-seed-mw">0,00</span> <span class="unit">MW</span></span>
+            <span class="cap-sub">für die Seed-Runde verfügbar</span>
+          </div>
+          <div class="cap-chip">
+            <span class="cap-chip-pct">80 %</span>
+            <span>von 1 MW</span>
+          </div>
+        </div>
+        <div class="cap-meter" role="img" aria-label="Aufteilung der 1-MW-Kapazität: finanziert, Seed offen und Reserve">
+          <div class="cap-seg fin" id="d-seg-fin"></div>
+          <div class="cap-seg open" id="d-seg-open"></div>
+          <div class="cap-seg res" id="d-seg-res"></div>
+        </div>
+        <div class="cap-legend">
+          <div class="cap-li"><span class="dotc fin"></span><span class="lab">Finanziert</span><b id="d-cap-fin">0,00 MW</b></div>
+          <div class="cap-li"><span class="dotc open"></span><span class="lab">Seed offen</span><b id="d-cap-open">0,00 MW</b></div>
+          <div class="cap-li"><span class="dotc res"></span><span class="lab">Reserve · 20 %</span><b id="d-cap-res">0,00 MW</b></div>
+        </div>
+        <div class="cap-foot">
+          <span><b id="d-th">0</b> TH/s finanziert</span>
+          <span>Seed-Ziel <b id="d-th-goal">0</b> TH/s</span>
+        </div>
       </div>
 
       <!-- Use of funds -->
