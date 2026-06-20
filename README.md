@@ -15,35 +15,62 @@ Deploybar auf **GitHub Pages, Netlify, Vercel, Cloudflare Pages** – Ordner hoc
 
 ```
 .
-├── index.html              # Landingpage (Hero, Pakete, Rechner, Krypto-/SEPA-Invest, FAQ …)
-├── dashboard.html          # Seed-Runde Live-Dashboard
+├── index.html              # Landingpage (Hero, Pakete, Rechner, Krypto-/SEPA-Anfrage, FAQ …)
+├── dashboard.html          # Seed-Runde Live-Dashboard + Admin
 ├── assets/
 │   ├── css/styles.css      # Design-System + alle Komponenten
-│   ├── js/main.js          # Rechner, Invest-Widget (Krypto+SEPA), FAQ, Reveal …
-│   ├── js/dashboard.js     # Dashboard-Rendering (Ring, KPIs, Chart, Feed)
+│   ├── js/seed.js          # ⭐ Zentrales Seed-Modell + Einnahmen-Ledger (von beiden Seiten genutzt)
+│   ├── js/main.js          # Rechner, Anfrage-Widget (Krypto+SEPA), Paket-Impact, FAQ, Reveal …
+│   ├── js/dashboard.js     # Dashboard-Rendering (Ring, KPIs, Chart, Feed, Countdown, Admin)
 │   └── img/                # (für lokal gespeicherte Bilder – siehe unten)
 └── README.md
 ```
+
+> **Neu:** `assets/js/seed.js` ist die **eine** Quelle für Seed-Ziel, 70-%-Kapazität,
+> Pakete, Countdown-Deadline und das **Einnahmen-Ledger**. Landingpage und Dashboard
+> lesen denselben Stand – Fortschritt, freies Volumen und verbleibende Pakete bleiben
+> automatisch synchron.
 
 ## ⚙️ Wo du echte Werte einträgst (1 Stelle pro Thema)
 
 | Was | Datei | Variable / Stelle |
 |-----|-------|-------------------|
+| **Seed-Ziel, 70-%-Kapazität, Pakete, Deadline, Admin-Passwort** | `assets/js/seed.js` | `CFG` (oben) |
+| Mining-Annahmen (Tarif, Effizienz, Netzwerk-Hashrate …) | `assets/js/seed.js` | `CFG.mining` |
 | **Krypto-Wallets** (BTC/ETH/USDT/USDC) | `assets/js/main.js` | `CONFIG.crypto.*.addr` |
-| Wechselkurse, Effizienz, Tarif, Szenarien | `assets/js/main.js` | `CONFIG` (oben) |
 | **SEPA-Bankdaten** (IBAN/BIC) | `index.html` | Block `.sepa-box` |
-| **Dashboard-Zahlen** (Ziel, eingesammelt, Investoren …) | `assets/js/dashboard.js` | `DASH` (oben) |
-| Funding-Fortschritt im Invest-Block (68 %) | `index.html` | `.mini-progress` |
-| Pakete & Preise | `index.html` | Abschnitt `#pakete` |
+| **Eingesammelt / Investoren / Verlauf** | — | **Admin** im Dashboard (Ledger, s. u.) |
+| Pakete & Preise (Anzeige) | `index.html` | Abschnitt `#pakete` (Werte aus `seed.js` spiegeln) |
 
-> ⚠️ **Wichtig:** Wallet-Adressen, IBAN und alle Zahlen sind aktuell **Platzhalter**
-> und müssen vor dem Live-Gang ersetzt werden.
+> ⚠️ **Wichtig:** Wallet-Adressen, IBAN und das Admin-Passwort (`enpara2026`) sind
+> **Platzhalter** und müssen vor dem Live-Gang ersetzt werden. Fortschrittszahlen kommen
+> jetzt aus dem **Einnahmen-Ledger** statt aus festen Demo-Werten.
 
-## 💱 Krypto-Investment
+## 🌱 Seed-Modell & Admin-Ledger
 
-Im Bereich **„Investieren"** kann direkt per **BTC, ETH, USDT, USDC** oder **SEPA**
-beteiligt werden: Paket wählen → Zahlungsart → Adresse/QR + Verwendungszweck →
-Daten eingeben → Meldung.
+- **70 % der 1-MW-Anlage** stehen der Seed-Runde zur Verfügung → `CFG.seedShare = 0.70`
+  (= 0,70 MW ≈ 51.852 TH/s). Ziel-Volumen & Mindestticket ebenfalls in `seed.js`.
+- **Countdown** läuft bis **30.11.2026** (`CFG.deadline`) – live auf dem Dashboard und in
+  der Invest-Box.
+- **Verbleibende Pakete:** Das Dashboard zeigt aus dem **freien Betrag** (Ziel − eingesammelt),
+  wie viele Starter/Pro/Whale-Pakete noch möglich sind – plus freies Volumen in TH/s und MW.
+- **Echte Einnahmen statt Beispielbetrag:** Fortschritt, Investoren, Kapitalverlauf und Feed
+  kommen aus einem **Ledger** (SEPA + Krypto). Pflege im **Dashboard → Button „Admin"**
+  (Passwort `CFG.adminPass`):
+  - **Einnahme nachtragen** (Betrag + Zahlungsart + Name/Referenz)
+  - **Offene Anfragen** aus dem Formular per Klick als Einnahme **bestätigen** oder verwerfen
+  - **Demo-Daten laden** / **Alles löschen**
+- **Speicherung:** Browser-`localStorage` (kein Server). Damit Anfragen und Einnahmen geräte-
+  und personenübergreifend zusammenlaufen, die Funktionen in `seed.js` (`addEntry`,
+  `addRequest`, `confirmRequest` …) an ein echtes **Backend/CRM** anbinden.
+
+## 💱 Krypto-/SEPA-Anfrage
+
+Im Bereich **„Jetzt anfragen"** wird direkt per **BTC, ETH, USDT, USDC** oder **SEPA**
+angefragt: Paket wählen → Zahlungsart → Adresse/QR + Verwendungszweck →
+Daten eingeben → **Anfrage absenden**. Jede Anfrage landet als **offener Posten** im
+Admin-Bereich des Dashboards und kann dort nach Zahlungseingang als Einnahme bestätigt
+werden.
 
 - Der **QR-Code** wird über `api.qrserver.com` erzeugt (externer Dienst, im Browser
   des Besuchers). Fällt er aus, bleibt die kopierbare Adresse erhalten. Für volle
@@ -56,11 +83,27 @@ Daten eingeben → Meldung.
 
 ## 📊 Rendite-Rechner
 
-Echte Mining-Logik: Hashrate → Netzwerk-Schwierigkeit → BTC-Kurs → minus
-All-in Mining-Tarif (**0,12 €/kWh**) und Pool-/Mgmt-Gebühr. Drei Szenarien
-(konservativ/basis/optimistisch), editierbarer BTC-Kurs und Laufzeit.
-Annahmen in `CONFIG` (`main.js`) anpassbar. **Alle Werte illustrativ – kein
+Echte Mining-Logik: Hashrate → Netzwerk-Hashrate → BTC-Kurs → minus All-in
+Mining-Tarif (**0,12 €/kWh**) und Pool-/Mgmt-Gebühr. Features:
+
+- **BTC-Kurs-Presets** (50k / 80k / 100k / 120k / 140k / 160k) + freie Eingabe.
+  Bewusst **kein** externer Echtzeitkurs (keine Live-Abfrage).
+- **Kurs-Szenario** als Schieberegler, **stufenlos in 1-%-Schritten bis +900 %**
+  (plus Schnellwahl Konservativ/Basis/Optimistisch/Bull).
+- **Laufzeit bis 10 Jahre** (12–120 Monate).
+- Zeigt **Leistung (kW)** *und* **tatsächlichen Stromverbrauch (kWh/Monat)**.
+- **Beispiel-Miner**: vergleichbare Hydro-Antminer für den gewählten TH-Anteil.
+
+Annahmen zentral in `CFG.mining` (`seed.js`). **Alle Werte illustrativ – kein
 Renditeversprechen.**
+
+## 📦 Pakete
+
+Starter (200 TH/s · 5.000 €), Pro (400 TH/s · 9.500 €) und **Whale (1.100 TH/s · 37.000 €)**.
+Jede Karte zeigt **Leistung, Stromverbrauch/Monat und Energiekosten** sowie eine
+**visuelle Aufteilung** (Energie-Anteil vs. Netto-Anteil am Brutto-Ertrag) – damit
+Endkund:innen direkt sehen, was ein Paket effektiv bedeutet. Pakete zentral in
+`CFG.packages` (`seed.js`).
 
 ## 🖼️ Bilder (KI-generiert)
 
@@ -78,12 +121,13 @@ Fällt ein Bild aus, zeigt die Seite automatisch einen Farbverlauf-Platzhalter.
 
 ## ✅ Checkliste vor dem Launch
 
-- [ ] **Echte Wallet-Adressen** eintragen (`CONFIG.crypto`)
+- [ ] **Echte Wallet-Adressen** eintragen (`CONFIG.crypto` in `main.js`)
 - [ ] **Echte Bankdaten** (IBAN/BIC) eintragen (`.sepa-box`)
-- [ ] **Dashboard-Zahlen** mit realen Werten füllen (`DASH`)
-- [ ] Funding-Fortschritt (68 %) & Investorenzahl aktualisieren
+- [ ] **Admin-Passwort** ändern (`CFG.adminPass` in `seed.js`)
+- [ ] Seed-Ziel, Pakete & Deadline prüfen (`CFG` in `seed.js`)
+- [ ] **Demo-Ledger leeren** und echte Einnahmen pflegen (Dashboard → Admin)
+- [ ] Ledger/Anfragen an **Backend/CRM** anbinden (statt nur `localStorage`)
 - [ ] Bilder lokal speichern
-- [ ] Formular an Backend/Service anbinden
 - [ ] Team mit echten Profilen füllen
 - [ ] **Impressum & Datenschutz** verlinken (Pflicht in DE)
 - [ ] Disclaimer & rechtliche Struktur prüfen lassen (s. u.)

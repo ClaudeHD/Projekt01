@@ -38,7 +38,7 @@
       </nav>
       <div class="nav-cta">
         <a class="btn btn-ghost" href="index.html">← Zur Website</a>
-        <a class="btn btn-primary" href="index.html#invest">Investieren</a>
+        <a class="btn btn-primary" href="index.html#invest">Jetzt anfragen</a>
         <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
       </div>
     </div>
@@ -50,7 +50,7 @@
     <a href="index.html#rechner">Rechner</a>
     <a href="dashboard.html">Seed-Dashboard</a>
     <a href="index.html#faq">FAQ</a>
-    <a class="btn btn-primary btn-block" href="index.html#invest">Jetzt investieren</a>
+    <a class="btn btn-primary btn-block" href="index.html#invest">Jetzt anfragen</a>
   </div>
 
   <!-- ============ DASHBOARD ============ -->
@@ -61,9 +61,18 @@
         <h1 style="margin-top:14px">Seed-Runde Dashboard</h1>
         <p class="sub">Vollständige Transparenz über Fortschritt, Kapital und Kapazität der ENPARA-Finanzierungsrunde.</p>
       </div>
-      <div class="round-pill"><span class="pulse"></span> Runde offen · schließt in <b id="d-days-pill" style="margin-left:4px">45 Tagen</b></div>
+      <div class="dash-head-cta">
+        <div class="round-pill"><span class="pulse"></span> Runde offen · schließt in <b id="d-days-pill" style="margin-left:4px">– Tagen</b></div>
+        <button type="button" class="btn btn-ghost btn-admin" id="admin-toggle">Admin</button>
+      </div>
     </div>
-    <span class="demo-note">⚠ Demo-/Platzhalterdaten – in <code>assets/js/dashboard.js</code> durch echte Zahlen ersetzen.</span>
+    <div class="countdown" id="d-countdown" aria-live="polite">
+      <span class="cd-label">Seed-Runde endet am <b id="cd-date">30. November 2026</b> ·</span>
+      <span class="cd-box"><b id="cd-d">–</b><i>Tage</i></span>
+      <span class="cd-box"><b id="cd-h">–</b><i>Std</i></span>
+      <span class="cd-box"><b id="cd-m">–</b><i>Min</i></span>
+    </div>
+    <span class="demo-note">ℹ Werte stammen aus dem lokalen Einnahmen-Ledger (Browser-Speicher). Pflege echte SEPA-/Krypto-Einnahmen über <b>Admin</b> – kein Server, Daten bleiben in diesem Browser.</span>
 
     <div class="dash-grid">
       <!-- Progress ring -->
@@ -79,8 +88,8 @@
           </div>
           <div class="ring-info">
             <div class="raised" id="d-raised">0 €</div>
-            <div class="target">von <b id="d-target">1.500.000 €</b> Zielvolumen</div>
-            <a class="btn btn-primary" href="index.html#invest">Jetzt beitreten</a>
+            <div class="target">von <b id="d-target">1.300.000 €</b> Zielvolumen</div>
+            <a class="btn btn-primary" href="index.html#invest">Jetzt anfragen</a>
           </div>
         </div>
       </div>
@@ -99,9 +108,9 @@
       <!-- Capacity -->
       <div class="dash-card span-4 reveal">
         <div class="dc-title">Finanzierte Kapazität</div>
-        <div class="kpi"><div class="v"><span id="d-mw">0</span> <span style="color:var(--green-2)">MW</span></div><div class="k">von 1 MW (Phase 1)</div></div>
+        <div class="kpi"><div class="v"><span id="d-mw">0</span> <span style="color:var(--green-2)">MW</span></div><div class="k">von <b id="d-seedmw">0,70</b> MW · 70 % der 1-MW-Anlage</div></div>
         <div class="bar-track" style="margin:18px 0 10px"><div class="bar-fill" id="d-capbar"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:.84rem;color:var(--muted)"><span><b id="d-th" style="color:var(--text)">0</b> TH/s</span><span>Ziel 74.000 TH/s</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.84rem;color:var(--muted)"><span><b id="d-th" style="color:var(--text)">0</b> TH/s belegt</span><span>für Seed: <b id="d-totalth">51.852</b> TH/s</span></div>
       </div>
 
       <!-- Use of funds -->
@@ -110,10 +119,14 @@
         <div class="bar-list" id="d-usefunds"></div>
       </div>
 
-      <!-- Tiers sold -->
+      <!-- Remaining packages -->
       <div class="dash-card span-4 reveal d2">
-        <div class="dc-title">Pakete-Auslastung</div>
-        <div class="bar-list" id="d-tiers"></div>
+        <div class="dc-title">Noch verfügbar (freies Volumen)</div>
+        <div class="free-head">
+          <div><b id="d-free">0 €</b><span>freier Betrag</span></div>
+          <div><b id="d-freeth">0</b><span>TH/s frei (<span id="d-freemw">0,00</span> MW)</span></div>
+        </div>
+        <div class="bar-list" id="d-remain"></div>
       </div>
 
       <!-- Funding timeline -->
@@ -144,8 +157,51 @@
       </div>
     </div>
 
+    <!-- ============ ADMIN ============ -->
+    <section class="admin-panel" id="admin-panel" hidden>
+      <div class="dash-card span-12">
+        <div class="admin-head">
+          <div class="dc-title" style="margin:0">Admin · Einnahmen pflegen</div>
+          <button type="button" class="btn btn-ghost" id="admin-lock">Sperren</button>
+        </div>
+        <p class="admin-note">Trage echte, bestätigte <b>SEPA-/Krypto-Einnahmen</b> manuell nach – sie fließen sofort in Fortschritt, Kapazität und freies Volumen ein. Speicherung lokal im Browser (localStorage), ohne Server. Für mehrere Geräte/Personen an ein Backend/CRM anbinden.</p>
+
+        <div class="admin-grid">
+          <form class="admin-add" id="admin-add">
+            <h4>Einnahme nachtragen</h4>
+            <div class="aa-row">
+              <div class="num-field"><span class="cur">€</span><input type="number" id="aa-amount" min="0" step="100" placeholder="Betrag" required /></div>
+              <select class="select" id="aa-method">
+                <option value="SEPA">SEPA</option>
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
+                <option value="USDT">USDT</option>
+                <option value="USDC">USDC</option>
+              </select>
+            </div>
+            <input class="input" type="text" id="aa-name" placeholder="Name / Referenz (optional)" />
+            <button class="btn btn-primary btn-block" type="submit">Als Einnahme buchen</button>
+            <div class="admin-tools">
+              <button type="button" class="btn btn-ghost" id="aa-demo">Demo-Daten laden</button>
+              <button type="button" class="btn btn-ghost" id="aa-clear">Alles löschen</button>
+            </div>
+          </form>
+
+          <div class="admin-list">
+            <h4>Offene Anfragen <span class="badge" id="req-count">0</span></h4>
+            <div class="admin-rows" id="admin-requests"></div>
+          </div>
+        </div>
+
+        <div class="admin-list" style="margin-top:18px">
+          <h4>Gebuchte Einnahmen <span class="badge" id="led-count">0</span></h4>
+          <div class="admin-rows" id="admin-ledger"></div>
+        </div>
+      </div>
+    </section>
+
     <div class="disclaimer" style="margin-top:34px">
-      <b>Hinweis:</b> Sämtliche im Dashboard dargestellten Werte (Fortschritt, Beträge, Investorenzahl, Beteiligungen) sind <b>illustrative Demo-Daten</b> und dienen ausschließlich der Veranschaulichung. Sie stellen keine verbindliche Information und kein Angebot dar. Investitionen in Bitcoin-Mining sind mit erheblichen Risiken bis zum Totalverlust verbunden.
+      <b>Hinweis:</b> Die im Dashboard dargestellten Werte stammen aus einem <b>lokalen Einnahmen-Ledger</b> (Browser-Speicher) und dienen der Veranschaulichung des Funding-Stands. Sie stellen keine geprüfte, verbindliche Information und kein Angebot dar. Investitionen in Bitcoin-Mining sind mit erheblichen Risiken bis zum Totalverlust verbunden.
     </div>
   </main>
 
@@ -160,6 +216,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/seed.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/dashboard.js" defer></script>
 </body>

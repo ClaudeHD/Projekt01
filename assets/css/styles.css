@@ -757,3 +757,106 @@ input[type="range"]::-moz-range-thumb {
   .dash-grid { grid-template-columns: 1fr; }
   .dash-grid > * { grid-column: auto !important; }
 }
+
+/* =========================================================
+   Calculator additions — BTC presets, scenario slider, miners
+   ========================================================= */
+.calc-controls .field > .hint { display: block; margin-top: 8px; }
+
+.btc-presets { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.btc-presets button {
+  padding: 9px 4px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text-dim); font-family: var(--ff-display); font-weight: 600; font-size: .82rem; transition: all .2s;
+}
+.btc-presets button:hover { border-color: var(--border-strong); }
+.btc-presets button.active { background: var(--grad); color: #042016; border-color: transparent; }
+
+.scn-quick { display: flex; gap: 8px; margin-top: 12px; }
+.scn-quick button {
+  flex: 1; padding: 9px 6px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text-dim); font-size: .82rem; font-weight: 600; transition: all .2s;
+}
+.scn-quick button:hover { border-color: var(--border-strong); }
+.scn-quick button.active { background: var(--grad); color: #042016; border-color: transparent; }
+
+.miner-eq { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border-strong); }
+.me-title { font-size: .8rem; letter-spacing: .03em; color: var(--muted); margin-bottom: 10px; }
+.me-list { display: grid; gap: 8px; }
+.me-chip {
+  display: flex; align-items: center; gap: 8px; font-size: .86rem; color: var(--text-dim);
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px;
+}
+.me-chip b { font-family: var(--ff-display); color: var(--green-2); }
+.me-chip i { color: var(--muted); font-style: normal; font-size: .78rem; margin-left: auto; }
+
+/* =========================================================
+   Package "impact" view (power + visual breakdown)
+   ========================================================= */
+.plan-impact { margin: 2px 0 22px; padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-elev); }
+.pi-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.pi-stats > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pi-stats span { font-size: .7rem; color: var(--muted); }
+.pi-stats b { font-family: var(--ff-display); color: #fff; font-size: .96rem; }
+.pi-bar { display: flex; height: 12px; border-radius: 100px; overflow: hidden; background: var(--surface-2); }
+.pi-bar i { display: block; height: 100%; transition: width 1s cubic-bezier(.2,.7,.2,1); }
+.pi-bar .pi-energy { background: var(--grad-warm); }
+.pi-bar .pi-net { background: var(--grad); }
+.pi-legend { display: flex; gap: 16px; margin-top: 10px; font-size: .75rem; color: var(--text-dim); }
+.pi-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.pi-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.pi-legend .d-energy { background: var(--orange); }
+.pi-legend .d-net { background: var(--green); }
+.pi-note { font-size: .72rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+.pi-note a { color: var(--green-2); }
+
+/* =========================================================
+   Dashboard — countdown, free volume, admin
+   ========================================================= */
+.dash-head-cta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.btn-admin { --pad-y: 9px; --pad-x: 16px; font-size: .86rem; }
+.btn-admin.active { border-color: var(--green-2); color: var(--green-2); }
+
+.countdown { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.countdown .cd-label { font-size: .9rem; color: var(--text-dim); }
+.countdown .cd-label b { color: var(--green-2); font-family: var(--ff-display); }
+.cd-box {
+  display: inline-flex; flex-direction: column; align-items: center; min-width: 58px; padding: 8px 10px;
+  border-radius: 12px; background: var(--surface); border: 1px solid var(--border-strong);
+}
+.cd-box b { font-family: var(--ff-display); font-size: 1.4rem; color: #fff; line-height: 1; }
+.cd-box i { font-style: normal; font-size: .66rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: 4px; }
+
+.free-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.free-head > div { display: flex; flex-direction: column; }
+.free-head > div:last-child { text-align: right; }
+.free-head b { font-family: var(--ff-display); font-size: 1.3rem; color: var(--green-2); line-height: 1.15; }
+.free-head > div:last-child b { color: #fff; }
+.free-head span { font-size: .76rem; color: var(--muted); }
+
+.admin-panel { margin-top: 24px; }
+.admin-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px; }
+.admin-note { color: var(--text-dim); font-size: .86rem; margin-bottom: 18px; max-width: 780px; line-height: 1.6; }
+.admin-note b { color: var(--text); }
+.admin-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 22px; align-items: start; }
+.admin-add h4, .admin-list h4 { font-family: var(--ff-display); font-size: .96rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.aa-row { display: grid; grid-template-columns: 1fr 118px; gap: 10px; margin-bottom: 12px; }
+.admin-add .input { margin-bottom: 12px; }
+.admin-tools { display: flex; gap: 10px; margin-top: 12px; }
+.admin-tools .btn { flex: 1; --pad-y: 10px; --pad-x: 12px; font-size: .82rem; }
+.badge { background: var(--surface-2); border: 1px solid var(--border); border-radius: 100px; padding: 2px 9px; font-size: .76rem; color: var(--text-dim); font-family: var(--ff-body); font-weight: 600; }
+.admin-rows { display: grid; gap: 8px; max-height: 340px; overflow-y: auto; }
+.admin-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.ar-main { min-width: 0; }
+.ar-main b { font-family: var(--ff-display); color: #fff; }
+.ar-main span { display: block; font-size: .78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ar-act { display: flex; gap: 6px; flex: none; }
+.mini { padding: 6px 10px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border-strong); color: var(--text-dim); font-size: .78rem; font-weight: 600; transition: all .2s; white-space: nowrap; }
+.mini:hover { color: var(--text); border-color: var(--green-2); }
+.mini.ok { color: var(--green); border-color: rgba(24,210,126,.4); }
+.mini.ok:hover { background: var(--grad); color: #042016; border-color: transparent; }
+.admin-empty { color: var(--muted); font-size: .85rem; padding: 14px; text-align: center; border: 1px dashed var(--border-strong); border-radius: 12px; }
+
+@media (max-width: 760px) {
+  .admin-grid { grid-template-columns: 1fr; }
+  .btc-presets { grid-template-columns: repeat(3, 1fr); }
+}
