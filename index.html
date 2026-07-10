@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HashWerk – Industrielles Bitcoin-Mining aus Europa. Effizient, transparent und mit erneuerbarer Energie betrieben.">
+  <title>HashWerk – Industrielles Bitcoin-Mining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a href="#top" class="brand">
+        <span class="brand-mark">&#8383;</span>
+        <span class="brand-name">Hash<em>Werk</em></span>
+      </a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#operations">Standorte</a></li>
+        <li><a href="#technologie">Technologie</a></li>
+        <li><a href="#nachhaltigkeit">Nachhaltigkeit</a></li>
+        <li><a href="#rechner">Rechner</a></li>
+        <li><a href="#wissen">Wissen</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#kontakt" class="btn btn-small">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="hero-kicker">Industrielles Bitcoin-Mining seit 2019</p>
+        <h1>Wir verwandeln <span class="accent">Energie</span> in das härteste Geld der Welt.</h1>
+        <p class="hero-sub">
+          HashWerk betreibt hocheffiziente Rechenzentren für Bitcoin-Mining –
+          mit überschüssiger erneuerbarer Energie, modernster ASIC-Technik und
+          voller Transparenz gegenüber unseren Partnern.
+        </p>
+        <div class="hero-actions">
+          <a href="#rechner" class="btn btn-primary">Mining-Ertrag berechnen</a>
+          <a href="#operations" class="btn btn-ghost">Unsere Standorte ansehen</a>
+        </div>
+      </div>
+
+      <!-- Kennzahlen-Leiste (Stil: MARA / Riot) -->
+      <div class="container">
+        <div class="stats-bar" id="stats">
+          <div class="stat">
+            <span class="stat-value" data-count="12.4" data-decimals="1">0</span>
+            <span class="stat-unit">EH/s</span>
+            <span class="stat-label">Installierte Hashrate</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="410" data-decimals="0">0</span>
+            <span class="stat-unit">MW</span>
+            <span class="stat-label">Energie-Kapazität</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="86" data-decimals="0">0</span>
+            <span class="stat-unit">%</span>
+            <span class="stat-label">Erneuerbare Energie</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="99.2" data-decimals="1">0</span>
+            <span class="stat-unit">%</span>
+            <span class="stat-label">Verfügbarkeit (Uptime)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Standorte / Operations ===== -->
+    <section class="section" id="operations">
+      <div class="container">
+        <p class="section-kicker">Operations</p>
+        <h2>Drei Standorte. Ein Prinzip: Energie dort nutzen, wo sie übrig ist.</h2>
+        <p class="section-intro">
+          Unsere Rechenzentren stehen bewusst dort, wo Energie im Überfluss produziert wird,
+          aber Abnehmer fehlen – so stabilisieren wir Netze, statt sie zu belasten.
+        </p>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-tag">Norwegen</div>
+            <h3>Fjordkraft Campus</h3>
+            <p>180 MW aus Wasserkraft. Natürliche Kühlung durch arktische Luft senkt den Energiebedarf der Kühlsysteme um bis zu 40&nbsp;%.</p>
+            <ul class="card-facts">
+              <li><strong>5,6 EH/s</strong> Hashrate</li>
+              <li><strong>100 %</strong> Wasserkraft</li>
+              <li><strong>24/7</strong> Betrieb seit 2020</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-tag">Spanien</div>
+            <h3>Solar-Park Andalusien</h3>
+            <p>Direkt an einen 250-MW-Solarpark angeschlossen. Wir monetarisieren Stromspitzen, die sonst abgeregelt würden.</p>
+            <ul class="card-facts">
+              <li><strong>4,1 EH/s</strong> Hashrate</li>
+              <li><strong>Flexible Last</strong> – drosselt bei Netzbedarf</li>
+              <li><strong>150 MW</strong> Anschlussleistung</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-tag">Deutschland</div>
+            <h3>Pilotanlage Brandenburg</h3>
+            <p>Forschungsstandort mit Immersionskühlung. Die Abwärme heizt ein angrenzendes Gewächshaus – Mining als Wärmequelle.</p>
+            <ul class="card-facts">
+              <li><strong>2,7 EH/s</strong> Hashrate</li>
+              <li><strong>Abwärmenutzung</strong> zu 70 %</li>
+              <li><strong>80 MW</strong> Windstrom-PPA</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Technologie ===== -->
+    <section class="section section-alt" id="technologie">
+      <div class="container">
+        <p class="section-kicker">Technologie</p>
+        <h2>Vertikal integriert – vom Chip bis zum Pool.</h2>
+        <p class="section-intro">
+          Wie die Großen der Branche kontrollieren wir jede Ebene des Mining-Stacks selbst.
+          Das macht uns schneller, effizienter und unabhängiger.
+        </p>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="feature-icon">&#9881;&#65039;</div>
+            <h3>ASIC-Flotte der neuesten Generation</h3>
+            <p>Über 38.000 Miner mit einer Effizienz von durchschnittlich 19,5 J/TH. Ältere Geräte werden konsequent ersetzt oder an Standorte mit Abwärmenutzung verlagert.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128167;</div>
+            <h3>Immersionskühlung</h3>
+            <p>Ein Teil der Flotte läuft in dielektrischer Flüssigkeit: leiser, langlebiger und mit bis zu 25&nbsp;% mehr Leistung pro Gerät durch sicheres Overclocking.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128268;</div>
+            <h3>Eigene Firmware</h3>
+            <p>Unsere Firmware optimiert jeden Chip einzeln (Per-Chip-Tuning) und passt die Leistungsaufnahme in Echtzeit an Strompreis und Netzsignale an.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#9935;&#65039;</div>
+            <h3>Pool-Infrastruktur</h3>
+            <p>Wir minen über eigene Stratum-V2-Infrastruktur: zensurresistent, mit verschlüsselter Verbindung und eigener Blocktemplate-Erstellung.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128200;</div>
+            <h3>Echtzeit-Monitoring</h3>
+            <p>Jeder Miner meldet sekündlich Temperatur, Hashrate und Effizienz. Anomalien werden automatisch erkannt, bevor sie Ertrag kosten.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128274;</div>
+            <h3>Sichere Verwahrung</h3>
+            <p>Geschürfte Bitcoin gehen direkt in Multi-Signature-Cold-Storage. Kein Custodian-Risiko, keine zentrale Schwachstelle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Nachhaltigkeit ===== -->
+    <section class="section" id="nachhaltigkeit">
+      <div class="container split">
+        <div class="split-text">
+          <p class="section-kicker">Nachhaltigkeit</p>
+          <h2>Mining als Werkzeug der Energiewende.</h2>
+          <p>
+            Bitcoin-Mining ist der flexibelste Stromverbraucher der Welt: Wir können
+            innerhalb von Sekunden hunderte Megawatt zu- oder abschalten. Genau das
+            brauchen Netze mit hohem Wind- und Solaranteil.
+          </p>
+          <ul class="check-list">
+            <li><strong>Abregelung vermeiden:</strong> Wir kaufen Strom, der sonst weggeworfen würde – und machen erneuerbare Projekte damit rentabler.</li>
+            <li><strong>Netzdienlich fahren:</strong> Bei Lastspitzen drosseln unsere Anlagen automatisch und geben Kapazität ans Netz zurück.</li>
+            <li><strong>Abwärme nutzen:</strong> In Brandenburg heizt unsere Pilotanlage ein Gewächshaus – 70&nbsp;% der Abwärme werden wiederverwendet.</li>
+            <li><strong>Transparent berichten:</strong> Unser Energiemix wird quartalsweise veröffentlicht und extern geprüft.</li>
+          </ul>
+        </div>
+        <div class="split-visual">
+          <div class="energy-panel">
+            <h3>Unser Energiemix 2026</h3>
+            <div class="energy-row"><span>Wasserkraft</span><div class="bar"><div class="bar-fill" style="--w: 44%"></div></div><span>44 %</span></div>
+            <div class="energy-row"><span>Solar</span><div class="bar"><div class="bar-fill" style="--w: 24%"></div></div><span>24 %</span></div>
+            <div class="energy-row"><span>Wind</span><div class="bar"><div class="bar-fill" style="--w: 18%"></div></div><span>18 %</span></div>
+            <div class="energy-row"><span>Netzstrom (Rest)</span><div class="bar"><div class="bar-fill bar-fill-muted" style="--w: 14%"></div></div><span>14 %</span></div>
+            <p class="energy-note">86 % erneuerbar – Ziel 2027: 95 %</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mining-Rechner ===== -->
+    <section class="section section-alt" id="rechner">
+      <div class="container">
+        <p class="section-kicker">Rechner</p>
+        <h2>Was bringt dein Miner? Rechne es aus.</h2>
+        <p class="section-intro">
+          Schätze Ertrag und Stromkosten auf Basis aktueller Netzwerkdaten.
+          Alle Angaben ohne Gewähr – Difficulty und Kurs ändern sich ständig.
+        </p>
+        <div class="calc">
+          <form class="calc-form" id="calc-form">
+            <div class="calc-field">
+              <label for="calc-hashrate">Hashrate (TH/s)</label>
+              <input type="number" id="calc-hashrate" value="200" min="0" step="1">
+              <small>z. B. Antminer S21 Pro ≈ 234 TH/s</small>
+            </div>
+            <div class="calc-field">
+              <label for="calc-power">Leistungsaufnahme (Watt)</label>
+              <input type="number" id="calc-power" value="3500" min="0" step="10">
+              <small>z. B. Antminer S21 Pro ≈ 3.531 W</small>
+            </div>
+            <div class="calc-field">
+              <label for="calc-price">Strompreis (ct/kWh)</label>
+              <input type="number" id="calc-price" value="8" min="0" step="0.1">
+              <small>Industrietarife liegen oft bei 5–15 ct</small>
+            </div>
+            <div class="calc-field">
+              <label for="calc-btc">Bitcoin-Kurs (€)</label>
+              <input type="number" id="calc-btc" value="95000" min="0" step="100">
+              <small>Anpassbar – Kurs schwankt stark</small>
+            </div>
+          </form>
+          <div class="calc-results" id="calc-results" aria-live="polite">
+            <div class="calc-result">
+              <span class="calc-result-label">BTC-Ertrag / Tag</span>
+              <span class="calc-result-value" id="res-btc">–</span>
+            </div>
+            <div class="calc-result">
+              <span class="calc-result-label">Erlös / Tag</span>
+              <span class="calc-result-value" id="res-revenue">–</span>
+            </div>
+            <div class="calc-result">
+              <span class="calc-result-label">Stromkosten / Tag</span>
+              <span class="calc-result-value" id="res-cost">–</span>
+            </div>
+            <div class="calc-result calc-result-highlight">
+              <span class="calc-result-label">Gewinn / Tag</span>
+              <span class="calc-result-value" id="res-profit">–</span>
+            </div>
+          </div>
+          <p class="calc-note" id="calc-note"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Wissen / Academy ===== -->
+    <section class="section" id="wissen">
+      <div class="container">
+        <p class="section-kicker">Wissen</p>
+        <h2>Mining verstehen – in vier Schritten.</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">01</span>
+            <h3>Transaktionen sammeln</h3>
+            <p>Miner bündeln unbestätigte Bitcoin-Transaktionen aus dem Mempool zu einem Block-Kandidaten.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <h3>Proof of Work</h3>
+            <p>Spezialisierte Chips (ASICs) probieren Billiarden Hash-Kombinationen pro Sekunde, um einen gültigen Blockhash zu finden.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <h3>Block gefunden</h3>
+            <p>Wer zuerst einen gültigen Hash findet, darf den Block anhängen und erhält die Block-Belohnung plus Transaktionsgebühren – aktuell 3,125 BTC pro Block.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">04</span>
+            <h3>Netzwerk sichern</h3>
+            <p>Je mehr Rechenleistung weltweit mint, desto teurer wird ein Angriff auf Bitcoin. Mining ist die Sicherheitsschicht des Netzwerks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section section-alt" id="faq">
+      <div class="container container-narrow">
+        <p class="section-kicker">FAQ</p>
+        <h2>Häufige Fragen</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Lohnt sich Bitcoin-Mining zu Hause noch?</summary>
+            <p>In den meisten Fällen nicht mit deutschem Haushaltsstrom (~30 ct/kWh). Profitables Mining braucht Strompreise unter etwa 10–12 ct/kWh, effiziente Hardware und gute Kühlung. Interessant wird es zu Hause vor allem in Kombination mit eigener PV-Anlage oder wenn die Abwärme Heizkosten ersetzt.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Was ist das Halving und warum ist es wichtig?</summary>
+            <p>Etwa alle vier Jahre halbiert sich die Block-Belohnung. Seit dem Halving 2024 erhalten Miner 3,125 BTC pro Block. Das verknappt das Angebot planmäßig und zwingt Miner, immer effizienter zu werden – ein zentraler Treiber unserer Technologie-Investitionen.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Wie viel Strom verbraucht Bitcoin – und ist das ein Problem?</summary>
+            <p>Das Bitcoin-Netzwerk verbraucht global grob 150–200 TWh pro Jahr. Entscheidend ist aber nicht nur die Menge, sondern die Quelle: Ein wachsender Anteil stammt aus erneuerbarer oder anderweitig ungenutzter Energie. Mining kann Überschussstrom monetarisieren und so den Ausbau von Wind und Solar wirtschaftlicher machen.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Was passiert, wenn der Bitcoin-Kurs fällt?</summary>
+            <p>Fällt der Kurs, verlassen ineffiziente Miner das Netzwerk, die Difficulty sinkt und die verbleibenden Miner erhalten wieder mehr BTC pro Hashrate. Dieser Mechanismus stabilisiert das System. Für uns gilt: Wer die niedrigsten Stromkosten hat, bleibt am längsten profitabel.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Wie werden Mining-Erträge in Deutschland besteuert?</summary>
+            <p>Gewerbliches Mining unterliegt der Einkommen- bzw. Körperschaftsteuer; geschürfte Coins sind bei Zufluss zu bewerten. Privates Mining kann als sonstige Einkünfte gelten. Die Details sind komplex und einzelfallabhängig – sprich unbedingt mit einem auf Krypto spezialisierten Steuerberater. Dies ist keine Steuerberatung.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Kann ich bei HashWerk investieren oder Hosting buchen?</summary>
+            <p>Wir bieten Hosting für institutionelle Partner ab 1 MW Anschlussleistung sowie langfristige Hashrate-Partnerschaften. Melde dich über das Kontaktformular – wir antworten in der Regel innerhalb von zwei Werktagen.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA / Kontakt ===== -->
+    <section class="section cta" id="kontakt">
+      <div class="container container-narrow center">
+        <h2>Bereit, mit uns zu minen?</h2>
+        <p class="section-intro">
+          Ob Hosting, Partnerschaft oder Presseanfrage – schreib uns.
+        </p>
+        <a href="mailto:kontakt@hashwerk.example" class="btn btn-primary btn-large">kontakt@hashwerk.example</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#top" class="brand">
+          <span class="brand-mark">&#8383;</span>
+          <span class="brand-name">Hash<em>Werk</em></span>
+        </a>
+        <p class="footer-tagline">Industrielles Bitcoin-Mining aus Europa.</p>
+      </div>
+      <div>
+        <h4>Unternehmen</h4>
+        <ul>
+          <li><a href="#operations">Standorte</a></li>
+          <li><a href="#technologie">Technologie</a></li>
+          <li><a href="#nachhaltigkeit">Nachhaltigkeit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ressourcen</h4>
+        <ul>
+          <li><a href="#rechner">Mining-Rechner</a></li>
+          <li><a href="#wissen">Wissen</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">Risikohinweise</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 HashWerk (fiktives Demo-Projekt). Keine Anlage- oder Steuerberatung. Bitcoin-Mining ist mit erheblichen finanziellen Risiken verbunden.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
