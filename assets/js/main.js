@@ -47,11 +47,12 @@
   const toggle = $(".nav-toggle");
   const menu = $(".mobile-menu");
   if (toggle && menu) {
-    const close = () => { toggle.classList.remove("open"); menu.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); };
+    const close = () => { toggle.classList.remove("open"); menu.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); toggle.setAttribute("aria-label", "Menü öffnen"); };
     toggle.addEventListener("click", () => {
       const open = toggle.classList.toggle("open");
       menu.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
     });
     $$("a", menu).forEach((a) => a.addEventListener("click", close));
   }

@@ -1,0 +1,5 @@
+# enpara.example vor dem Live-Gang durch die echte Domain ersetzen
+User-agent: *
+Allow: /
+
+Sitemap: https://enpara.example/sitemap.xml

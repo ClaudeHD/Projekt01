@@ -124,7 +124,7 @@
     });
     area += "L" + W + " " + H + " Z";
     const dots = data.values.map((v, i) =>
-      `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4.5" fill="#0b110e" stroke="#18d27e" stroke-width="2.5"/>`).join("");
+      `<circle class="chart-dot" style="animation-delay:${(0.35 + i * 0.18).toFixed(2)}s" cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4.5" fill="#0b110e" stroke="#18d27e" stroke-width="2.5"/>`).join("");
 
     chartEl.innerHTML =
       `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Kapitalverlauf">` +
@@ -132,8 +132,20 @@
       `<stop offset="0" stop-color="#18d27e" stop-opacity="0.35"/><stop offset="1" stop-color="#18d27e" stop-opacity="0"/>` +
       `</linearGradient></defs>` +
       `<path d="${area}" fill="url(#areaGrad)"/>` +
-      `<path d="${line}" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>` +
+      `<path class="chart-line" d="${line}" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>` +
       dots + `</svg>`;
+
+    // draw-on-load animation for the line (decorative only)
+    const lineEl = chartEl.querySelector(".chart-line");
+    if (lineEl && lineEl.getTotalLength && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const len = lineEl.getTotalLength();
+      lineEl.style.strokeDasharray = len;
+      lineEl.style.strokeDashoffset = len;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        lineEl.style.transition = "stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1)";
+        lineEl.style.strokeDashoffset = "0";
+      }));
+    }
 
     const xEl = $("#d-chartx");
     if (xEl) xEl.innerHTML = data.labels.map((l) => `<span>${l}</span>`).join("");
@@ -143,9 +155,9 @@
   const feedEl = $("#d-feed");
   if (feedEl) {
     const sym = { BTC: "₿", ETH: "Ξ", USDT: "₮", USDC: "$", SEPA: "🏦" };
-    feedEl.innerHTML = DASH.feed.map((f) => {
+    feedEl.innerHTML = DASH.feed.map((f, i) => {
       const isSepa = f.method === "SEPA";
-      return `<div class="feed-row">` +
+      return `<div class="feed-row" style="--i:${i}">` +
         `<div class="feed-badge${isSepa ? " sepa" : ""}">${sym[f.method] || "•"}</div>` +
         `<div class="feed-main"><b>Neue Beteiligung</b><span>${f.method} · ${f.when}</span></div>` +
         `<div class="feed-amt">+ ${euro0.format(f.amount)}</div></div>`;

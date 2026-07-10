@@ -248,7 +248,7 @@ h2.title {
 /* Hero visual card */
 .hero-visual { position: relative; }
 .hero-card {
-  position: relative; border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
+  display: block; position: relative; border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
   overflow: hidden; background: var(--surface); box-shadow: var(--shadow); aspect-ratio: 4/5;
 }
 .hero-card img { width: 100%; height: 100%; object-fit: cover; }
@@ -577,11 +577,12 @@ input[type="range"]::-moz-range-thumb {
 
 /* ---------- Mobile menu ---------- */
 .mobile-menu {
-  display: none; position: fixed; inset: 72px 0 auto; z-index: 49;
+  visibility: hidden; position: fixed; inset: 72px 0 auto; z-index: 49;
   background: rgba(7,11,9,.96); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border);
-  padding: 20px var(--gutter) 30px; transform: translateY(-12px); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+  padding: 20px var(--gutter) 30px; transform: translateY(-12px); opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s, visibility .25s;
 }
-.mobile-menu.open { opacity: 1; transform: none; pointer-events: auto; }
+.mobile-menu.open { visibility: visible; opacity: 1; transform: none; pointer-events: auto; }
 .mobile-menu a { display: block; padding: 14px 0; font-family: var(--ff-display); font-size: 1.1rem; border-bottom: 1px solid var(--border); }
 .mobile-menu .btn { margin-top: 20px; }
 
@@ -756,4 +757,213 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 980px) {
   .dash-grid { grid-template-columns: 1fr; }
   .dash-grid > * { grid-column: auto !important; }
+}
+
+/* =========================================================
+   Visual wow layer
+   Energy theme: green/teal = renewable power, orange = BTC.
+   Everything here is decorative — reduced-motion handling
+   at the bottom of this block and via the global rule above.
+   ========================================================= */
+
+/* ---------- Aurora background (slow drifting glow blobs) ---------- */
+.aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.aurora i {
+  position: absolute; border-radius: 50%; opacity: .5;
+  filter: blur(70px); will-change: transform;
+}
+.aurora i:nth-child(1) {
+  width: 55vw; height: 55vw; top: -24vw; right: -14vw;
+  background: radial-gradient(circle, rgba(24, 210, 126, .20), transparent 65%);
+  animation: drift1 46s ease-in-out infinite alternate;
+}
+.aurora i:nth-child(2) {
+  width: 46vw; height: 46vw; top: 28%; left: -18vw;
+  background: radial-gradient(circle, rgba(0, 224, 184, .15), transparent 65%);
+  animation: drift2 58s ease-in-out infinite alternate;
+}
+.aurora i:nth-child(3) {
+  width: 40vw; height: 40vw; bottom: -18vw; right: 6vw;
+  background: radial-gradient(circle, rgba(247, 147, 26, .11), transparent 65%);
+  animation: drift3 52s ease-in-out infinite alternate;
+}
+@keyframes drift1 { to { transform: translate3d(-8vw, 9vh, 0) scale(1.15); } }
+@keyframes drift2 { to { transform: translate3d(10vw, -8vh, 0) scale(1.1); } }
+@keyframes drift3 { to { transform: translate3d(-6vw, -10vh, 0) scale(1.2); } }
+
+/* Film-grain overlay for depth */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; pointer-events: none; }
+.scroll-progress i {
+  display: block; height: 100%;
+  transform: scaleX(var(--sp, 0)); transform-origin: 0 50%;
+  background: linear-gradient(90deg, #18d27e, #00e0b8 55%, #f7931a);
+  box-shadow: 0 0 10px rgba(0, 224, 184, .5);
+}
+
+/* ---------- Hero: particle canvas + shimmer + tilt + glare ---------- */
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero .container { position: relative; z-index: 1; }
+
+.grad-text {
+  background-size: 200% auto;
+  animation: gradShift 5s ease-in-out infinite alternate;
+}
+@keyframes gradShift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+.hero-card { transition: transform .4s ease; will-change: transform; }
+.hero-card::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, .15) 48%, rgba(255, 255, 255, .03) 52%, transparent 58%);
+  transform: translateX(-130%); transition: transform 1s ease;
+}
+.hero-visual:hover .hero-card::after { transform: translateX(130%); }
+
+.float-chip.c1 { animation: floaty 6s ease-in-out infinite, chipGlow 3.2s ease-in-out infinite; }
+.float-chip.c2 { animation: floaty 7s ease-in-out infinite reverse, chipGlow 4s ease-in-out .6s infinite; }
+@keyframes chipGlow {
+  0%, 100% { box-shadow: var(--shadow), 0 0 0 0 rgba(24, 210, 126, 0); }
+  50% { box-shadow: var(--shadow), 0 0 22px -2px rgba(24, 210, 126, .45); }
+}
+
+/* Button shine sweep */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .35) 50%, transparent 60%);
+  transform: translateX(-130%); transition: transform .7s ease;
+}
+.btn-primary:hover::after { transform: translateX(130%); }
+
+/* ---------- Trust strip → seamless marquee ---------- */
+.strip { overflow: hidden; }
+.strip-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+.strip:hover .strip-track { animation-play-state: paused; }
+.strip-track .strip-inner { flex: none; flex-wrap: nowrap; padding-inline: 7px; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Energy flow diagram (Wasser → Strom → ASIC → ₿) ---------- */
+.flow-section { padding-block: clamp(44px, 6vw, 76px); }
+.flow-head { text-align: center; margin-bottom: clamp(26px, 4vw, 40px); }
+.flow { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 1.6vw, 22px); }
+.flow-node { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 118px; }
+.flow-node .fn-ic {
+  width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 12px;
+  background: linear-gradient(135deg, rgba(24, 210, 126, .16), rgba(0, 224, 184, .05));
+  border: 1px solid rgba(24, 210, 126, .35); color: var(--green-2); position: relative;
+}
+.flow-node .fn-ic svg { width: 28px; height: 28px; }
+.flow-node .fn-ic::after {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%;
+  border: 1px solid rgba(24, 210, 126, .3); animation: ringPulse 2.6s ease-out infinite;
+}
+.flow-node.warm .fn-ic {
+  background: linear-gradient(135deg, rgba(247, 147, 26, .18), rgba(247, 147, 26, .04));
+  border-color: rgba(247, 147, 26, .45); color: var(--orange-2);
+  box-shadow: 0 0 26px -6px rgba(247, 147, 26, .5);
+}
+.flow-node.warm .fn-ic::after { border-color: rgba(247, 147, 26, .35); }
+.flow-node b { font-family: var(--ff-display); color: #fff; font-size: .98rem; }
+.flow-node span { color: var(--muted); font-size: .8rem; margin-top: 2px; }
+@keyframes ringPulse { 0% { transform: scale(.92); opacity: .9; } 70%, 100% { transform: scale(1.4); opacity: 0; } }
+
+.flow-link { flex: 1; max-width: 150px; min-width: 44px; height: 22px; margin-top: -46px; }
+.flow-link .base { stroke: var(--border-strong); }
+.flow-link .pulse {
+  stroke: var(--green-2); stroke-dasharray: 16 130;
+  animation: flowdash 1.7s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(0, 224, 184, .8));
+}
+.flow-link.warm .pulse { stroke: var(--orange); filter: drop-shadow(0 0 4px rgba(247, 147, 26, .8)); }
+@keyframes flowdash { to { stroke-dashoffset: -146; } }
+
+/* ---------- Card spotlight (cursor-following glow) ---------- */
+.card, .stat, .plan, .step, .dash-card { position: relative; }
+.card::before, .stat::before, .plan::before, .step::before, .dash-card::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(24, 210, 126, .09), transparent 65%);
+  opacity: 0; transition: opacity .35s ease;
+}
+.card:hover::before, .stat:hover::before, .plan:hover::before, .step:hover::before, .dash-card:hover::before { opacity: 1; }
+
+/* ---------- Featured plan: rotating gradient border ---------- */
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.plan.featured::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: conic-gradient(from var(--angle),
+    transparent 0%, rgba(24, 210, 126, .9) 10%, rgba(0, 224, 184, .9) 18%, transparent 30%,
+    transparent 55%, rgba(247, 147, 26, .55) 65%, transparent 75%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: spinBorder 6s linear infinite;
+}
+@keyframes spinBorder { to { --angle: 360deg; } }
+
+/* Stat top bar: slow gradient shimmer */
+.stat::after {
+  background: linear-gradient(90deg, #18d27e, #00e0b8, #f7931a, #18d27e);
+  background-size: 300% 100%;
+  animation: statbar 7s linear infinite;
+}
+@keyframes statbar { to { background-position: -300% 0; } }
+
+/* ---------- Roadmap timeline: glowing fill on scroll ---------- */
+.timeline::after {
+  content: ""; position: absolute; left: 19px; top: 8px; width: 2px; height: 0;
+  background: linear-gradient(180deg, var(--green), var(--teal));
+  box-shadow: 0 0 14px rgba(24, 210, 126, .7);
+  transition: height 1.8s cubic-bezier(.2, .7, .2, 1);
+}
+.timeline.in::after { height: calc(100% - 16px); }
+
+/* ---------- Invest section: BTC accent ---------- */
+#invest { overflow: hidden; }
+#invest::before {
+  content: ""; position: absolute; right: -6%; top: 3%; pointer-events: none;
+  width: clamp(280px, 34vw, 520px); aspect-ratio: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='50' text-anchor='middle' dominant-baseline='central' font-family='Arial, sans-serif' font-weight='bold' font-size='96' fill='%23f7931a'%3E%E2%82%BF%3C/text%3E%3C/svg%3E") no-repeat center / contain;
+  opacity: .05; transform: rotate(12deg);
+}
+.invest-card { box-shadow: 0 0 0 1px rgba(247, 147, 26, .1), 0 30px 70px -30px rgba(247, 147, 26, .22); }
+
+/* ---------- Dashboard polish ---------- */
+.dash-card { overflow: hidden; }
+.ring .prog { filter: drop-shadow(0 0 7px rgba(24, 210, 126, .55)); }
+.chart-dot { animation: dotIn .5s ease both; }
+@keyframes dotIn { from { opacity: 0; } to { opacity: 1; } }
+.feed-row { animation: fadeUp .5s ease both; animation-delay: calc(var(--i, 0) * 70ms); }
+
+/* ---------- Accessibility helpers ---------- */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: 100;
+  padding: 10px 18px; border-radius: 10px;
+  background: var(--grad); color: #042016;
+  font-family: var(--ff-display); font-weight: 700;
+  transform: translateY(-220%); transition: transform .2s ease;
+}
+.skip-link:focus { transform: none; }
+
+.form-field { display: grid; gap: 8px; }
+.form-field label { font-size: .85rem; color: var(--text-dim); font-weight: 500; }
+
+/* ---------- Reduced motion / small screens ---------- */
+@media (max-width: 760px) {
+  .aurora i { filter: blur(48px); }
+  .aurora i:nth-child(3) { display: none; }
+  .flow { flex-direction: column; gap: 4px; }
+  .flow-link { transform: rotate(90deg); flex: none; width: 56px; max-width: none; margin: 16px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-canvas { display: none; }
+  .strip-track { width: 100%; }
+  .strip-track .strip-inner { flex-wrap: wrap; justify-content: center; width: 100%; }
+  .strip-inner[aria-hidden="true"] { display: none; }
+  .flow-node .fn-ic::after { display: none; }
+  .feed-row, .chart-dot { animation: none; opacity: 1; }
 }
