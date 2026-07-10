@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://claudehd.github.io/Projekt01/sitemap.xml

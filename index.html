@@ -3,9 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HashWerk – Industrielles Bitcoin-Mining aus Europa. Effizient, transparent und mit erneuerbarer Energie betrieben.">
   <title>HashWerk – Industrielles Bitcoin-Mining</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta name="description" content="HashWerk – Industrielles Bitcoin-Mining aus Europa. Effizient, transparent und mit erneuerbarer Energie betrieben. Mit Live-Kursen und Mining-Rechner.">
+
+  <!-- SEO / Social -->
+  <link rel="canonical" href="https://claudehd.github.io/Projekt01/">
+  <link rel="alternate" hreflang="de" href="https://claudehd.github.io/Projekt01/">
+  <link rel="alternate" hreflang="en" href="https://claudehd.github.io/Projekt01/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HashWerk">
+  <meta property="og:title" content="HashWerk – Industrielles Bitcoin-Mining">
+  <meta property="og:description" content="Wir verwandeln Energie in das härteste Geld der Welt. Live-Kurse, Mining-Rechner und Einblicke in unsere Standorte.">
+  <meta property="og:url" content="https://claudehd.github.io/Projekt01/">
+  <meta property="og:image" content="https://claudehd.github.io/Projekt01/assets/og-image.png">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HashWerk – Industrielles Bitcoin-Mining">
+  <meta name="twitter:description" content="Wir verwandeln Energie in das härteste Geld der Welt.">
+  <meta name="twitter:image" content="https://claudehd.github.io/Projekt01/assets/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HashWerk",
+    "url": "https://claudehd.github.io/Projekt01/",
+    "logo": "https://claudehd.github.io/Projekt01/assets/og-image.png",
+    "description": "Fiktives industrielles Bitcoin-Mining-Unternehmen aus Europa (Demo-Projekt)."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Lohnt sich Bitcoin-Mining zu Hause noch?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In den meisten Fällen nicht mit deutschem Haushaltsstrom (~30 ct/kWh). Profitables Mining braucht Strompreise unter etwa 10–12 ct/kWh, effiziente Hardware und gute Kühlung." }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist das Halving und warum ist es wichtig?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Etwa alle vier Jahre halbiert sich die Block-Belohnung. Seit dem Halving 2024 erhalten Miner 3,125 BTC pro Block. Das verknappt das Angebot planmäßig." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie viel Strom verbraucht Bitcoin?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Das Bitcoin-Netzwerk verbraucht global grob 150–200 TWh pro Jahr. Ein wachsender Anteil stammt aus erneuerbarer oder anderweitig ungenutzter Energie." }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
 </head>
@@ -18,6 +68,11 @@
         <span class="brand-mark">&#8383;</span>
         <span class="brand-name">Hash<em>Werk</em></span>
       </a>
+      <div class="ticker" id="ticker" hidden>
+        <span class="ticker-dot" aria-hidden="true"></span>
+        <span class="ticker-price" id="ticker-price">–</span>
+        <span class="ticker-change" id="ticker-change">–</span>
+      </div>
       <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -27,7 +82,9 @@
         <li><a href="#nachhaltigkeit">Nachhaltigkeit</a></li>
         <li><a href="#rechner">Rechner</a></li>
         <li><a href="#wissen">Wissen</a></li>
+        <li><a href="#news">News</a></li>
         <li><a href="#faq">FAQ</a></li>
+        <li><a href="en/" class="lang-switch" lang="en" hreflang="en">EN</a></li>
         <li><a href="#kontakt" class="btn btn-small">Kontakt</a></li>
       </ul>
     </nav>
@@ -37,6 +94,7 @@
 
     <!-- ===== Hero ===== -->
     <section class="hero">
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-inner">
         <p class="hero-kicker">Industrielles Bitcoin-Mining seit 2019</p>
@@ -208,15 +266,29 @@
           Alle Angaben ohne Gewähr – Difficulty und Kurs ändern sich ständig.
         </p>
         <div class="calc">
+          <div class="calc-toolbar">
+            <div class="calc-field calc-preset">
+              <label for="calc-miner">Miner-Modell</label>
+              <select id="calc-miner">
+                <option value="custom">Eigene Werte</option>
+                <option value="234,3531" selected>Antminer S21 Pro (234 TH/s · 3.531 W)</option>
+                <option value="200,3500">Antminer S21 (200 TH/s · 3.500 W)</option>
+                <option value="120,2760">Antminer S19k Pro (120 TH/s · 2.760 W)</option>
+                <option value="186,3441">Whatsminer M60S (186 TH/s · 3.441 W)</option>
+                <option value="114,3306">Whatsminer M50 (114 TH/s · 3.306 W)</option>
+              </select>
+            </div>
+            <span class="badge" id="data-badge" data-state="fallback">Standardwerte</span>
+          </div>
           <form class="calc-form" id="calc-form">
             <div class="calc-field">
               <label for="calc-hashrate">Hashrate (TH/s)</label>
-              <input type="number" id="calc-hashrate" value="200" min="0" step="1">
+              <input type="number" id="calc-hashrate" value="234" min="0" step="1">
               <small>z. B. Antminer S21 Pro ≈ 234 TH/s</small>
             </div>
             <div class="calc-field">
               <label for="calc-power">Leistungsaufnahme (Watt)</label>
-              <input type="number" id="calc-power" value="3500" min="0" step="10">
+              <input type="number" id="calc-power" value="3531" min="0" step="10">
               <small>z. B. Antminer S21 Pro ≈ 3.531 W</small>
             </div>
             <div class="calc-field">
@@ -227,7 +299,7 @@
             <div class="calc-field">
               <label for="calc-btc">Bitcoin-Kurs (€)</label>
               <input type="number" id="calc-btc" value="95000" min="0" step="100">
-              <small>Anpassbar – Kurs schwankt stark</small>
+              <small id="calc-btc-hint">Anpassbar – Kurs schwankt stark</small>
             </div>
           </form>
           <div class="calc-results" id="calc-results" aria-live="polite">
@@ -249,6 +321,22 @@
             </div>
           </div>
           <p class="calc-note" id="calc-note"></p>
+
+          <div class="table-wrap">
+            <table class="miner-table" id="miner-table">
+              <caption>Aktuelle Geräte im Vergleich (Gewinn/Tag bei deinem Strompreis und Kurs)</caption>
+              <thead>
+                <tr>
+                  <th>Modell</th>
+                  <th>Hashrate</th>
+                  <th>Leistung</th>
+                  <th>Effizienz</th>
+                  <th>Gewinn / Tag</th>
+                </tr>
+              </thead>
+              <tbody><!-- wird per JS befüllt --></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -283,8 +371,36 @@
       </div>
     </section>
 
+    <!-- ===== News ===== -->
+    <section class="section section-alt" id="news">
+      <div class="container">
+        <p class="section-kicker">News</p>
+        <h2>Neues aus dem HashWerk.</h2>
+        <div class="card-grid">
+          <article class="card news-card">
+            <div class="news-meta"><span class="card-tag">Ausbau</span><time datetime="2026-06-18">18. Juni 2026</time></div>
+            <h3>Andalusien wächst auf 200 MW</h3>
+            <p>Die zweite Ausbaustufe unseres Solar-Standorts ist genehmigt: 50 MW zusätzliche Anschlussleistung und 12.000 neue Miner ab Q4 2026.</p>
+            <span class="news-link">Weiterlesen &rarr;</span>
+          </article>
+          <article class="card news-card">
+            <div class="news-meta"><span class="card-tag">Produktion</span><time datetime="2026-07-02">2. Juli 2026</time></div>
+            <h3>Q2-Zahlen: 168 BTC geschürft</h3>
+            <p>Trotz steigender Difficulty lag unsere Effizienz bei 19,1 J/TH – der beste Quartalswert der Unternehmensgeschichte. Uptime: 99,4&nbsp;%.</p>
+            <span class="news-link">Weiterlesen &rarr;</span>
+          </article>
+          <article class="card news-card">
+            <div class="news-meta"><span class="card-tag">Forschung</span><time datetime="2026-05-30">30. Mai 2026</time></div>
+            <h3>Abwärme heizt jetzt 2. Gewächshaus</h3>
+            <p>In Brandenburg versorgt unsere Pilotanlage ab sofort ein zweites Gewächshaus – die Abwärmenutzung steigt damit auf 70 % der Gesamtleistung.</p>
+            <span class="news-link">Weiterlesen &rarr;</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== FAQ ===== -->
-    <section class="section section-alt" id="faq">
+    <section class="section" id="faq">
       <div class="container container-narrow">
         <p class="section-kicker">FAQ</p>
         <h2>Häufige Fragen</h2>
@@ -317,14 +433,42 @@
       </div>
     </section>
 
-    <!-- ===== CTA / Kontakt ===== -->
+    <!-- ===== Kontakt ===== -->
     <section class="section cta" id="kontakt">
-      <div class="container container-narrow center">
-        <h2>Bereit, mit uns zu minen?</h2>
-        <p class="section-intro">
-          Ob Hosting, Partnerschaft oder Presseanfrage – schreib uns.
-        </p>
-        <a href="mailto:kontakt@hashwerk.example" class="btn btn-primary btn-large">kontakt@hashwerk.example</a>
+      <div class="container container-narrow">
+        <div class="center">
+          <h2>Bereit, mit uns zu minen?</h2>
+          <p class="section-intro">Ob Hosting, Partnerschaft oder Presseanfrage – schreib uns.</p>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="calc-field">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" name="name" required autocomplete="name">
+            </div>
+            <div class="calc-field">
+              <label for="contact-email">E-Mail</label>
+              <input type="email" id="contact-email" name="email" required autocomplete="email">
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="contact-topic">Anliegen</label>
+            <select id="contact-topic" name="topic">
+              <option value="hosting">Hosting-Anfrage (ab 1 MW)</option>
+              <option value="partnerschaft">Hashrate-Partnerschaft</option>
+              <option value="presse">Presse</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label for="contact-message">Nachricht</label>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary btn-large">Nachricht senden</button>
+            <p class="form-status" id="form-status" role="status"></p>
+          </div>
+        </form>
       </div>
     </section>
 
@@ -346,6 +490,7 @@
           <li><a href="#operations">Standorte</a></li>
           <li><a href="#technologie">Technologie</a></li>
           <li><a href="#nachhaltigkeit">Nachhaltigkeit</a></li>
+          <li><a href="#news">News</a></li>
         </ul>
       </div>
       <div>
@@ -354,19 +499,19 @@
           <li><a href="#rechner">Mining-Rechner</a></li>
           <li><a href="#wissen">Wissen</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="en/" lang="en" hreflang="en">English version</a></li>
         </ul>
       </div>
       <div>
         <h4>Rechtliches</h4>
         <ul>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
-          <li><a href="#">Risikohinweise</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
         </ul>
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>© 2026 HashWerk (fiktives Demo-Projekt). Keine Anlage- oder Steuerberatung. Bitcoin-Mining ist mit erheblichen finanziellen Risiken verbunden.</p>
+      <p>© 2026 HashWerk (fiktives Demo-Projekt). Keine Anlage- oder Steuerberatung. Bitcoin-Mining ist mit erheblichen finanziellen Risiken verbunden. Kursdaten: CoinGecko · Netzwerkdaten: mempool.space</p>
     </div>
   </footer>
 

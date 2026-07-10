@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HashWerk – Industrial Bitcoin Mining</title>
+  <meta name="description" content="HashWerk – Industrial Bitcoin mining from Europe. Efficient, transparent, powered by renewable energy. With live prices and a mining calculator.">
+
+  <!-- SEO / Social -->
+  <link rel="canonical" href="https://claudehd.github.io/Projekt01/en/">
+  <link rel="alternate" hreflang="de" href="https://claudehd.github.io/Projekt01/">
+  <link rel="alternate" hreflang="en" href="https://claudehd.github.io/Projekt01/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HashWerk">
+  <meta property="og:title" content="HashWerk – Industrial Bitcoin Mining">
+  <meta property="og:description" content="We turn energy into the hardest money in the world. Live prices, mining calculator, and a look inside our facilities.">
+  <meta property="og:url" content="https://claudehd.github.io/Projekt01/en/">
+  <meta property="og:image" content="https://claudehd.github.io/Projekt01/assets/og-image.png">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HashWerk – Industrial Bitcoin Mining">
+  <meta name="twitter:description" content="We turn energy into the hardest money in the world.">
+  <meta name="twitter:image" content="https://claudehd.github.io/Projekt01/assets/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HashWerk",
+    "url": "https://claudehd.github.io/Projekt01/",
+    "logo": "https://claudehd.github.io/Projekt01/assets/og-image.png",
+    "description": "Fictional industrial Bitcoin mining company from Europe (demo project)."
+  }
+  </script>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a href="#top" class="brand">
+        <span class="brand-mark">&#8383;</span>
+        <span class="brand-name">Hash<em>Werk</em></span>
+      </a>
+      <div class="ticker" id="ticker" hidden>
+        <span class="ticker-dot" aria-hidden="true"></span>
+        <span class="ticker-price" id="ticker-price">–</span>
+        <span class="ticker-change" id="ticker-change">–</span>
+      </div>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#operations">Facilities</a></li>
+        <li><a href="#technologie">Technology</a></li>
+        <li><a href="#nachhaltigkeit">Sustainability</a></li>
+        <li><a href="#rechner">Calculator</a></li>
+        <li><a href="#wissen">Learn</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="../" class="lang-switch" lang="de" hreflang="de">DE</a></li>
+        <li><a href="#kontakt" class="btn btn-small">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="hero-kicker">Industrial Bitcoin mining since 2019</p>
+        <h1>We turn <span class="accent">energy</span> into the hardest money in the world.</h1>
+        <p class="hero-sub">
+          HashWerk operates highly efficient Bitcoin mining data centers –
+          powered by surplus renewable energy, state-of-the-art ASIC technology,
+          and full transparency toward our partners.
+        </p>
+        <div class="hero-actions">
+          <a href="#rechner" class="btn btn-primary">Calculate mining revenue</a>
+          <a href="#operations" class="btn btn-ghost">Explore our facilities</a>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="stats-bar" id="stats">
+          <div class="stat">
+            <span class="stat-value" data-count="12.4" data-decimals="1">0</span>
+            <span class="stat-unit">EH/s</span>
+            <span class="stat-label">Installed hashrate</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="410" data-decimals="0">0</span>
+            <span class="stat-unit">MW</span>
+            <span class="stat-label">Power capacity</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="86" data-decimals="0">0</span>
+            <span class="stat-unit">%</span>
+            <span class="stat-label">Renewable energy</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="99.2" data-decimals="1">0</span>
+            <span class="stat-unit">%</span>
+            <span class="stat-label">Uptime</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Facilities ===== -->
+    <section class="section" id="operations">
+      <div class="container">
+        <p class="section-kicker">Operations</p>
+        <h2>Three sites. One principle: use energy where it is abundant.</h2>
+        <p class="section-intro">
+          Our data centers are deliberately located where energy is produced in surplus
+          but consumers are scarce – stabilizing grids instead of straining them.
+        </p>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-tag">Norway</div>
+            <h3>Fjordkraft Campus</h3>
+            <p>180 MW of hydropower. Natural cooling from arctic air cuts the energy demand of our cooling systems by up to 40%.</p>
+            <ul class="card-facts">
+              <li><strong>5.6 EH/s</strong> hashrate</li>
+              <li><strong>100%</strong> hydropower</li>
+              <li><strong>24/7</strong> operation since 2020</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-tag">Spain</div>
+            <h3>Andalusia Solar Park</h3>
+            <p>Directly connected to a 250 MW solar park. We monetize power peaks that would otherwise be curtailed.</p>
+            <ul class="card-facts">
+              <li><strong>4.1 EH/s</strong> hashrate</li>
+              <li><strong>Flexible load</strong> – throttles on grid demand</li>
+              <li><strong>150 MW</strong> grid connection</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-tag">Germany</div>
+            <h3>Brandenburg Pilot Plant</h3>
+            <p>Research site with immersion cooling. The waste heat warms an adjacent greenhouse – mining as a heat source.</p>
+            <ul class="card-facts">
+              <li><strong>2.7 EH/s</strong> hashrate</li>
+              <li><strong>Heat reuse</strong> at 70%</li>
+              <li><strong>80 MW</strong> wind power PPA</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Technology ===== -->
+    <section class="section section-alt" id="technologie">
+      <div class="container">
+        <p class="section-kicker">Technology</p>
+        <h2>Vertically integrated – from chip to pool.</h2>
+        <p class="section-intro">
+          Like the biggest players in the industry, we control every layer of the mining
+          stack ourselves. That makes us faster, more efficient, and more independent.
+        </p>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="feature-icon">&#9881;&#65039;</div>
+            <h3>Latest-generation ASIC fleet</h3>
+            <p>Over 38,000 miners with an average efficiency of 19.5 J/TH. Older units are consistently replaced or moved to sites with heat reuse.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128167;</div>
+            <h3>Immersion cooling</h3>
+            <p>Part of the fleet runs in dielectric liquid: quieter, longer-lasting, and up to 25% more output per unit through safe overclocking.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128268;</div>
+            <h3>Custom firmware</h3>
+            <p>Our firmware tunes every chip individually (per-chip tuning) and adjusts power draw in real time to electricity prices and grid signals.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#9935;&#65039;</div>
+            <h3>Pool infrastructure</h3>
+            <p>We mine through our own Stratum V2 infrastructure: censorship-resistant, with encrypted connections and our own block template construction.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128200;</div>
+            <h3>Real-time monitoring</h3>
+            <p>Every miner reports temperature, hashrate, and efficiency by the second. Anomalies are detected automatically before they cost revenue.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">&#128274;</div>
+            <h3>Secure custody</h3>
+            <p>Mined bitcoin goes straight into multi-signature cold storage. No custodian risk, no single point of failure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Sustainability ===== -->
+    <section class="section" id="nachhaltigkeit">
+      <div class="container split">
+        <div class="split-text">
+          <p class="section-kicker">Sustainability</p>
+          <h2>Mining as a tool of the energy transition.</h2>
+          <p>
+            Bitcoin mining is the most flexible electricity consumer in the world: we can
+            switch hundreds of megawatts on or off within seconds. That is exactly what
+            grids with high wind and solar shares need.
+          </p>
+          <ul class="check-list">
+            <li><strong>Avoid curtailment:</strong> We buy power that would otherwise be wasted – making renewable projects more profitable.</li>
+            <li><strong>Grid-friendly operation:</strong> During peak load our facilities throttle automatically and hand capacity back to the grid.</li>
+            <li><strong>Reuse waste heat:</strong> In Brandenburg our pilot plant heats a greenhouse – 70% of the waste heat is reused.</li>
+            <li><strong>Report transparently:</strong> Our energy mix is published quarterly and audited externally.</li>
+          </ul>
+        </div>
+        <div class="split-visual">
+          <div class="energy-panel">
+            <h3>Our energy mix 2026</h3>
+            <div class="energy-row"><span>Hydropower</span><div class="bar"><div class="bar-fill" style="--w: 44%"></div></div><span>44%</span></div>
+            <div class="energy-row"><span>Solar</span><div class="bar"><div class="bar-fill" style="--w: 24%"></div></div><span>24%</span></div>
+            <div class="energy-row"><span>Wind</span><div class="bar"><div class="bar-fill" style="--w: 18%"></div></div><span>18%</span></div>
+            <div class="energy-row"><span>Grid power (rest)</span><div class="bar"><div class="bar-fill bar-fill-muted" style="--w: 14%"></div></div><span>14%</span></div>
+            <p class="energy-note">86% renewable – 2027 target: 95%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mining calculator ===== -->
+    <section class="section section-alt" id="rechner">
+      <div class="container">
+        <p class="section-kicker">Calculator</p>
+        <h2>What does your miner earn? Find out.</h2>
+        <p class="section-intro">
+          Estimate revenue and power costs based on current network data.
+          All figures without guarantee – difficulty and price change constantly.
+        </p>
+        <div class="calc">
+          <div class="calc-toolbar">
+            <div class="calc-field calc-preset">
+              <label for="calc-miner">Miner model</label>
+              <select id="calc-miner">
+                <option value="custom">Custom values</option>
+                <option value="234,3531" selected>Antminer S21 Pro (234 TH/s · 3,531 W)</option>
+                <option value="200,3500">Antminer S21 (200 TH/s · 3,500 W)</option>
+                <option value="120,2760">Antminer S19k Pro (120 TH/s · 2,760 W)</option>
+                <option value="186,3441">Whatsminer M60S (186 TH/s · 3,441 W)</option>
+                <option value="114,3306">Whatsminer M50 (114 TH/s · 3,306 W)</option>
+              </select>
+            </div>
+            <span class="badge" id="data-badge" data-state="fallback">Default values</span>
+          </div>
+          <form class="calc-form" id="calc-form">
+            <div class="calc-field">
+              <label for="calc-hashrate">Hashrate (TH/s)</label>
+              <input type="number" id="calc-hashrate" value="234" min="0" step="1">
+              <small>e.g. Antminer S21 Pro ≈ 234 TH/s</small>
+            </div>
+            <div class="calc-field">
+              <label for="calc-power">Power draw (watts)</label>
+              <input type="number" id="calc-power" value="3531" min="0" step="10">
+              <small>e.g. Antminer S21 Pro ≈ 3,531 W</small>
+            </div>
+            <div class="calc-field">
+              <label for="calc-price">Electricity price (ct/kWh)</label>
+              <input type="number" id="calc-price" value="8" min="0" step="0.1">
+              <small>Industrial rates often range 5–15 ct</small>
+            </div>
+            <div class="calc-field">
+              <label for="calc-btc">Bitcoin price (€)</label>
+              <input type="number" id="calc-btc" value="95000" min="0" step="100">
+              <small id="calc-btc-hint">Adjustable – the price is volatile</small>
+            </div>
+          </form>
+          <div class="calc-results" id="calc-results" aria-live="polite">
+            <div class="calc-result">
+              <span class="calc-result-label">BTC / day</span>
+              <span class="calc-result-value" id="res-btc">–</span>
+            </div>
+            <div class="calc-result">
+              <span class="calc-result-label">Revenue / day</span>
+              <span class="calc-result-value" id="res-revenue">–</span>
+            </div>
+            <div class="calc-result">
+              <span class="calc-result-label">Power cost / day</span>
+              <span class="calc-result-value" id="res-cost">–</span>
+            </div>
+            <div class="calc-result calc-result-highlight">
+              <span class="calc-result-label">Profit / day</span>
+              <span class="calc-result-value" id="res-profit">–</span>
+            </div>
+          </div>
+          <p class="calc-note" id="calc-note"></p>
+
+          <div class="table-wrap">
+            <table class="miner-table" id="miner-table">
+              <caption>Current devices compared (profit/day at your electricity price and BTC price)</caption>
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Hashrate</th>
+                  <th>Power</th>
+                  <th>Efficiency</th>
+                  <th>Profit / day</th>
+                </tr>
+              </thead>
+              <tbody><!-- populated by JS --></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Learn ===== -->
+    <section class="section" id="wissen">
+      <div class="container">
+        <p class="section-kicker">Learn</p>
+        <h2>Understanding mining – in four steps.</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">01</span>
+            <h3>Collect transactions</h3>
+            <p>Miners bundle unconfirmed Bitcoin transactions from the mempool into a block candidate.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <h3>Proof of work</h3>
+            <p>Specialized chips (ASICs) try quadrillions of hash combinations per second to find a valid block hash.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <h3>Block found</h3>
+            <p>Whoever finds a valid hash first gets to append the block and receives the block reward plus transaction fees – currently 3.125 BTC per block.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">04</span>
+            <h3>Secure the network</h3>
+            <p>The more computing power mines worldwide, the more expensive an attack on Bitcoin becomes. Mining is the network's security layer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== News ===== -->
+    <section class="section section-alt" id="news">
+      <div class="container">
+        <p class="section-kicker">News</p>
+        <h2>Latest from HashWerk.</h2>
+        <div class="card-grid">
+          <article class="card news-card">
+            <div class="news-meta"><span class="card-tag">Expansion</span><time datetime="2026-06-18">June 18, 2026</time></div>
+            <h3>Andalusia grows to 200 MW</h3>
+            <p>The second expansion stage of our solar site is approved: 50 MW of additional grid connection and 12,000 new miners from Q4 2026.</p>
+            <span class="news-link">Read more &rarr;</span>
+          </article>
+          <article class="card news-card">
+            <div class="news-meta"><span class="card-tag">Production</span><time datetime="2026-07-02">July 2, 2026</time></div>
+            <h3>Q2 results: 168 BTC mined</h3>
+            <p>Despite rising difficulty, our efficiency reached 19.1 J/TH – the best quarterly figure in company history. Uptime: 99.4%.</p>
+            <span class="news-link">Read more &rarr;</span>
+          </article>
+          <article class="card news-card">
+            <div class="news-meta"><span class="card-tag">Research</span><time datetime="2026-05-30">May 30, 2026</time></div>
+            <h3>Waste heat now warms a 2nd greenhouse</h3>
+            <p>In Brandenburg our pilot plant now supplies a second greenhouse – raising heat reuse to 70% of total output.</p>
+            <span class="news-link">Read more &rarr;</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq">
+      <div class="container container-narrow">
+        <p class="section-kicker">FAQ</p>
+        <h2>Frequently asked questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is home mining still worth it?</summary>
+            <p>In most cases not at typical European household rates (~€0.30/kWh). Profitable mining needs electricity below roughly 10–12 ct/kWh, efficient hardware, and good cooling. At home it gets interesting mainly in combination with your own solar system or when the waste heat replaces heating costs.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What is the halving and why does it matter?</summary>
+            <p>Roughly every four years the block reward is cut in half. Since the 2024 halving, miners receive 3.125 BTC per block. This tightens supply on a fixed schedule and forces miners to become ever more efficient – a key driver of our technology investments.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How much electricity does Bitcoin consume – and is that a problem?</summary>
+            <p>The Bitcoin network consumes roughly 150–200 TWh per year globally. What matters is not just the amount but the source: a growing share comes from renewable or otherwise stranded energy. Mining can monetize surplus power and make wind and solar buildouts more economical.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What happens if the Bitcoin price falls?</summary>
+            <p>When the price falls, inefficient miners leave the network, difficulty drops, and the remaining miners earn more BTC per unit of hashrate again. This mechanism stabilizes the system. For us the rule is: whoever has the lowest power costs stays profitable the longest.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I invest with HashWerk or book hosting?</summary>
+            <p>We offer hosting for institutional partners from 1 MW of grid connection as well as long-term hashrate partnerships. Reach out via the contact form – we usually reply within two business days.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section cta" id="kontakt">
+      <div class="container container-narrow">
+        <div class="center">
+          <h2>Ready to mine with us?</h2>
+          <p class="section-intro">Hosting, partnership, or press inquiry – drop us a line.</p>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="calc-field">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" name="name" required autocomplete="name">
+            </div>
+            <div class="calc-field">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" name="email" required autocomplete="email">
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="contact-topic">Topic</label>
+            <select id="contact-topic" name="topic">
+              <option value="hosting">Hosting inquiry (from 1 MW)</option>
+              <option value="partnerschaft">Hashrate partnership</option>
+              <option value="presse">Press</option>
+              <option value="sonstiges">Other</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary btn-large">Send message</button>
+            <p class="form-status" id="form-status" role="status"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#top" class="brand">
+          <span class="brand-mark">&#8383;</span>
+          <span class="brand-name">Hash<em>Werk</em></span>
+        </a>
+        <p class="footer-tagline">Industrial Bitcoin mining from Europe.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#operations">Facilities</a></li>
+          <li><a href="#technologie">Technology</a></li>
+          <li><a href="#nachhaltigkeit">Sustainability</a></li>
+          <li><a href="#news">News</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#rechner">Mining calculator</a></li>
+          <li><a href="#wissen">Learn</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="../" lang="de" hreflang="de">Deutsche Version</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="../impressum.html" lang="de">Impressum (German)</a></li>
+          <li><a href="../datenschutz.html" lang="de">Privacy policy (German)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 HashWerk (fictional demo project). Not investment or tax advice. Bitcoin mining involves substantial financial risk. Price data: CoinGecko · Network data: mempool.space</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
