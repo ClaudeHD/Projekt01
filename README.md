@@ -4,6 +4,13 @@ Conversion-orientierte **Funding-Seite** für die Seed-Runde von **ENPARA** –
 einer nachhaltigen **Bitcoin-Mining-Farm in Paraguay** (erneuerbare Wasserkraft,
 hydro-gekühlte Antminer). Statisch, schnell, ohne Build-Schritt.
 
+Diese Version ist die **Kombination aus drei Ständen**:
+das finale Video-Design aus Claude Design (Navy/Orange/Blau, Vollbild-Video-Hero,
+Video-Sektionen, Neon-Logo) **+** die VerdeHash-Inhalte (Team-Sektion,
+Pitch-Deck-/Beratungs-Formular, erweiterte FAQ) **+** ein moderner
+Animations-Layer (scroll-getriebene CSS-Animationen, Cross-Document View
+Transitions, 3D-Tilt, Marquee, Live-Demo-Feed im Dashboard).
+
 ## 🚀 Schnellstart
 
 ```bash
@@ -15,15 +22,37 @@ Deploybar auf **GitHub Pages, Netlify, Vercel, Cloudflare Pages** – Ordner hoc
 
 ```
 .
-├── index.html              # Landingpage (Hero, Pakete, Rechner, Krypto-/SEPA-Invest, FAQ …)
+├── index.html              # Landingpage (Video-Hero, Pakete, Rechner, Krypto-/SEPA-Invest, Team, FAQ …)
 ├── dashboard.html          # Seed-Runde Live-Dashboard
 ├── assets/
-│   ├── css/styles.css      # Design-System + alle Komponenten
-│   ├── js/main.js          # Rechner, Invest-Widget (Krypto+SEPA), FAQ, Reveal …
-│   ├── js/dashboard.js     # Dashboard-Rendering (Ring, KPIs, Chart, Feed)
-│   └── img/                # (für lokal gespeicherte Bilder – siehe unten)
+│   ├── css/styles.css      # Design-System + Komponenten + Effekt-Layer
+│   ├── js/main.js          # Rechner, Invest-Widget (Krypto+SEPA), Pitch-Deck-Formular, FAQ, Reveal …
+│   ├── js/effects.js       # Animations-Layer (Hero-Intro, Tilt, Magnetic, Marquee, Scroll-Progress)
+│   ├── js/dashboard.js     # Dashboard-Rendering (Ring, KPIs, Chart-Draw-In, Live-Demo-Feed)
+│   ├── img/                # Logo + Video-Poster
+│   └── video/clips/        # Hintergrund-Clips (nur die tatsächlich genutzten)
 └── README.md
 ```
+
+## ✨ Animations-Layer ("ihrer Zeit voraus")
+
+Alles Vanilla CSS/JS, ohne Libraries, und **komplett deaktiviert bei
+`prefers-reduced-motion`**:
+
+- **Scroll-getriebene CSS-Animationen** (`animation-timeline: view()/scroll()`):
+  Scroll-Progress-Leiste im Header, Parallax-Ausblenden des Hero-Inhalts,
+  Kino-Reveal der Video-Frames, selbstzeichnende Roadmap-Linie —
+  mit IntersectionObserver-Fallback für ältere Browser.
+- **Cross-Document View Transitions** (`@view-transition`) beim Wechsel
+  zwischen Landingpage und Dashboard (Logo als geteiltes Element).
+- **Hero-Kino-Intro**: Headline erscheint Wort für Wort gestaffelt.
+- **3D-Tilt + Glare** auf Vorteils-, Paket- und Team-Karten, **magnetische**
+  Primär-Buttons (nur bei feinem Pointer/Hover-Gerät).
+- **Endlos-Marquee** für den Trust-Strip (pausiert bei Hover).
+- **Dashboard**: Fortschrittsring mit Glow-Puls, Kapitalverlauf-Chart
+  zeichnet sich beim Scrollen ein, simulierter **Live-Demo-Feed**
+  (klar als Demo gekennzeichnet).
+- Videos pausieren automatisch, sobald sie den Viewport verlassen.
 
 ## ⚙️ Wo du echte Werte einträgst (1 Stelle pro Thema)
 
@@ -35,24 +64,27 @@ Deploybar auf **GitHub Pages, Netlify, Vercel, Cloudflare Pages** – Ordner hoc
 | **Dashboard-Zahlen** (Ziel, eingesammelt, Investoren …) | `assets/js/dashboard.js` | `DASH` (oben) |
 | Funding-Fortschritt im Invest-Block (68 %) | `index.html` | `.mini-progress` |
 | Pakete & Preise | `index.html` | Abschnitt `#pakete` |
+| **Team-Profile** | `index.html` | Abschnitt `#team` |
 
-> ⚠️ **Wichtig:** Wallet-Adressen, IBAN und alle Zahlen sind aktuell **Platzhalter**
-> und müssen vor dem Live-Gang ersetzt werden.
+> ⚠️ **Wichtig:** Wallet-Adressen, IBAN, Team-Profile und alle Zahlen sind
+> aktuell **Platzhalter** und müssen vor dem Live-Gang ersetzt werden.
 
-## 💱 Krypto-Investment
+## 💱 Investieren: zwei Wege auf einer Seite
 
-Im Bereich **„Investieren"** kann direkt per **BTC, ETH, USDT, USDC** oder **SEPA**
-beteiligt werden: Paket wählen → Zahlungsart → Adresse/QR + Verwendungszweck →
-Daten eingeben → Meldung.
+Im Bereich **„Investieren"** gibt es zwei Tabs:
+
+1. **Direkt investieren** – per **BTC, ETH, USDT, USDC** oder **SEPA**:
+   Paket wählen → Zahlungsart → Adresse/QR + Verwendungszweck → Daten eingeben → Meldung.
+2. **Pitch-Deck & Beratung** – unverbindliches Lead-Formular
+   (Name, E-Mail, Wunsch-Investment, Telefon, Nachricht) für Interessenten,
+   die noch nicht direkt einzahlen wollen.
 
 - Der **QR-Code** wird über `api.qrserver.com` erzeugt (externer Dienst, im Browser
-  des Besuchers). Fällt er aus, bleibt die kopierbare Adresse erhalten. Für volle
-  Unabhängigkeit eine kleine QR-Lib bündeln (z. B. `qrcode-generator`) – sag Bescheid,
-  ich baue es ein.
-- Das Formular ist aktuell **Frontend-Demo**. Anbinden an Backend/CRM:
-  - **Formspree/Getform/Netlify Forms** am `<form id="invest-form">`, **oder**
-  - eigenen `fetch()`-Call im `submit`-Handler in `assets/js/main.js` (das `data`-Objekt
-    mit Name, E-Mail, Betrag, Methode, Asset und Referenz ist bereits vorbereitet).
+  des Besuchers). Fällt er aus, bleibt die kopierbare Adresse erhalten.
+- Beide Formulare sind aktuell **Frontend-Demo**. Anbinden an Backend/CRM:
+  **Formspree/Getform/Netlify Forms** an `#invest-form` bzw. `#lead-form`, oder
+  eigener `fetch()`-Call in den `submit`-Handlern in `assets/js/main.js`
+  (die `data`-Objekte sind bereits vorbereitet).
 
 ## 📊 Rendite-Rechner
 
@@ -62,19 +94,22 @@ All-in Mining-Tarif (**0,12 €/kWh**) und Pool-/Mgmt-Gebühr. Drei Szenarien
 Annahmen in `CONFIG` (`main.js`) anpassbar. **Alle Werte illustrativ – kein
 Renditeversprechen.**
 
-## 🖼️ Bilder (KI-generiert)
+## 🎬 Videos, Bilder & Logo
 
-Vier Bilder werden derzeit von einer externen CDN geladen. Für den Produktivbetrieb
-herunterladen und lokal unter `assets/img/` ablegen, dann die `…cloudfront.net/…`-URLs
-in `index.html` ersetzen:
-
-- `hero.png` `…/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png`
-- `dam.png` `…/hf_20260618_145426_2d565d68-21d3-4057-a419-9b1dac9169bb.png`
-- `farm.png` `…/hf_20260618_145610_455cea7b-3e87-4081-a151-86991df25064.png`
-- `ops.png` `…/hf_20260618_145916_f6e3b61b-5262-4d02-bb36-edbb620d3992.png`
-
-(Basis-URL: `https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/`)
-Fällt ein Bild aus, zeigt die Seite automatisch einen Farbverlauf-Platzhalter.
+- **Video-Clips**: Die Seite referenziert `assets/video/clips/c06.mp4` (Hero),
+  `c13.mp4` (Paraguay), `c08.mp4` (Hardware), `c22.mp4` (Betrieb) aus dem
+  Claude-Design-Projekt „Enpara finale Website Design“. Die Clips konnten aus
+  dieser Umgebung nicht exportiert werden (API-Limit 256 KB/Datei, externe
+  Downloads gesperrt) — **lege sie einfach unter `assets/video/clips/` ab**,
+  dann laufen sie sofort. Bis dahin zeigt jede Video-Fläche automatisch ihr
+  Poster; die Seite bleibt voll funktionsfähig.
+- **Poster** (`assets/img/poster-*.jpg`): aktuell **generierte On-Brand-Platzhalter**
+  (Navy + Orange/Blau-Glow). Für den Live-Gang idealerweise durch echte
+  Video-Standbilder ersetzen (gleiche Dateinamen).
+- **Logo**: als **Inline-Neon-SVG** direkt im HTML (`<symbol id="enpara-wordmark">`
+  im Header beider Seiten definiert, per `<use>` wiederverwendet). Kein
+  Bild-Asset nötig, gestochen scharf auf jedem Display; Farben/Stärke der
+  Neon-Röhren direkt im Symbol anpassbar.
 
 ## ✅ Checkliste vor dem Launch
 
@@ -82,9 +117,8 @@ Fällt ein Bild aus, zeigt die Seite automatisch einen Farbverlauf-Platzhalter.
 - [ ] **Echte Bankdaten** (IBAN/BIC) eintragen (`.sepa-box`)
 - [ ] **Dashboard-Zahlen** mit realen Werten füllen (`DASH`)
 - [ ] Funding-Fortschritt (68 %) & Investorenzahl aktualisieren
-- [ ] Bilder lokal speichern
-- [ ] Formular an Backend/Service anbinden
-- [ ] Team mit echten Profilen füllen
+- [ ] Team mit echten Profilen füllen (`#team`)
+- [ ] Formulare an Backend/Service anbinden (`#invest-form`, `#lead-form`)
 - [ ] **Impressum & Datenschutz** verlinken (Pflicht in DE)
 - [ ] Disclaimer & rechtliche Struktur prüfen lassen (s. u.)
 

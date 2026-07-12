@@ -7,6 +7,7 @@
   const $ = (s) => document.querySelector(s);
   const euro0 = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
   const num = (n) => Math.round(n).toLocaleString("de-DE");
+  const REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------------- DASH data (edit me) ---------------- */
   const DASH = {
@@ -51,6 +52,7 @@
   /* ---------------- number count-up ---------------- */
   const animateNum = (el, target, fmt) => {
     if (!el) return;
+    if (REDUCED) { el.textContent = fmt(target); return; }
     const dur = 1500, start = performance.now();
     const step = (now) => {
       const p = Math.min((now - start) / dur, 1);
@@ -124,31 +126,68 @@
     });
     area += "L" + W + " " + H + " Z";
     const dots = data.values.map((v, i) =>
-      `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4.5" fill="#0b110e" stroke="#18d27e" stroke-width="2.5"/>`).join("");
+      `<circle class="chart-dot" cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4.5" fill="#091126" stroke="#ff8a3c" stroke-width="2.5"/>`).join("");
 
     chartEl.innerHTML =
       `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Kapitalverlauf">` +
       `<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">` +
-      `<stop offset="0" stop-color="#18d27e" stop-opacity="0.35"/><stop offset="1" stop-color="#18d27e" stop-opacity="0"/>` +
+      `<stop offset="0" stop-color="#ff8a3c" stop-opacity="0.35"/><stop offset="1" stop-color="#ff8a3c" stop-opacity="0"/>` +
       `</linearGradient></defs>` +
-      `<path d="${area}" fill="url(#areaGrad)"/>` +
-      `<path d="${line}" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>` +
+      `<path class="chart-area" d="${area}" fill="url(#areaGrad)"/>` +
+      `<path class="chart-line" d="${line}" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>` +
       dots + `</svg>`;
 
     const xEl = $("#d-chartx");
     if (xEl) xEl.innerHTML = data.labels.map((l) => `<span>${l}</span>`).join("");
+
+    // Draw-in animation: line strokes itself, then area + dots fade in
+    const linePath = chartEl.querySelector(".chart-line");
+    if (!REDUCED && linePath && linePath.getTotalLength) {
+      const len = linePath.getTotalLength();
+      linePath.style.strokeDasharray = len;
+      linePath.style.strokeDashoffset = len;
+      const wrap = chartEl.closest(".dash-card") || chartEl;
+      const start = () => requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add("chart-drawn")));
+      if ("IntersectionObserver" in window) {
+        const cio = new IntersectionObserver((entries) => entries.forEach((e) => {
+          if (e.isIntersecting) { start(); cio.disconnect(); }
+        }), { threshold: 0.3 });
+        cio.observe(wrap);
+      } else { start(); }
+    } else if (chartEl.closest(".dash-card")) {
+      chartEl.closest(".dash-card").classList.add("chart-drawn");
+    }
   }
 
   /* ---------------- activity feed ---------------- */
+  const sym = { BTC: "₿", ETH: "Ξ", USDT: "₮", USDC: "$", SEPA: "🏦" };
+  const feedRow = (f, fresh) => {
+    const isSepa = f.method === "SEPA";
+    return `<div class="feed-row${fresh ? " feed-new" : ""}">` +
+      `<div class="feed-badge${isSepa ? " sepa" : ""}">${sym[f.method] || "•"}</div>` +
+      `<div class="feed-main"><b>Neue Beteiligung</b><span>${f.method} · ${f.when}</span></div>` +
+      `<div class="feed-amt">+ ${euro0.format(f.amount)}</div></div>`;
+  };
+
   const feedEl = $("#d-feed");
   if (feedEl) {
-    const sym = { BTC: "₿", ETH: "Ξ", USDT: "₮", USDC: "$", SEPA: "🏦" };
-    feedEl.innerHTML = DASH.feed.map((f) => {
-      const isSepa = f.method === "SEPA";
-      return `<div class="feed-row">` +
-        `<div class="feed-badge${isSepa ? " sepa" : ""}">${sym[f.method] || "•"}</div>` +
-        `<div class="feed-main"><b>Neue Beteiligung</b><span>${f.method} · ${f.when}</span></div>` +
-        `<div class="feed-amt">+ ${euro0.format(f.amount)}</div></div>`;
-    }).join("");
+    feedEl.innerHTML = DASH.feed.map((f) => feedRow(f, false)).join("");
+
+    // Simulated live ticker (demo only — clearly labelled in the card title)
+    if (!REDUCED) {
+      const methods = ["BTC", "ETH", "USDT", "USDC", "SEPA"];
+      const amounts = [5000, 5000, 9500, 9500, 9500, 22500];
+      const tick = () => {
+        const f = {
+          method: methods[Math.floor(Math.random() * methods.length)],
+          amount: amounts[Math.floor(Math.random() * amounts.length)],
+          when: "gerade eben",
+        };
+        feedEl.insertAdjacentHTML("afterbegin", feedRow(f, true));
+        const rows = feedEl.querySelectorAll(".feed-row");
+        if (rows.length > 8) rows[rows.length - 1].remove();
+      };
+      setInterval(tick, 7000 + Math.random() * 4000);
+    }
   }
 })();

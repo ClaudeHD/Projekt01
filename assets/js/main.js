@@ -174,6 +174,26 @@
     render();
   }
 
+  /* ---------------- Invest mode tabs (direct ↔ pitch deck) ---------------- */
+  const modeTabs = $$(".mode-tab");
+  const modePanels = $$("[data-mode-panel]");
+  const setInvestMode = (mode) => {
+    if (!modeTabs.length) return;
+    modeTabs.forEach((t) => {
+      const active = t.dataset.mode === mode;
+      t.classList.toggle("active", active);
+      t.setAttribute("aria-selected", String(active));
+    });
+    modePanels.forEach((p) => { p.hidden = p.dataset.modePanel !== mode; });
+  };
+  modeTabs.forEach((t) => t.addEventListener("click", () => setInvestMode(t.dataset.mode)));
+  window.__enparaSetMode = setInvestMode;
+
+  // Links like <a href="#invest" data-invest-mode="lead"> switch the mode before scrolling
+  $$("[data-invest-mode]").forEach((a) => a.addEventListener("click", () => {
+    setInvestMode(a.dataset.investMode);
+  }));
+
   /* ---------------- Invest widget (Crypto + SEPA) ---------------- */
   const investWrap = $(".invest-wrap");
   if (investWrap) {
@@ -281,8 +301,8 @@
       const data = { name: $("#f-name").value, email: $("#f-email").value, betrag: amount, methode: method, asset: method === "crypto" ? asset : "—", ref };
       try { console.info("[ENPARA] Investitionsanfrage:", data); } catch (_) {}
 
-      const card = $(".invest-card");
-      $$(".inv-step", card).forEach((s) => (s.style.display = "none"));
+      const direct = $('[data-mode-panel="direct"]');
+      $$(".inv-step", direct).forEach((s) => (s.style.display = "none"));
       const ok = $("#form-success");
       const nameEl = $("#success-name");
       if (nameEl) nameEl.textContent = (data.name || "").split(" ")[0] || "danke";
@@ -298,15 +318,51 @@
     render();
   }
 
+  /* ---------------- Lead form (pitch deck / consultation) ---------------- */
+  const leadForm = $("#lead-form");
+  if (leadForm) leadForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!leadForm.checkValidity()) { leadForm.reportValidity(); return; }
+    const data = {
+      name: $("#l-name").value, email: $("#l-email").value,
+      betrag: $("#l-amount").value, telefon: $("#l-phone").value, nachricht: $("#l-msg").value,
+    };
+    try { console.info("[ENPARA] Pitch-Deck-Anfrage:", data); } catch (_) {}
+    leadForm.style.display = "none";
+    const intro = $(".lead-intro");
+    if (intro) intro.style.display = "none";
+    const ok = $("#lead-success");
+    const nameEl = $("#lead-success-name");
+    if (nameEl) nameEl.textContent = (data.name || "").split(" ")[0] || "danke";
+    if (ok) ok.classList.add("show");
+  });
+
   /* ---------------- Pricing buttons → preset invest amount + scroll ---------------- */
   $$("[data-plan]").forEach((btn) => btn.addEventListener("click", (e) => {
     e.preventDefault();
     const amt = parseInt(btn.dataset.amount, 10);
+    setInvestMode("direct");
     if (amt && window.__enparaSetInvest) window.__enparaSetInvest(amt);
     const target = $("#invest");
     if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     setTimeout(() => { const n = $("#f-name"); if (n) n.focus(); }, 600);
   }));
+
+  /* ---------------- Autoplay section videos on scroll ---------------- */
+  const secVideos = $$(".media-frame video");
+  if ("IntersectionObserver" in window && secVideos.length) {
+    const vio = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        const v = e.target;
+        if (e.isIntersecting) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+        else { v.pause(); }
+      }),
+      { threshold: 0.25 }
+    );
+    secVideos.forEach((v) => vio.observe(v));
+  } else {
+    secVideos.forEach((v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+  }
 
   /* ---------------- Image fallback ---------------- */
   $$("img[data-fallback]").forEach((img) => {

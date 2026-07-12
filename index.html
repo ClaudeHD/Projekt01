@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ENPARA — Grünes Bitcoin-Mining aus Paraguay | Seed-Runde · jetzt investieren</title>
   <meta name="description" content="Investiere in ENPARA – eine nachhaltige Bitcoin-Mining-Farm in Paraguay, betrieben mit ~100 % erneuerbarer Wasserkraft. Seed-Runde offen: ab 5.000 € per Krypto oder Überweisung beteiligen." />
-  <meta name="theme-color" content="#070b09" />
+  <meta name="theme-color" content="#050a18" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="ENPARA — Grünes Bitcoin-Mining aus Paraguay" />
   <meta property="og:description" content="Nachhaltige Hashrate aus erneuerbarer Wasserkraft. Seed-Runde offen – jetzt per Krypto oder SEPA investieren." />
-  <meta property="og:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png" />
+  <meta property="og:image" content="assets/img/poster-hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7L4 23V9z' fill='%2318d27e'/%3E%3Cpath d='M17 7l-6 11h4l-1 7 7-12h-4z' fill='%23042016'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7L4 23V9z' fill='%23ff8a3c'/%3E%3Cpath d='M17 7l-6 11h4l-1 7 7-12h-4z' fill='%23050a18'/%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,31 +23,42 @@
 </head>
 <body>
 
+  <div class="scroll-progress" aria-hidden="true"><i></i></div>
+
   <!-- ============ HEADER ============ -->
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="ENPARA Startseite">
-        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
-          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#18d27e"/><stop offset="1" stop-color="#00e0b8"/>
-          </linearGradient></defs>
-          <path d="M16 2l12 7v14l-12 7L4 23V9z" fill="url(#lg)"/>
-          <path d="M17 7l-6 11h4l-1 7 7-12h-4z" fill="#042016"/>
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a3c"/><stop offset="1" stop-color="#4da6ff"/></linearGradient>
+            <filter id="neon-halo" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+            <filter id="neon-tube" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="1.1"/></filter>
+            <symbol id="enpara-wordmark" viewBox="0 0 560 120">
+              <g font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="88" font-weight="700" letter-spacing="8" text-anchor="middle">
+                <text x="280" y="94" fill="none" stroke="#4da6ff" stroke-width="12" opacity=".9" filter="url(#neon-halo)">ENPARA</text>
+                <text x="280" y="94" fill="none" stroke="#050a18" stroke-width="7">ENPARA</text>
+                <text x="280" y="94" fill="none" stroke="#ff8a3c" stroke-width="3.6" filter="url(#neon-tube)">ENPARA</text>
+                <text x="280" y="94" fill="none" stroke="#ffe1c2" stroke-width="1.3">ENPARA</text>
+              </g>
+            </symbol>
+          </defs>
         </svg>
-        EN<b>PARA</b>
+        <svg class="logo-word" viewBox="0 0 560 120" role="img" aria-label="ENPARA"><use href="#enpara-wordmark"/></svg>
       </a>
 
       <nav class="nav-links" aria-label="Hauptnavigation">
         <a href="#paraguay">Warum Paraguay</a>
         <a href="#pakete">Pakete</a>
         <a href="#rechner">Rechner</a>
+        <a href="#team">Team</a>
         <a href="dashboard.html">Seed-Dashboard</a>
         <a href="#faq">FAQ</a>
       </nav>
 
       <div class="nav-cta">
-        <a class="btn btn-ghost" href="dashboard.html">Dashboard</a>
-        <a class="btn btn-primary" href="#invest">Investieren</a>
+        <a class="btn btn-ghost" href="#invest" data-invest-mode="lead">Pitch-Deck</a>
+        <a class="btn btn-primary" href="#invest" data-invest-mode="direct">Investieren</a>
         <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
       </div>
     </div>
@@ -59,59 +70,50 @@
     <a href="#ablauf">Ablauf</a>
     <a href="#pakete">Pakete</a>
     <a href="#rechner">Rechner</a>
+    <a href="#team">Team</a>
     <a href="dashboard.html">Seed-Dashboard</a>
     <a href="#faq">FAQ</a>
-    <a class="btn btn-primary btn-block" href="#invest">Jetzt investieren</a>
+    <a href="#invest" data-invest-mode="lead">Pitch-Deck anfordern</a>
+    <a class="btn btn-primary btn-block" href="#invest" data-invest-mode="direct">Jetzt investieren</a>
   </div>
 
   <span id="top"></span>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="hero-bg has-img" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png');"></div>
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow reveal"><span class="dot"></span> Grünes Bitcoin-Mining · Paraguay</span>
-        <h1 class="reveal d1">Bitcoin minen mit der <span class="grad-text">grünsten Energie</span> Südamerikas.</h1>
-        <p class="lead reveal d2">ENPARA baut eine nachhaltige Mining-Farm in Paraguay – betrieben mit nahezu 100 % erneuerbarer Wasserkraft. Beteilige dich in der Seed-Runde an echter, professionell betriebener Hashrate – ab 5.000 €, per Krypto oder Überweisung.</p>
-        <div class="hero-actions reveal d3">
-          <a class="btn btn-primary btn-lg" href="#invest">
-            Jetzt investieren
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a class="btn btn-ghost btn-lg" href="dashboard.html">Seed-Dashboard ansehen</a>
-        </div>
-        <div class="hero-meta reveal d3">
-          <div class="m"><b>~100 %</b><span>erneuerbare Energie</span></div>
-          <div class="m"><b>1 MW</b><span>Kapazität Phase 1</span></div>
-          <div class="m"><b>24/7</b><span>Betrieb & Monitoring</span></div>
-        </div>
-        <div class="hero-trust reveal d4">
-          <div class="avatars"><i></i><i></i><i></i><i></i></div>
-          <span>Über <b style="color:var(--text-dim)">340 Interessenten</b> haben sich bereits angemeldet</span>
-        </div>
-      </div>
+  <!-- ============ HERO (Vollbild-Hintergrundvideo) ============ -->
+  <section class="hero hero-video">
+    <video class="hero-bgvid" autoplay muted loop playsinline poster="assets/img/poster-hero.jpg" aria-hidden="true">
+      <source src="assets/video/clips/c06.mp4" type="video/mp4" />
+      <source src="assets/video/clips/c06.webm" type="video/webm" />
+    </video>
+    <div class="hero-bgvid-overlay" aria-hidden="true"></div>
 
-      <div class="hero-visual reveal d2">
-        <a class="hero-card" href="dashboard.html" aria-label="Seed-Dashboard öffnen">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145342_1f035359-9f63-45f8-9f06-1e09244273aa.png" alt="Luftaufnahme der ENPARA Mining-Farm in Paraguay mit Wasserkraftwerk" data-fallback loading="eager" />
-          <div class="fallback"></div>
-          <div class="overlay"></div>
-          <div class="hero-badge">
-            <div class="live"><span class="pulse"></span> Seed-Runde offen</div>
-            <div class="pct">68 % gefüllt →</div>
-          </div>
+    <div class="container hero-video-inner">
+      <svg class="hero-wordmark reveal" viewBox="0 0 560 120" role="img" aria-label="ENPARA"><use href="#enpara-wordmark"/></svg>
+      <span class="eyebrow reveal"><span class="dot"></span> Grünes Bitcoin-Mining · Paraguay</span>
+      <h1 class="reveal d1" data-splitwords>Bitcoin minen mit der <span class="grad-text">grünsten Energie</span> Südamerikas.</h1>
+      <p class="lead reveal d2">ENPARA baut eine nachhaltige Mining-Farm in Paraguay – betrieben mit nahezu 100 % erneuerbarer Wasserkraft. Beteilige dich in der Seed-Runde an echter, professionell betriebener Hashrate – ab 5.000 €, per Krypto oder Überweisung.</p>
+      <div class="hero-actions reveal d3">
+        <a class="btn btn-primary btn-lg" href="#invest" data-invest-mode="direct">
+          Jetzt investieren
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <div class="float-chip c1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
-          Energie <b>100 % grün</b>
-        </div>
-        <div class="float-chip c2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z" stroke-linejoin="round"/></svg>
-          Mining-Tarif <b>0,12 €/kWh</b>
-        </div>
+        <a class="btn btn-ghost btn-lg" href="dashboard.html">Seed-Dashboard ansehen</a>
+      </div>
+      <div class="hero-meta reveal d3">
+        <div class="m"><b>~100 %</b><span>erneuerbare Energie</span></div>
+        <div class="m"><b>1 MW</b><span>Kapazität Phase 1</span></div>
+        <div class="m"><b>24/7</b><span>Betrieb & Monitoring</span></div>
+      </div>
+      <div class="hero-trust reveal d4">
+        <div class="avatars"><i></i><i></i><i></i><i></i></div>
+        <span>Über <b style="color:var(--text-dim)">340 Interessenten</b> haben sich bereits angemeldet</span>
       </div>
     </div>
+
+    <a class="hero-scroll reveal d4" href="#paraguay" aria-label="Nach unten scrollen">
+      <span class="live-pill"><span class="pulse"></span> Seed-Runde offen · 68 % gefüllt</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </section>
 
   <!-- ============ TRUST STRIP ============ -->
@@ -154,8 +156,10 @@
     <div class="container split">
       <div class="reveal">
         <div class="media-frame">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145426_2d565d68-21d3-4057-a419-9b1dac9169bb.png" alt="Großes Wasserkraftwerk in Paraguay mit türkisem Wasser" data-fallback loading="lazy" />
-          <div class="fallback"></div>
+          <video autoplay muted loop playsinline poster="assets/img/poster-paraguay.jpg" aria-label="Wasserkraftwerk in Paraguay">
+            <source src="assets/video/clips/c13.mp4" type="video/mp4" />
+      <source src="assets/video/clips/c13.webm" type="video/webm" />
+          </video>
           <span class="tag">Itaipú · Wasserkraft</span>
         </div>
       </div>
@@ -243,9 +247,11 @@
       </div>
       <div class="reveal d1">
         <div class="media-frame">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145610_455cea7b-3e87-4081-a151-86991df25064.png" alt="Innenansicht der Mining-Halle mit Reihen leuchtender ASIC-Miner" data-fallback loading="lazy" />
-          <div class="fallback"></div>
-          <span class="tag">Mining-Halle</span>
+          <video autoplay muted loop playsinline poster="assets/img/poster-hardware.jpg" aria-label="Glühende ASIC-Miner-Platine">
+            <source src="assets/video/clips/c08.mp4" type="video/mp4" />
+      <source src="assets/video/clips/c08.webm" type="video/webm" />
+          </video>
+          <span class="tag" style="left: 14px; top: 16px; position: absolute;">ENPARA</span>
         </div>
       </div>
     </div>
@@ -400,7 +406,7 @@
             <div class="r"><span>Netto / Monat</span><b id="r-net">92 €</b></div>
             <div class="r total"><span>Netto über Laufzeit</span><b id="r-total">2.208 €</b></div>
           </div>
-          <a class="btn btn-primary btn-block" href="#invest" style="margin-top:24px">Diesen Betrag investieren</a>
+          <a class="btn btn-primary btn-block" href="#invest" data-invest-mode="direct" style="margin-top:24px">Diesen Betrag investieren</a>
         </div>
       </div>
     </div>
@@ -446,8 +452,10 @@
     <div class="container split">
       <div class="reveal">
         <div class="media-frame">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DzDTt3a6Vkt24L7jaFmcN9bjT4/hf_20260618_145916_f6e3b61b-5262-4d02-bb36-edbb620d3992.png" alt="Technikerin überwacht den Betrieb der Mining-Server" data-fallback loading="lazy" />
-          <div class="fallback"></div>
+          <video autoplay muted loop playsinline poster="assets/img/poster-betrieb.jpg" aria-label="Professioneller Betrieb der Anlage">
+            <source src="assets/video/clips/c22.mp4" type="video/mp4" />
+      <source src="assets/video/clips/c22.webm" type="video/webm" />
+          </video>
           <span class="tag">Betrieb · 24/7</span>
         </div>
       </div>
@@ -460,6 +468,43 @@
           <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Transparente Verträge</b>Klar geregelte Beteiligung, Konditionen und Auszahlungsmodalitäten.</span></li>
           <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Erfahrenes Team vor Ort</b>Lokale Operations-Crew plus Mining- und Energie-Expertise.</span></li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="section-pad" id="team">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow"><span class="dot"></span> Das Team</span>
+        <h2 class="title">Menschen, die liefern</h2>
+        <p class="lead">Ein Team aus Mining-, Energie- und Finanzexpertise – mit Boots-on-the-ground in Paraguay. <em>(Platzhalter – bitte mit echten Profilen ersetzen.)</em></p>
+      </div>
+      <div class="team-grid">
+        <div class="member reveal">
+          <div class="ava">LM</div>
+          <h3>L. Mendoza</h3>
+          <div class="role">Gründer & CEO</div>
+          <p>10+ Jahre Krypto & Infrastruktur.</p>
+        </div>
+        <div class="member reveal d1">
+          <div class="ava">SK</div>
+          <h3>S. Keller</h3>
+          <div class="role">Head of Operations</div>
+          <p>Betrieb & Aufbau der Anlage in Paraguay.</p>
+        </div>
+        <div class="member reveal d2">
+          <div class="ava">AR</div>
+          <h3>A. Rojas</h3>
+          <div class="role">Energie & Standort</div>
+          <p>Verträge mit lokalen Energieversorgern.</p>
+        </div>
+        <div class="member reveal d3">
+          <div class="ava">TF</div>
+          <h3>T. Fischer</h3>
+          <div class="role">Finanzen & Investoren</div>
+          <p>Reporting, Compliance & Investor Relations.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -493,6 +538,14 @@
           <div class="body">Phase 1 umfasst 1 MW Leistung mit hydro-gekühlten Antminern. Der modulare Aufbau erlaubt eine spätere Skalierung auf 10+ MW über weitere Finanzierungsrunden.</div>
         </details>
         <details class="faq-item">
+          <summary>Wie und wann werde ich ausgezahlt?<span class="pm"></span></summary>
+          <div class="body">Geplant sind regelmäßige, anteilige Auszahlungen in Bitcoin, beginnend nach Aufnahme des produktiven Betriebs (siehe Fahrplan). Die genauen Intervalle und Modalitäten werden vertraglich festgelegt.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Was ist der Mindestbetrag?<span class="pm"></span></summary>
+          <div class="body">Der Einstieg ist ab 5.000 € möglich (Paket „Starter“ mit 200 TH/s). Für größere Beteiligungen gibt es die Pakete „Pro“ und „Whale“ mit besserem Preis je TH/s. Wenn du erst einmal unverbindlich Informationen möchtest, fordere über das Formular einfach das Pitch-Deck an.</div>
+        </details>
+        <details class="faq-item">
           <summary>Wie wird mein Investment abgesichert?<span class="pm"></span></summary>
           <div class="body">Die Hardware befindet sich an einem gesicherten Standort mit Zutrittskontrolle und Versicherung. Du erhältst transparente Verträge sowie Zugang zum Live-Dashboard. Wichtig: Wie jedes unternehmerische Investment ist auch dieses mit Risiken bis hin zum Totalverlust verbunden – mehr dazu im Disclaimer.</div>
         </details>
@@ -500,13 +553,13 @@
     </div>
   </section>
 
-  <!-- ============ INVEST (Krypto + SEPA) ============ -->
+  <!-- ============ INVEST (Krypto + SEPA + Pitch-Deck) ============ -->
   <section class="section-pad" id="invest">
     <div class="container">
       <div class="section-head center reveal">
         <span class="eyebrow"><span class="dot"></span> Seed-Runde · jetzt offen</span>
         <h2 class="title">Investiere in ENPARA – per Krypto oder Überweisung</h2>
-        <p class="lead">Sichere dir deinen Hashrate-Anteil. Mindestbeteiligung 5.000 €. Direkt hier, in wenigen Schritten.</p>
+        <p class="lead">Sichere dir deinen Hashrate-Anteil. Mindestbeteiligung 5.000 €. Direkt hier, in wenigen Schritten – oder fordere zuerst unverbindlich das Pitch-Deck an.</p>
       </div>
 
       <div class="invest-wrap reveal d1">
@@ -529,96 +582,158 @@
         </aside>
 
         <div class="invest-card">
-          <!-- Step 1: amount -->
-          <div class="inv-step">
-            <span class="inv-label"><i>1</i> Paket wählen</span>
-            <div class="amount-chips">
-              <button type="button" class="chip active" data-amount="5000" data-th="200"><b>200 TH/s</b><span>5.000 €</span></button>
-              <button type="button" class="chip" data-amount="9500" data-th="400"><b>400 TH/s</b><span>9.500 €</span></button>
-              <button type="button" class="chip" data-amount="22500" data-th="1000"><b>1.000 TH/s</b><span>22.500 €</span></button>
-            </div>
-            <div class="custom-amount">
-              <label for="inv-amount">Eigener Betrag</label>
-              <div class="num-field"><span class="cur">€</span><input type="number" id="inv-amount" min="5000" step="500" value="5000" /></div>
-              <span class="inv-hash">≈ <b id="inv-th">200</b> TH/s</span>
-            </div>
+          <div class="mode-tabs" role="tablist" aria-label="Art der Anfrage">
+            <button type="button" class="mode-tab active" role="tab" aria-selected="true" data-mode="direct">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z" stroke-linejoin="round"/></svg>
+              Direkt investieren
+            </button>
+            <button type="button" class="mode-tab" role="tab" aria-selected="false" data-mode="lead">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v13H8l-4 4z" stroke-linejoin="round"/><path d="M8 9h8M8 12.5h5" stroke-linecap="round"/></svg>
+              Pitch-Deck &amp; Beratung
+            </button>
           </div>
 
-          <!-- Step 2: payment method -->
-          <div class="inv-step">
-            <span class="inv-label"><i>2</i> Zahlungsart</span>
-            <div class="pay-tabs">
-              <button type="button" class="pay-tab active" data-method="crypto">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 8h4a2 2 0 0 1 0 4h-4m0 0h4.5a2 2 0 0 1 0 4H9.5m0-8V6m0 12v-2m2-12v2m0 12v-2" stroke-linecap="round"/></svg>
-                Krypto
-              </button>
-              <button type="button" class="pay-tab" data-method="sepa">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                SEPA
-              </button>
+          <!-- Mode: direct invest (Crypto + SEPA) -->
+          <div class="invest-mode" data-mode-panel="direct">
+            <!-- Step 1: amount -->
+            <div class="inv-step">
+              <span class="inv-label"><i>1</i> Paket wählen</span>
+              <div class="amount-chips">
+                <button type="button" class="chip active" data-amount="5000" data-th="200"><b>200 TH/s</b><span>5.000 €</span></button>
+                <button type="button" class="chip" data-amount="9500" data-th="400"><b>400 TH/s</b><span>9.500 €</span></button>
+                <button type="button" class="chip" data-amount="22500" data-th="1000"><b>1.000 TH/s</b><span>22.500 €</span></button>
+              </div>
+              <div class="custom-amount">
+                <label for="inv-amount">Eigener Betrag</label>
+                <div class="num-field"><span class="cur">€</span><input type="number" id="inv-amount" min="5000" step="500" value="5000" /></div>
+                <span class="inv-hash">≈ <b id="inv-th">200</b> TH/s</span>
+              </div>
             </div>
 
-            <!-- crypto panel -->
-            <div class="pay-panel" data-panel="crypto">
-              <div class="asset-grid">
-                <button type="button" class="asset active" data-asset="BTC"><b>₿</b> BTC</button>
-                <button type="button" class="asset" data-asset="ETH"><b>Ξ</b> ETH</button>
-                <button type="button" class="asset" data-asset="USDT"><b>₮</b> USDT</button>
-                <button type="button" class="asset" data-asset="USDC"><b>$</b> USDC</button>
+            <!-- Step 2: payment method -->
+            <div class="inv-step">
+              <span class="inv-label"><i>2</i> Zahlungsart</span>
+              <div class="pay-tabs">
+                <button type="button" class="pay-tab active" data-method="crypto">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 8h4a2 2 0 0 1 0 4h-4m0 0h4.5a2 2 0 0 1 0 4H9.5m0-8V6m0 12v-2m2-12v2m0 12v-2" stroke-linecap="round"/></svg>
+                  Krypto
+                </button>
+                <button type="button" class="pay-tab" data-method="sepa">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  SEPA
+                </button>
               </div>
-              <div class="crypto-pay">
-                <div class="cp-amount">Zu senden: <b id="cp-amount">0,062500 BTC</b> <span class="cp-net" id="cp-net">· Bitcoin-Netzwerk</span></div>
-                <div class="addr-box">
-                  <div class="qr-wrap"><img class="qr" id="cp-qr" alt="QR-Code der Einzahlungsadresse" /><div class="qr-fallback">QR</div></div>
-                  <div class="addr-side">
-                    <span class="addr-label">Einzahlungsadresse</span>
-                    <code class="addr" id="cp-addr">bc1q…</code>
-                    <button class="copy-btn" id="cp-copy" type="button">
-                      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                      Adresse kopieren
-                    </button>
-                    <span class="ref">Verwendungszweck: <b id="cp-ref">ENP-000000</b></span>
-                  </div>
+
+              <!-- crypto panel -->
+              <div class="pay-panel" data-panel="crypto">
+                <div class="asset-grid">
+                  <button type="button" class="asset active" data-asset="BTC"><b>₿</b> BTC</button>
+                  <button type="button" class="asset" data-asset="ETH"><b>Ξ</b> ETH</button>
+                  <button type="button" class="asset" data-asset="USDT"><b>₮</b> USDT</button>
+                  <button type="button" class="asset" data-asset="USDC"><b>$</b> USDC</button>
                 </div>
-                <p class="warn">⚠ Platzhalter-Adresse – vor dem Live-Gang durch eure echte Wallet ersetzen (siehe README).</p>
+                <div class="crypto-pay">
+                  <div class="cp-amount">Zu senden: <b id="cp-amount">0,062500 BTC</b> <span class="cp-net" id="cp-net">· Bitcoin-Netzwerk</span></div>
+                  <div class="addr-box">
+                    <div class="qr-wrap"><img class="qr" id="cp-qr" alt="QR-Code der Einzahlungsadresse" /><div class="qr-fallback">QR</div></div>
+                    <div class="addr-side">
+                      <span class="addr-label">Einzahlungsadresse</span>
+                      <code class="addr" id="cp-addr">bc1q…</code>
+                      <button class="copy-btn" id="cp-copy" type="button">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                        Adresse kopieren
+                      </button>
+                      <span class="ref">Verwendungszweck: <b id="cp-ref">ENP-000000</b></span>
+                    </div>
+                  </div>
+                  <p class="warn">⚠ Platzhalter-Adresse – vor dem Live-Gang durch eure echte Wallet ersetzen (siehe README).</p>
+                </div>
+              </div>
+
+              <!-- sepa panel -->
+              <div class="pay-panel" data-panel="sepa" hidden>
+                <div class="sepa-box">
+                  <div class="sepa-row"><span>Empfänger</span><b>ENPARA S.A.</b></div>
+                  <div class="sepa-row"><span>IBAN</span><b>PY00 0000 0000 0000 0000 00</b></div>
+                  <div class="sepa-row"><span>BIC</span><b>XXXXPYXX</b></div>
+                  <div class="sepa-row"><span>Betrag</span><b id="sepa-amount">5.000 €</b></div>
+                  <div class="sepa-row"><span>Verwendungszweck</span><b id="sepa-ref">ENP-000000</b></div>
+                </div>
+                <p class="warn">⚠ Platzhalter-Bankdaten – vor dem Live-Gang durch echte Kontodaten ersetzen.</p>
               </div>
             </div>
 
-            <!-- sepa panel -->
-            <div class="pay-panel" data-panel="sepa" hidden>
-              <div class="sepa-box">
-                <div class="sepa-row"><span>Empfänger</span><b>ENPARA S.A.</b></div>
-                <div class="sepa-row"><span>IBAN</span><b>PY00 0000 0000 0000 0000 00</b></div>
-                <div class="sepa-row"><span>BIC</span><b>XXXXPYXX</b></div>
-                <div class="sepa-row"><span>Betrag</span><b id="sepa-amount">5.000 €</b></div>
-                <div class="sepa-row"><span>Verwendungszweck</span><b id="sepa-ref">ENP-000000</b></div>
+            <!-- Step 3: contact / confirm -->
+            <form class="inv-step" id="invest-form" novalidate>
+              <span class="inv-label"><i>3</i> Deine Daten</span>
+              <div class="form-row two">
+                <input class="input" type="text" id="f-name" name="name" placeholder="Name" required />
+                <input class="input" type="email" id="f-email" name="email" placeholder="E-Mail" required />
               </div>
-              <p class="warn">⚠ Platzhalter-Bankdaten – vor dem Live-Gang durch echte Kontodaten ersetzen.</p>
+              <label class="form-consent">
+                <input type="checkbox" name="consent" required />
+                <span>Ich habe den Risikohinweis gelesen und stimme der Verarbeitung meiner Daten gemäß Datenschutzerklärung zu.</span>
+              </label>
+              <input type="hidden" id="f-method" name="zahlungsart" value="crypto" />
+              <input type="hidden" id="f-asset" name="asset" value="BTC" />
+              <input type="hidden" id="f-amount" name="betrag" value="5000" />
+              <button class="btn btn-primary btn-block btn-lg" type="submit" id="inv-submit">Investition melden</button>
+              <p class="form-note">Kein Spam · keine Weitergabe an Dritte · Reservierung unverbindlich bis zur Bestätigung.</p>
+            </form>
+
+            <div class="form-success" id="form-success">
+              <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Danke, <span id="success-name">danke</span>! 🎉</h3>
+              <p id="success-msg">Deine Investitionsanfrage ist eingegangen. Wir melden uns in Kürze mit der Bestätigung und allen Details.</p>
             </div>
           </div>
 
-          <!-- Step 3: contact / confirm -->
-          <form class="inv-step" id="invest-form" novalidate>
-            <span class="inv-label"><i>3</i> Deine Daten</span>
-            <div class="form-row two">
-              <input class="input" type="text" id="f-name" name="name" placeholder="Name" required />
-              <input class="input" type="email" id="f-email" name="email" placeholder="E-Mail" required />
-            </div>
-            <label class="form-consent">
-              <input type="checkbox" name="consent" required />
-              <span>Ich habe den Risikohinweis gelesen und stimme der Verarbeitung meiner Daten gemäß Datenschutzerklärung zu.</span>
-            </label>
-            <input type="hidden" id="f-method" name="zahlungsart" value="crypto" />
-            <input type="hidden" id="f-asset" name="asset" value="BTC" />
-            <input type="hidden" id="f-amount" name="betrag" value="5000" />
-            <button class="btn btn-primary btn-block btn-lg" type="submit" id="inv-submit">Investition melden</button>
-            <p class="form-note">Kein Spam · keine Weitergabe an Dritte · Reservierung unverbindlich bis zur Bestätigung.</p>
-          </form>
+          <!-- Mode: lead / pitch deck -->
+          <div class="invest-mode" data-mode-panel="lead" hidden>
+            <p class="lead-intro">Noch nicht bereit für die Direkt-Investition? Trag dich unverbindlich ein – wir melden uns mit dem vollständigen Pitch-Deck, allen Konditionen und den nächsten Schritten. Auf Wunsch auch mit persönlichem Gespräch.</p>
+            <form id="lead-form" novalidate>
+              <div class="form-row two">
+                <div class="form-row" style="margin:0">
+                  <label for="l-name">Name</label>
+                  <input class="input" type="text" id="l-name" name="name" placeholder="Max Mustermann" required />
+                </div>
+                <div class="form-row" style="margin:0">
+                  <label for="l-email">E-Mail</label>
+                  <input class="input" type="email" id="l-email" name="email" placeholder="max@beispiel.de" required />
+                </div>
+              </div>
+              <div class="form-row two">
+                <div class="form-row" style="margin:0">
+                  <label for="l-amount">Wunsch-Investment</label>
+                  <select class="select" id="l-amount" name="betrag">
+                    <option value="5.000 €">Starter · 5.000 € (200 TH/s)</option>
+                    <option value="9.500 €" selected>Pro · 9.500 € (400 TH/s)</option>
+                    <option value="22.500 €+">Whale · 22.500 €+ (1.000 TH/s)</option>
+                    <option value="individuell">Individuell</option>
+                  </select>
+                </div>
+                <div class="form-row" style="margin:0">
+                  <label for="l-phone">Telefon (optional)</label>
+                  <input class="input" type="tel" id="l-phone" name="telefon" placeholder="+49 …" />
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="l-msg">Nachricht (optional)</label>
+                <input class="input" type="text" id="l-msg" name="nachricht" placeholder="Ich interessiere mich für …" />
+              </div>
+              <label class="form-consent">
+                <input type="checkbox" name="consent" required />
+                <span>Ich möchte unverbindlich Informationen erhalten und stimme der Verarbeitung meiner Daten gemäß Datenschutzerklärung zu.</span>
+              </label>
+              <button class="btn btn-primary btn-block btn-lg" type="submit">Pitch-Deck anfordern</button>
+              <p class="form-note">Kein Spam. Keine Weitergabe an Dritte. Jederzeit abbestellbar.</p>
+            </form>
 
-          <div class="form-success" id="form-success">
-            <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h3>Danke, <span id="success-name">danke</span>! 🎉</h3>
-            <p id="success-msg">Deine Investitionsanfrage ist eingegangen. Wir melden uns in Kürze mit der Bestätigung und allen Details.</p>
+            <div class="form-success" id="lead-success">
+              <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Danke, <span id="lead-success-name">danke</span>! 🎉</h3>
+              <p>Deine Anfrage ist eingegangen. Wir melden uns in Kürze mit dem Pitch-Deck und allen Details bei dir.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -631,11 +746,7 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <a class="brand" href="#top">
-            <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
-              <path d="M16 2l12 7v14l-12 7L4 23V9z" fill="url(#lg)"/>
-              <path d="M17 7l-6 11h4l-1 7 7-12h-4z" fill="#042016"/>
-            </svg>
-            EN<b>PARA</b>
+            <svg class="logo-word" viewBox="0 0 560 120" role="img" aria-label="ENPARA"><use href="#enpara-wordmark"/></svg>
           </a>
           <p>Nachhaltiges Bitcoin-Mining, betrieben mit erneuerbarer Wasserkraft in Paraguay.</p>
         </div>
@@ -644,18 +755,20 @@
           <a href="#paraguay">Warum Paraguay</a>
           <a href="#pakete">Pakete</a>
           <a href="#rechner">Rechner</a>
+          <a href="#team">Team</a>
           <a href="dashboard.html">Seed-Dashboard</a>
         </div>
         <div class="foot-col">
           <h4>Investoren</h4>
-          <a href="#invest">Jetzt investieren</a>
+          <a href="#invest" data-invest-mode="direct">Jetzt investieren</a>
+          <a href="#invest" data-invest-mode="lead">Pitch-Deck anfordern</a>
           <a href="#rechner">Rendite-Rechner</a>
           <a href="#faq">FAQ</a>
         </div>
         <div class="foot-col">
           <h4>Kontakt</h4>
           <a href="mailto:invest@enpara.example">invest@enpara.example</a>
-          <a href="#invest">Gespräch vereinbaren</a>
+          <a href="#invest" data-invest-mode="lead">Gespräch vereinbaren</a>
         </div>
       </div>
 
@@ -675,5 +788,6 @@
   </footer>
 
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/effects.js" defer></script>
 </body>
 </html>
