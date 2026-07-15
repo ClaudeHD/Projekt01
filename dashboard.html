@@ -16,6 +16,15 @@
 </head>
 <body>
 
+  <!-- Fixer bewegter Seiten-Hintergrund (Original: c06.mp4 aus dem Claude-Design-Projekt) -->
+  <div class="page-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline poster="assets/img/poster-hero.jpg">
+      <source src="assets/video/clips/c06.mp4" type="video/mp4" />
+      <source src="assets/video/clips/c06.webm" type="video/webm" />
+    </video>
+    <div class="page-bg-overlay"></div>
+  </div>
+
   <div class="scroll-progress" aria-hidden="true"><i></i></div>
 
   <!-- ============ HEADER ============ -->
@@ -171,6 +180,8 @@
       </div>
     </div>
   </footer>
+
+  <canvas class="energy-bg" aria-hidden="true"></canvas>
 
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/dashboard.js" defer></script>

@@ -852,6 +852,17 @@ input[type="range"]::-moz-range-thumb {
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; }
 ::view-transition-group(brand-logo) { animation-duration: .5s; }
 
+/* ---------- Fixed moving page background + lightning canvas ---------- */
+.page-bg { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
+.page-bg video { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.page-bg-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 22% 28%, rgba(5, 10, 24, .42) 0%, rgba(5, 10, 24, .68) 55%, rgba(5, 10, 24, .84) 100%),
+    linear-gradient(180deg, rgba(5, 10, 24, .30) 0%, rgba(5, 10, 24, .55) 100%);
+}
+.energy-bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
 /* ---------- Scroll progress bar ---------- */
 .scroll-progress {
   position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 70; pointer-events: none;
@@ -995,4 +1006,5 @@ body::before { inset: -12%; animation: aurora 46s ease-in-out infinite alternate
   .chart-wrap .chart-area, .chart-wrap .chart-dot { opacity: 1; }
   .chart-wrap .chart-line { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
   .scroll-progress { display: none; }
+  .energy-bg { display: none; }
 }

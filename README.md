@@ -39,6 +39,12 @@ Deploybar auf **GitHub Pages, Netlify, Vercel, Cloudflare Pages** – Ordner hoc
 Alles Vanilla CSS/JS, ohne Libraries, und **komplett deaktiviert bei
 `prefers-reduced-motion`**:
 
+- **Ganzseitiger bewegter Hintergrund**: fixer Video-Layer (`.page-bg`, Clip c06)
+  hinter **allen** Sektionen der Startseite und des Dashboards, plus
+  **prozedurale Blitz-Ebene** (`.energy-bg`-Canvas): verzweigte Blitze im
+  Marken-Look (blauer Glow, oranger Strahl, heller Kern) alle 4–9 Sekunden,
+  dazwischen Mikro-Funken; Screen-Flash beim Einschlag. Test-Hook:
+  `window.__enparaStrike()`.
 - **Scroll-getriebene CSS-Animationen** (`animation-timeline: view()/scroll()`):
   Scroll-Progress-Leiste im Header, Parallax-Ausblenden des Hero-Inhalts,
   Kino-Reveal der Video-Frames, selbstzeichnende Roadmap-Linie —
@@ -96,8 +102,9 @@ Renditeversprechen.**
 
 ## 🎬 Videos, Bilder & Logo
 
-- **Video-Clips**: Die Seite referenziert `assets/video/clips/c06.mp4` (Hero),
-  `c13.mp4` (Paraguay), `c08.mp4` (Hardware), `c22.mp4` (Betrieb) aus dem
+- **Video-Clips**: Die Seite referenziert `assets/video/clips/c06.mp4`
+  (Ganzseiten-Hintergrund auf Startseite **und** Dashboard), `c13.mp4`
+  (Paraguay), `c08.mp4` (Hardware), `c22.mp4` (Betrieb) aus dem
   Claude-Design-Projekt „Enpara finale Website Design“. Die Clips konnten aus
   dieser Umgebung nicht exportiert werden (API-Limit 256 KB/Datei, externe
   Downloads gesperrt) — **lege sie einfach unter `assets/video/clips/` ab**,
